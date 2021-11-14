@@ -173,4 +173,24 @@ public class Math {
 
 		return (rx, ry, rz);
 	}
+
+	/**
+	 * Normalize an angle to the [0, 360] range, assuming that the angle
+	 * haven't done multiple revolutions. If it has done multiple
+	 * revolutions, then this will simply take multiple calls to fully
+	 * normalize the angle.
+	 *
+	 * @param angle: The angle, in degrees, to be normalized.
+	 * @return The normalized angle, still in degrees.
+	 */
+	public static float NormalizeAngle(float angle) {
+		if (angle > 360.0f) {
+			angle -= 360.0f;
+		}
+		else if (angle < 0.0f) {
+			angle += 360.0f;
+		}
+
+		return angle;
+	}
 }
