@@ -101,4 +101,76 @@ public class Math {
 
 		return (rx, ry);
 	}
+
+	/**
+	 * Rotate a vector (x, y, z) in the standard basis (i.e., {(1,0,0),
+	 * (0,1,0), (0,0,1)}) horAng degrees on the horizontal plane and verAng
+	 * degrees on the vertical plane.
+	 *
+	 * @param x: The vector's horizontal component.
+	 * @param y: The vector's vertical component.
+	 * @param z: The vector's depth component.
+	 * @param horAng: The rotation angle on the horizontal plane, in degrees.
+	 * @param verAng: The rotation angle on the vertcal plane, in degrees.
+	 * @return The resulting 3D Vector.
+	 */
+	public static (float, float, float) RotateVec3(float x, float y,
+			float z, float horAng, float verAng) {
+		/**
+		 * The explanation for this is similar to RotateVec2's explanation.
+		 * So, familiarize yourself with that before proceeding!
+		 *
+		 * The rotation is done in two step: first in the horizontal plane
+		 * (i.e., the XZ plane around the Y axis), and then around the
+		 * vertical plane (i.e., ZY plane around the local X axis). The XZ
+		 * plane is rotate "theta" (t) degrees, and the ZY plane is rotate
+		 * "phi" (p) degrees.
+		 *
+		 * The matrices were devised in a similar way:
+		 *
+		 *      |  cos(t)  sin(t) |       |  cos(p)  sin(p) |
+		 * XZ = |                 |  ZY = |                 |
+		 *      | -sin(t)  cos(t) |       | -sin(p)  cos(p) |
+		 *
+		 * However, to merge the matrices, the axis must be in the same
+		 * order. Thus, the ZY matrix must actually be:
+		 *
+		 *      | cos(p) -sin(p) |
+		 * ZY = |                |
+		 *      | sin(p)  cos(p) |
+		 *
+		 * Before applying those transformations to a 3D vector, these
+		 * matrices must be expanded to 3x3 matrices, keeping the vector in
+		 * the axis of rotation unchanged:
+		 *
+		 *      |  cos(t)  0  sin(t) |       |  1    0       0    |
+		 *      |                    |       |                    |
+		 * XZ = |    0     1    0    |  ZY = |  0  cos(p)  sin(p) |
+		 *      |                    |       |                    |
+		 *      | -sin(t)  0  cos(t) |       |  0 -sin(p)  cos(p) |
+		 *
+		 * Then, merging those two transformations into a single operation
+		 * is as simple as multiplying the two matrices, which gives the
+		 * unified transformation as:
+		 *
+		 * | rx |   |  cos(t)   sin(t) * sin(p)   sin(t) * cos(p) |   | x |
+		 * |    |   |                                             |   |   |
+		 * | ry | = |   0            cos(p)           -sin(p)     | * | y |
+		 * |    |   |                                             |   |   |
+		 * | rz |   | -sin(t)   cos(t) * sin(p)   cos(t) * cos(p) |   | z |
+		 */
+		float t = horAng * UEMath.Deg2Rad;
+		float ct = UEMath.Cos(t);
+		float st = UEMath.Sin(t);
+
+		float p = verAng * UEMath.Deg2Rad;
+		float cp = UEMath.Cos(p);
+		float sp = UEMath.Sin(p);
+
+		float rx =  x * ct + y * st * sp + z * st * cp;
+		float ry =  x * 0  + y * cp      - z * sp;
+		float rz = -x * st + y * ct * sp + z * ct * cp;
+
+		return (rx, ry, rz);
+	}
 }
