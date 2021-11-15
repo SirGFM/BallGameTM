@@ -11,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - LevelController
+  - LevelComponent
+  - NoCollision
+  - PlayerController
+  - PlayerComponent
+  - Player
   - 
   - 
   - 
