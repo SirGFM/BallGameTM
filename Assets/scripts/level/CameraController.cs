@@ -90,6 +90,13 @@ public class CameraController : BaseRemoteAction, CameraIface {
 			this.horAng += mouseDelta.x;
 			this.verAng += mouseDelta.y;
 		}
+		else {
+			float x = UnityEngine.Input.GetAxis("HorizontalR");
+			float y = UnityEngine.Input.GetAxis("VerticalR");
+
+			this.horAng += x * 5.0f;
+			this.verAng += y * 5.0f;
+		}
 
 		this.horAng = Math.NormalizeAngle(this.horAng);
 		this.verAng = Math.NormalizeAngle(this.verAng);
