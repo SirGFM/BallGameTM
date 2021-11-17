@@ -25,6 +25,9 @@ public class MovingPlatform : BaseRemoteAction, SetForceIface {
 	/** The force currently being applied to the entity. */
 	private Vec3 force;
 
+	/** Factor applied to the force applied on the touching entity. */
+	public float ForceCorrection = 1.5f;
+
 	void Start() {
 		this.rb = this.GetComponent<RB>();
 		if (this.rb == null) {
@@ -62,7 +65,7 @@ public class MovingPlatform : BaseRemoteAction, SetForceIface {
 			 * don't know), the platform must apply slightly more force to
 			 * the object being carried. */
 			issueEvent<PushIface>(
-					(x,y) => x.OnPush(this.force * 1.125f),
+					(x,y) => x.OnPush(this.force * this.ForceCorrection),
 					tgt);
 		}
 	}
