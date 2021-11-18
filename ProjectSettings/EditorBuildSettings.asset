@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/test-stages/SillyTitle.unity
+    guid: 7b0a431845f3c0a26af2e08348cba836
+  - enabled: 1
     path: Assets/test-stages/00-basic-stuff.unity
     guid: 16ac07b284b81abd7a1b6a89e0ccfffa
   - enabled: 1
