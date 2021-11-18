@@ -13,7 +13,7 @@ public class AdvanceLevel : UnityEngine.MonoBehaviour, GoalIface {
         int next;
 
         next = SceneMng.GetActiveScene().buildIndex + 1;
-		if (next >= SceneMng.sceneCount) {
+		if (next >= SceneMng.sceneCountInBuildSettings) {
 			next = 0;
 		}
 
