@@ -21,35 +21,35 @@ using Vec3 = UnityEngine.Vector3;
 
 public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 	/** The main camera, retrieved from a GetMainCamera event. */
-    private Transform cam;
+	private Transform cam;
 	/** This object's rigidbody. */
-    private RB rb;
+	private RB rb;
 	/** This object's default drag, so it may recover it on a OnResetDrag
 	 * event. */
-    private float drag;
+	private float drag;
 	/** Current force being applied to the object. */
-    private float speed;
+	private float speed;
 	/** How long has elapsed since the entity started to move. */
-    private float speedDT;
+	private float speedDT;
 
 	/** Force applied when the object starts moving. */
-    public float MinSpeed = 5.0f;
+	public float MinSpeed = 5.0f;
 	/** How long it takes, in seconds, for the maximum force to be
 	 * applied. */
-    public float TimeToMaxSpeed = 30.0f;
+	public float TimeToMaxSpeed = 30.0f;
 	/** Maximum force applied to object, after TimeToMaxSpeed seconds have
 	 * elapsed. */
-    public float MaxSpeed = 25.0f;
+	public float MaxSpeed = 25.0f;
 	/** Deadzone for increasing the movement. */
-    public float InputThreshold = 0.33f;
+	public float InputThreshold = 0.33f;
 
-    void Start() {
-        this.rb = this.GetComponent<RB>();
-        if (this.rb == null) {
-            throw new System.Exception($"{this} requires a Rigidbody component!");
-        }
+	void Start() {
+		this.rb = this.GetComponent<RB>();
+		if (this.rb == null) {
+			throw new System.Exception($"{this} requires a Rigidbody component!");
+		}
 
-        this.drag = this.rb.drag;
+		this.drag = this.rb.drag;
 
 		/* Try to retrieve and configure the main camera, and on failure
 		 * set a coroutine to try it again at a later time. */
@@ -58,7 +58,7 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 		}
 
 		this.updateSpeed(0.0f, 0.0f);
-    }
+	}
 
 	/**
 	 * Try to call configureMainCamera() every frame, until it succeeds.
@@ -84,7 +84,7 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 			return false;
 		}
 
-        this.cam = cam.transform;
+		this.cam = cam.transform;
 
 		this.issueEvent<CameraIface>(
 				(x,y) => x.SetCameraTarget(this.gameObject),
@@ -118,13 +118,13 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 		}
 	}
 
-    void FixedUpdate() {
+	void FixedUpdate() {
 		/* TODO: Update the input method.
 		 *
 		 * - If the input is digital (keyboard or buttons), the vector must
 		 * be normalized! For axis input, it should already normalized. */
-        float x = UnityEngine.Input.GetAxis("Horizontal");
-        float y = UnityEngine.Input.GetAxis("Vertical");
+		float x = UnityEngine.Input.GetAxis("Horizontal");
+		float y = UnityEngine.Input.GetAxis("Vertical");
 
 		this.updateSpeed(x, y);
 
@@ -133,21 +133,21 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 			ang = this.cam.eulerAngles.y;
 		}
 
-        (x, y) = Math.RotateVec2(x, y, ang);
-        Vec3 v3 = new Vec3(x, 0.0f, y);
-        v3 *= this.speed;
-        this.rb.AddForce(v3);
-    }
+		(x, y) = Math.RotateVec2(x, y, ang);
+		Vec3 v3 = new Vec3(x, 0.0f, y);
+		v3 *= this.speed;
+		this.rb.AddForce(v3);
+	}
 
-    public void OnPush(Vec3 force) {
-        this.rb.AddForce(force);
-    }
+	public void OnPush(Vec3 force) {
+		this.rb.AddForce(force);
+	}
 
-    public void OnSetDrag(float drag) {
-        this.rb.drag = drag;
-    }
+	public void OnSetDrag(float drag) {
+		this.rb.drag = drag;
+	}
 
-    public void OnResetDrag() {
-        this.rb.drag = this.drag;
-    }
+	public void OnResetDrag() {
+		this.rb.drag = this.drag;
+	}
 }
