@@ -119,7 +119,10 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 	}
 
     void FixedUpdate() {
-		/* TODO: Update the input method */
+		/* TODO: Update the input method.
+		 *
+		 * - If the input is digital (keyboard or buttons), the vector must
+		 * be normalized! For axis input, it should already normalized. */
         float x = UnityEngine.Input.GetAxis("Horizontal");
         float y = UnityEngine.Input.GetAxis("Vertical");
 
