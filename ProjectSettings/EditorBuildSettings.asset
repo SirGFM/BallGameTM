@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/test-stages/SillyTitle.unity
     guid: 7b0a431845f3c0a26af2e08348cba836
   - enabled: 1
-    path: Assets/test-stages/00-basic-stuff.unity
-    guid: 16ac07b284b81abd7a1b6a89e0ccfffa
+    path: Assets/scenes/00-basic/00-first-steps.unity
+    guid: 6c49f06cb7bc4689d971c700f6f9fc74
   - enabled: 1
-    path: Assets/test-stages/01-patience.unity
-    guid: 4c456948d5acca121882d5886e971ed0
+    path: Assets/scenes/00-basic/05-across-the-gap.unity
+    guid: 94419638f547aecce863ec0f5d0ca7db
   m_configObjects: {}
