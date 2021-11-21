@@ -1,4 +1,5 @@
 using Col = UnityEngine.Collider;
+using Color = UnityEngine.Color;
 using EvSys = UnityEngine.EventSystems;
 using GO = UnityEngine.GameObject;
 using Vec3 = UnityEngine.Vector3;
@@ -21,13 +22,27 @@ public interface SetForceIface : EvSys.IEventSystemHandler {
 }
 
 public class SetForce : BaseRemoteAction {
-	public Vec3 Force;
+	public Vec3 Direction;
+	public float Force;
 
 	void OnTriggerStay(Col other) {
 		GO tgt = other.gameObject;
 
+		Vec3 force = this.Direction.normalized * this.Force;
 		issueEvent<SetForceIface>(
-				(x,y) => x.OnSetForce(this.Force),
+				(x,y) => x.OnSetForce(force),
 				tgt);
+	}
+
+	void OnDrawGizmos() {
+		UnityEngine.Vector3 to;
+		UnityEngine.Vector3 pos;
+		UnityEngine.Transform t = this.transform;
+
+		pos = t.position;
+		to = pos + this.Direction.normalized * this.Force;
+
+		UnityEngine.Gizmos.color = Color.red;
+		UnityEngine.Gizmos.DrawLine(pos, to);
 	}
 }
