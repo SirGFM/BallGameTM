@@ -60,3 +60,11 @@ In the player's case, these events are handled by Ball component:
 ![The player main game object, which handle events](/docs/imgs/player-controller.png)
 
 So, although the ForceField would collide against the Ball's Affector, the event would end up getting handled by the BallController.
+
+## Global events
+
+So far, events have been described as a way to send message between two known objects (for example, two objects that collided against each other). However, in some cases, it may be useful to send an event without a specific receiver. These events may be used, for example, to control the state of the game (e.g., to advance the game to the next level or to reset the current level).
+
+For this to work, an object must define itself as the "root" object (simply stored as a static variable in `BaseRemoteAction`, and which may be modified by calling `BaseRemoteAction.setRootTarget()`). Then, a component that wants to send simply sends an event to that root object (in an abstracted way, by calling `BaseRemoteAction.rootEvent<T>()`).
+
+Currently, one of the more different uses of this type of events is to allow the communication between the camera and the player without one being aware of the other. The camera sends a global event to register itself as the main camera. Then, the player sends a global event to try to retrieve the main camera, and on success sends an event to the retrieved object to register itself as the object being tracked by the camera.
