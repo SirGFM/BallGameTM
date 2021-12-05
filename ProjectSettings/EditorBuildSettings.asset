@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/00-basic/05-across-the-gap.unity
     guid: 94419638f547aecce863ec0f5d0ca7db
+  - enabled: 1
+    path: Assets/scenes/00-basic/10-ride-the-stream.unity
+    guid: 3797315aa4fdfd03baf91b3eb88fafe8
   m_configObjects: {}
