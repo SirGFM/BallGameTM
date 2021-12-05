@@ -1,4 +1,5 @@
 using Col = UnityEngine.Collider;
+using Color = UnityEngine.Color;
 using EvSys = UnityEngine.EventSystems;
 using GO = UnityEngine.GameObject;
 using Vec3 = UnityEngine.Vector3;
@@ -27,14 +28,30 @@ public interface PushIface : EvSys.IEventSystemHandler {
 
 public class Push : BaseRemoteAction {
 
-	/** Direction and intensity to push entities. */
-	public Vec3 Force;
+	/** Direction to push entities. */
+	public Vec3 Direction;
+
+	/** Intensity to push entities. */
+	public float Force;
 
 	void OnTriggerStay(Col other) {
 		GO tgt = other.gameObject;
 
+		Vec3 force = this.Direction.normalized * this.Force;
 		issueEvent<PushIface>(
-				(x,y) => x.OnPush(this.Force),
+				(x,y) => x.OnPush(force),
 				tgt);
+	}
+
+	void OnDrawGizmos() {
+		UnityEngine.Vector3 to;
+		UnityEngine.Vector3 pos;
+		UnityEngine.Transform t = this.transform;
+
+		pos = t.position;
+		to = pos + this.Direction.normalized * this.Force;
+
+		UnityEngine.Gizmos.color = Color.red;
+		UnityEngine.Gizmos.DrawLine(pos, to);
 	}
 }
