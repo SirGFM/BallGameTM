@@ -151,7 +151,6 @@ public class CameraController : BaseRemoteAction, CameraIface {
 			yield return new UnityEngine.WaitForFixedUpdate();
 
 			if (UEMath.Abs(this.lastDistPerc - this.curDist) > 0.01f) {
-				UnityEngine.Debug.Log($"dist: {this.curDist}");
 				this.curDist = this.curDist + (this.lastDistPerc - this.curDist) * Time.fixedDeltaTime;
 			}
 		}
