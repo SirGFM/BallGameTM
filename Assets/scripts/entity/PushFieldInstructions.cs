@@ -2,6 +2,7 @@
 public class PushFieldInstructions : UnityEngine.MonoBehaviour {
 }
 
+#if UNITY_EDITOR
 [UnityEditor.CustomEditor(typeof(PushFieldInstructions))]
 public class PushFieldInstructionsEditor : UnityEditor.Editor {
 	public override UnityEngine.UIElements.VisualElement CreateInspectorGUI() {
@@ -56,3 +57,4 @@ Arrow particles:
 ");
 	}
 }
+#endif
