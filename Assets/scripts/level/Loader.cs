@@ -32,3 +32,6 @@ public interface LoaderIface : EvSys.IEventSystemHandler {
 	 */
 	void OnReset();
 }
+
+public class Loader : UnityEngine.MonoBehaviour {
+}
