@@ -456,6 +456,13 @@ static public class Input {
 	static private float[] axisRest = null;
 
 	/**
+	 * Reset the axis training, so it may be executed again from scratch.
+	 */
+	static public void ResetAxisTraining() {
+		Input.axisRest = null;
+	}
+
+	/**
 	 * Check every axis on every gamepad to ensure that everything is
 	 * as stable as possible.
 	 *
