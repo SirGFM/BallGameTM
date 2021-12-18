@@ -3,6 +3,7 @@ using GO = UnityEngine.GameObject;
 using Transform = UnityEngine.Transform;
 using Time = UnityEngine.Time;
 using UEMath = UnityEngine.Mathf;
+using Vec2 = UnityEngine.Vector2;
 using Vec3 = UnityEngine.Vector3;
 
 /**
@@ -54,7 +55,7 @@ public class CameraController : BaseRemoteAction, CameraIface {
 
 	void Start() {
 		this.self = this.transform;
-		this.lastMouse = UnityEngine.Input.mousePosition;
+		this.lastMouse = Input.GetMousePosition();
 
 		/* Try to configure this as the main camera, and on failure
 		 * set a coroutine to try it again at a later time. */
@@ -98,22 +99,21 @@ public class CameraController : BaseRemoteAction, CameraIface {
 		}
 
 		/* TODO:
-		 *   - Add gamepad/keys input
 		 *   - Make the camera inversible
 		 *   - Mouse sensibility
+		 *   - Gamepad sensibility
 		 */
-		if (UnityEngine.Input.GetAxis("Fire1") > 0) {
-			Vec3 mouseDelta = UnityEngine.Input.mousePosition - this.lastMouse;
+		if (Input.GetMouseCameraEnabled()) {
+			Vec3 mouseDelta = Input.GetMousePosition() - this.lastMouse;
 
 			this.horAng += mouseDelta.x;
 			this.verAng += mouseDelta.y;
 		}
 		else {
-			float x = UnityEngine.Input.GetAxis("HorizontalR");
-			float y = UnityEngine.Input.GetAxis("VerticalR");
+			Vec2 cam = Input.GetCamera();
 
-			this.horAng += x * 5.0f;
-			this.verAng += y * 5.0f;
+			this.horAng += cam.x * 5.0f;
+			this.verAng += cam.y * 5.0f;
 		}
 
 		this.horAng = Math.NormalizeAngle(this.horAng);
@@ -130,7 +130,7 @@ public class CameraController : BaseRemoteAction, CameraIface {
 
 		/* Update the mouse's origin to calculate the movement on a later
 		 * frame. */
-		this.lastMouse = UnityEngine.Input.mousePosition;
+		this.lastMouse = Input.GetMousePosition();
 	}
 
 	public void SetCameraTarget(GO target) {

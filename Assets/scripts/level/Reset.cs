@@ -6,8 +6,7 @@
 public class Reset : BaseRemoteAction {
 
 	void Update() {
-		/* TODO: Update this after implementing the input system. */
-		if (UnityEngine.Input.GetButtonDown("Reset")) {
+		if (Input.GetResetButton()) {
 			rootEvent<LoaderIface>(	(x,y) => x.OnReset() );
 		}
 	}

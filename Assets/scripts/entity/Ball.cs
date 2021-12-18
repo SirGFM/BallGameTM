@@ -3,6 +3,7 @@ using UEMath = UnityEngine.Mathf;
 using RB = UnityEngine.Rigidbody;
 using Time = UnityEngine.Time;
 using Transform = UnityEngine.Transform;
+using Vec2 = UnityEngine.Vector2;
 using Vec3 = UnityEngine.Vector3;
 
 /**
@@ -119,21 +120,16 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 	}
 
 	void FixedUpdate() {
-		/* TODO: Update the input method.
-		 *
-		 * - If the input is digital (keyboard or buttons), the vector must
-		 * be normalized! For axis input, it should already normalized. */
-		float x = UnityEngine.Input.GetAxis("Horizontal");
-		float y = UnityEngine.Input.GetAxis("Vertical");
+		Vec2 movement = Input.GetMovement();
 
-		this.updateSpeed(x, y);
+		this.updateSpeed(movement.x, movement.y);
 
 		float ang = 0.0f;
 		if (this.cam != null) {
 			ang = this.cam.eulerAngles.y;
 		}
 
-		(x, y) = Math.RotateVec2(x, y, ang);
+		(float x, float y) = Math.RotateVec2(movement.x, movement.y, ang);
 		Vec3 v3 = new Vec3(x, 0.0f, y);
 		v3 *= this.speed;
 		this.rb.AddForce(v3);

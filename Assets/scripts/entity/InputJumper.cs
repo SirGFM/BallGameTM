@@ -66,8 +66,7 @@ public class InputJumper : UnityEngine.MonoBehaviour, DetectColliderIface {
 	}
 
     void FixedUpdate() {
-		/* TODO: Update the input method */
-		if (UnityEngine.Input.GetAxis("Jump") > 0) {
+		if (Input.GetActionButton()) {
 			this.tryJump = this.JumpBuffer;
 		}
 		else if (this.tryJump > 0.0f) {
