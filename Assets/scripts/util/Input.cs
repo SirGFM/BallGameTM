@@ -285,6 +285,11 @@ static public class Input {
 		private float getAxisPerc(float val) {
 			float diff = val - this.rest;
 
+			if ((this.type == axisType.negativeAxis && diff > 0) ||
+					(this.type == axisType.positiveAxis && diff < 0)) {
+				return 0.0f;
+			}
+
 			if (val < this.rest)
 				return UEMath.Abs(diff / (1.0f + rest));
 			else if (val > this.rest)
