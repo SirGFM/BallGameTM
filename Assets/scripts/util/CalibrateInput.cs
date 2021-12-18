@@ -44,6 +44,6 @@ public class CalibrateInput : UnityEngine.MonoBehaviour {
 		Input.RevertMap(1);
 		Input.RevertMap(2);
 
-        SceneMng.LoadSceneAsync("Loader", SceneMode.Single);
+		SceneMng.LoadSceneAsync(this.NextScene, SceneMode.Single);
 	}
 }
