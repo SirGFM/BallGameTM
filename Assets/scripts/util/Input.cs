@@ -85,6 +85,12 @@ using CultureInfo = System.Globalization.CultureInfo;
  *
  * === REMAPPING INPUTS ===================================================
  *
+ * NOTE: Unity is quite finicky with inputs. When a scene is loaded, every
+ * input is zeroed-out. Therefore, trying to train an input in this state
+ * will cause lots of issues. However, if the user moved every axis around
+ * before interactively assigning each axis, this should work without any
+ * problem.
+ *
  * Before starting to query for an input, it's important to be sure that no
  * key is pressed. Input.TrainAxisStable() reports whether all detected
  * gamepad axis are stable and try to figure out the each axis resting
@@ -471,19 +477,28 @@ static public class Input {
 	 * Check every axis on every gamepad to ensure that everything is
 	 * as stable as possible.
 	 *
+	 * @param trainDefaultGamepad: Whether the default gamepad (which may
+	 *                             detect input from any gamepad) should
+	 *                             also be trained.
+	 *
 	 * @return true if the axis are stable, false otherwise
 	 */
-	static public bool TrainAxisStable() {
+	static public bool TrainAxisStable(bool trainDefaultGamepad = false) {
 		bool stable = true;
 
 		if (Input.axisRest == null) {
 			Input.axisRest = new float[gamepadNum * gamepadAxisNum];
-			for (int i = 1; i < gamepadNum * gamepadAxisNum; i++) {
+			for (int i = 0; i < gamepadNum * gamepadAxisNum; i++) {
 				Input.axisRest[i] = 0.0f;
 			}
 		}
 
-		for (int gpIdx = 1; gpIdx < gamepadNum; gpIdx++) {
+		for (int gpIdx = 0; gpIdx < gamepadNum; gpIdx++) {
+			if (!trainDefaultGamepad && gpIdx == 0) {
+				continue;
+			}
+			trainDefaultGamepad = false;
+
 			for (int gpAxis = 0; gpAxis < gamepadAxisNum; gpAxis++) {
 				int i = gpIdx * gamepadAxisNum + gpAxis;
 				string name = $"joystick {gpIdx} axis {gpAxis}";
@@ -491,7 +506,7 @@ static public class Input {
 				float rest = Input.axisRest[i];
 				float diff = UEMath.Abs(rest - cur);
 
-				Input.axisRest[i] = 0.99f * (cur * 0.75f + rest * 0.25f);
+				Input.axisRest[i] = cur * 0.75f + rest * 0.25f;
 				stable = (stable && diff < 0.05f);
 			}
 		}
@@ -610,6 +625,10 @@ static public class Input {
 	}
 
 	static public void RevertMap(int column) {
+		if (Input.axisRest == null) {
+			Input.TrainAxisStable();
+		}
+
 		switch (column) {
 		case 0:
 			axis[] _axis0 = {
@@ -630,27 +649,27 @@ static public class Input {
 			break;
 		case 1:
 			axis[] _axis1 = {
-				new axis("joystick 0 axis 0", axisType.negativeAxis) /* Left */,
-				new axis("joystick 0 axis 0", axisType.positiveAxis) /* Right */,
-				new axis("joystick 0 axis 1", axisType.negativeAxis) /* Up */,
-				new axis("joystick 0 axis 1", axisType.positiveAxis) /* Down */,
+				new axis("joystick 0 axis 0", axisType.negativeAxis, Input.axisRest[0]) /* Left */,
+				new axis("joystick 0 axis 0", axisType.positiveAxis, Input.axisRest[0]) /* Right */,
+				new axis("joystick 0 axis 1", axisType.negativeAxis, Input.axisRest[1]) /* Up */,
+				new axis("joystick 0 axis 1", axisType.positiveAxis, Input.axisRest[1]) /* Down */,
 				new axis("joystick 0 button 0", axisType.none) /* Action */,
 				new axis("joystick 0 button 3", axisType.none) /* Reset */,
 				new axis("joystick 0 button 7", axisType.none) /* Pause */,
 				null /* MouseCamera */,
-				new axis("joystick 0 axis 3", axisType.negativeAxis) /* CameraLeft */,
-				new axis("joystick 0 axis 3", axisType.positiveAxis) /* CameraRight */,
-				new axis("joystick 0 axis 4", axisType.negativeAxis) /* CameraUp */,
-				new axis("joystick 0 axis 4", axisType.positiveAxis) /* CameraDown */,
+				new axis("joystick 0 axis 3", axisType.negativeAxis, Input.axisRest[3]) /* CameraLeft */,
+				new axis("joystick 0 axis 3", axisType.positiveAxis, Input.axisRest[3]) /* CameraRight */,
+				new axis("joystick 0 axis 4", axisType.negativeAxis, Input.axisRest[4]) /* CameraUp */,
+				new axis("joystick 0 axis 4", axisType.positiveAxis, Input.axisRest[4]) /* CameraDown */,
 			};
 			axis1 = _axis1;
 			break;
 		case 2:
 			axis[] _axis2 = {
-				new axis("joystick 0 axis 6", axisType.negativeAxis) /* Left */,
-				new axis("joystick 0 axis 6", axisType.positiveAxis) /* Right */,
-				new axis("joystick 0 axis 7", axisType.negativeAxis) /* Up */,
-				new axis("joystick 0 axis 7", axisType.positiveAxis) /* Down */,
+				new axis("joystick 0 axis 6", axisType.negativeAxis, Input.axisRest[6]) /* Left */,
+				new axis("joystick 0 axis 6", axisType.positiveAxis, Input.axisRest[6]) /* Right */,
+				new axis("joystick 0 axis 7", axisType.negativeAxis, Input.axisRest[7]) /* Up */,
+				new axis("joystick 0 axis 7", axisType.positiveAxis, Input.axisRest[7]) /* Down */,
 				null /* Action */,
 				null /* Reset */,
 				null /* Pause */,

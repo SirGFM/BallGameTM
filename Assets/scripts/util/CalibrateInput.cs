@@ -4,6 +4,10 @@ using SceneMode = UnityEngine.SceneManagement.LoadSceneMode;
 /**
  * CalibrateInput forcefully reset every axis calibration and re-calibrate
  * the inputs, jumping to the defined scene afterwards.
+ *
+ * Note that as soon as a scene starts, the inputs will be in a weird
+ * state. To work around that, this script waits until an input is pressed
+ * and then released to properly train the axes.
  */
 
 public class CalibrateInput : UnityEngine.MonoBehaviour {
@@ -21,7 +25,11 @@ public class CalibrateInput : UnityEngine.MonoBehaviour {
 	private System.Collections.IEnumerator Calibrate() {
 		uint trainNum = this.IterCount;
 
-		while (!Input.TrainAxisStable() || Input.CheckAnyKeyDown() ||
+		while (!Input.CheckAnyKeyDown()) {
+			yield return null;
+		}
+
+		while (!Input.TrainAxisStable(true) || Input.CheckAnyKeyDown() ||
 				trainNum > 0) {
 			yield return null;
 
@@ -31,6 +39,10 @@ public class CalibrateInput : UnityEngine.MonoBehaviour {
 		}
 
 		yield return null;
+
+		Input.RevertMap(0);
+		Input.RevertMap(1);
+		Input.RevertMap(2);
 
         SceneMng.LoadSceneAsync("Loader", SceneMode.Single);
 	}

@@ -379,7 +379,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Please wait a moment...
+  m_Text: Press and hold a button, then move every axis around and release the button.
 --- !u!222 &695023977
 CanvasRenderer:
   m_ObjectHideFlags: 0
