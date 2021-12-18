@@ -72,7 +72,6 @@ static public class LevelNameList {
 			baseName = ti.ToTitleCase(baseName);
 		}
 
-		UnityEngine.Debug.Log($"{baseName}");
 		return baseName;
 	}
 
