@@ -62,6 +62,9 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	 * set back to 1. */
 	static public int currentLevel = 1;
 
+	/** The loader scene. */
+	static private string loaderSceneName = "Loader";
+
 	/** Name of the sub-scene used to display the loading progress. */
 	public string uiScene = "LoadingUI";
 
@@ -180,5 +183,16 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 #endif
 
 		this.blockReset = false;
+	}
+
+	/**
+	 * Load a given level, configuring everything so level progression may
+	 * work properly.
+	 *
+	 * @param idx: The index of the level to be loaded (should start at 1).
+	 */
+	static public void LoadLevel(int idx) {
+		Loader.currentLevel = idx;
+		SceneMng.LoadSceneAsync(Loader.loaderSceneName, SceneMode.Single);
 	}
 }

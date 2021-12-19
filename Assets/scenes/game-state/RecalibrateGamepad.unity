@@ -735,7 +735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IterCount: 5
-  NextScene: Loader
+  NextScene: MainMenu
 --- !u!4 &1869788775
 Transform:
   m_ObjectHideFlags: 0
