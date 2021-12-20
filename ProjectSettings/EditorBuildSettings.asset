@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/scenes/00-basic/02-going-around.unity
     guid: 7d2303ce38b8d82a99e5a6caba96f889
   - enabled: 1
+    path: Assets/scenes/00-basic/02.5-dont-fall.unity
+    guid: 7bd15d983b1c6d1a093847c7101b4759
+  - enabled: 1
     path: Assets/scenes/00-basic/05-across-the-gap.unity
     guid: 94419638f547aecce863ec0f5d0ca7db
   - enabled: 1
