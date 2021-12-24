@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/scenes/00-basic/00-first-steps.unity
     guid: 6c49f06cb7bc4689d971c700f6f9fc74
   - enabled: 1
+    path: Assets/scenes/00-basic/08-going-with-the-flow.unity
+    guid: a7ab38f087effacd9883cc2416a3645f
+  - enabled: 1
     path: Assets/scenes/00-basic/02-going-around.unity
     guid: 7d2303ce38b8d82a99e5a6caba96f889
   - enabled: 1
