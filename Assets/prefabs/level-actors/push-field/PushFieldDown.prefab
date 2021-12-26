@@ -665,7 +665,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 10, z: 0}
+    m_Position: {x: 0, y: 5, z: 0}
     m_Rotation: {x: 90, y: 0, z: 0}
     m_Scale: {x: 20, y: 10, z: 1}
     placementMode: 0
@@ -4848,7 +4848,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 20, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6738574643911997695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4861,7 +4861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43556b8c72cc67c6a83ef2fe5362d329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Direction: {x: 0, y: -1, z: 0}
+  Direction: {x: -0, y: -1, z: -0}
   Force: 1
 --- !u!1 &6281552124211725959
 GameObject:
@@ -5359,8 +5359,8 @@ ParticleSystem:
     startRotationY:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0
-      minScalar: 3.1415925
+      scalar: 3.1415927
+      minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5412,8 +5412,8 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3.1415925
-      minScalar: 3.1415925
+      scalar: 3.1415927
+      minScalar: 3.1415927
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5528,7 +5528,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 10, z: 0}
+    m_Position: {x: 0, y: 5, z: 0}
     m_Rotation: {x: 90, y: 0, z: 0}
     m_Scale: {x: 20, y: 10, z: 1}
     placementMode: 0
@@ -9677,6 +9677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6281552124809739492}
   - component: {fileID: 6281552124809739495}
+  - component: {fileID: 4970151414965639099}
   m_Layer: 9
   m_Name: PushFieldDown
   m_TagString: Untagged
@@ -9713,3 +9714,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8dd2278c39bfdd0293f0f900db7ca2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4970151414965639099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6281552124809739494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afa15ce0ab03d04b7a29b02c9bb629e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlockAutomation: 0
+  ForceUpdate: 0
+  Direction: 1
+  Force: 1
+  Size: {x: 20, y: 10, z: 10}
+  FogDuration: 2
+  FogSpeed: 5
+  FogMaxParticles: 1000
+  ArrowDuration: 2
+  ArrowSpeed: 5
+  ArrowMaxParticles: 1000
+  FogObjectName: Fog
+  ArrowObjectName: ArrowParticleEmitter

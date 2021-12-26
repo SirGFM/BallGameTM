@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1726742656070791696}
   - component: {fileID: 1726742656070791699}
+  - component: {fileID: 4616845981868661219}
   m_Layer: 9
   m_Name: PushFieldBackward
   m_TagString: Untagged
@@ -46,6 +47,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8dd2278c39bfdd0293f0f900db7ca2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4616845981868661219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726742656070791698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afa15ce0ab03d04b7a29b02c9bb629e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlockAutomation: 0
+  ForceUpdate: 0
+  Direction: 3
+  Force: 10
+  Size: {x: 10, y: 10, z: 40}
+  FogDuration: 8
+  FogSpeed: 5
+  FogMaxParticles: 1000
+  ArrowDuration: 5
+  ArrowSpeed: 8
+  ArrowMaxParticles: 1000
+  FogObjectName: Fog
+  ArrowObjectName: ArrowParticleEmitter
 --- !u!1 &1726742657488162865
 GameObject:
   m_ObjectHideFlags: 0
@@ -5293,8 +5319,8 @@ ParticleSystem:
     startRotationX:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.3089969
-      minScalar: 1.8325957
+      scalar: 1.8325958
+      minScalar: 1.3089969
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5346,8 +5372,8 @@ ParticleSystem:
     startRotationY:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3.1415925
-      minScalar: 3.1415925
+      scalar: 3.1415927
+      minScalar: 3.1415927
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9711,5 +9737,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43556b8c72cc67c6a83ef2fe5362d329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Direction: {x: 0, y: 0, z: -1}
+  Direction: {x: -0, y: -0, z: -1}
   Force: 10

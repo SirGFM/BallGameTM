@@ -502,8 +502,8 @@ ParticleSystem:
     startRotationX:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.3089969
-      minScalar: 1.8325957
+      scalar: 1.8325958
+      minScalar: 1.3089969
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9677,6 +9677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4642417565807030320}
   - component: {fileID: 4642417565807030323}
+  - component: {fileID: 4394116957543793650}
   m_Layer: 9
   m_Name: PushFieldForward
   m_TagString: Untagged
@@ -9713,3 +9714,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8dd2278c39bfdd0293f0f900db7ca2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4394116957543793650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4642417565807030322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afa15ce0ab03d04b7a29b02c9bb629e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlockAutomation: 0
+  ForceUpdate: 0
+  Direction: 2
+  Force: 10
+  Size: {x: 10, y: 10, z: 40}
+  FogDuration: 8
+  FogSpeed: 5
+  FogMaxParticles: 1000
+  ArrowDuration: 5
+  ArrowSpeed: 8
+  ArrowMaxParticles: 1000
+  FogObjectName: Fog
+  ArrowObjectName: ArrowParticleEmitter
