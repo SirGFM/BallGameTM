@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/scenes/00-basic/05-across-the-gap.unity
     guid: 94419638f547aecce863ec0f5d0ca7db
   - enabled: 1
+    path: Assets/scenes/00-basic/06-tricky-ride.unity
+    guid: ba8a1afeb98b8c5878d643d1b8f878a8
+  - enabled: 1
     path: Assets/scenes/00-basic/08-going-with-the-flow.unity
     guid: a7ab38f087effacd9883cc2416a3645f
   - enabled: 1
