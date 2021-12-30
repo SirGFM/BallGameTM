@@ -841,7 +841,8 @@ static public class Input {
 
 	static public bool MenuSelect() {
 		return DefInput.GetAxisRaw("joystick 0 button 0") > 0.7f ||
-			DefInput.GetKey("return");
+			DefInput.GetKey("return") ||
+			Input.GetActionButton();
 	}
 
 	static public bool MenuCancel() {
