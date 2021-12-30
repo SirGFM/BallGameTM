@@ -47,4 +47,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/test-stages/SillyTitle.unity
     guid: 7b0a431845f3c0a26af2e08348cba836
+  - enabled: 1
+    path: Assets/scenes/menu/RebindInputs.unity
+    guid: 364bdcb546e4889a3acc23bb76c8644f
+  - enabled: 1
+    path: Assets/scenes/bg-scene/TestInputs.unity
+    guid: 66e7460ce5a8f0ba184d6c8166415801
   m_configObjects: {}
