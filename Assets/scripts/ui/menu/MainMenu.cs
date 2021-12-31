@@ -5,6 +5,7 @@ using Image = UnityEngine.UI.Image;
 public class MainMenu : VerticalTextMenu {
     private string[] _opts = {
         "New game",
+        "Options",
         "Quit"
     };
 
@@ -14,6 +15,9 @@ public class MainMenu : VerticalTextMenu {
             this.LoadLevel(1);
             break;
         case 1:
+			this.LoadScene("scenes/menu/Options");
+            break;
+        case 2:
             App.Quit();
             break;
         }

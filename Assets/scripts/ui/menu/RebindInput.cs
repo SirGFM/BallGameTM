@@ -287,7 +287,7 @@ public class RebindInput : VerticalTextMenu {
 
 	private void back() {
 		this.saveInputs();
-		// TODO Load the options menu
+		this.LoadScene("scenes/menu/Options");
 	}
 
 	private CoroutineRet handleBack() {
