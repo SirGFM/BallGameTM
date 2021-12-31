@@ -369,6 +369,19 @@ public class Options : VerticalTextMenu {
 					"Apply the selected resolution and\n"+
 					"windowed mode.",
 					null),
+			Option.SectionHeader("-- General --"),
+			new Option("Camera X",
+					"Configure horizontal camera movement.\n"+
+					"Try it out!",
+					(new Values(idx => Config.setHorCamInverted(idx == 1),
+								"Normal",
+								"Inverted")).setAt((Config.getHorCamInverted()) ? 1 : 0)),
+			new Option("Camera Y",
+					"Configure vertical camera movement.\n"+
+					"Try it out!",
+					(new Values(idx => Config.setVerCamInverted(idx == 1),
+								"Normal",
+								"Inverted")).setAt((Config.getVerCamInverted()) ? 1 : 0)),
 			Option.SectionHeader("-- Rebind --"),
 			new Option("Reset",
 					"Reset input bindings to their initial configurations.",

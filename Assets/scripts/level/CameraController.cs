@@ -99,21 +99,20 @@ public class CameraController : BaseRemoteAction, CameraIface {
 		}
 
 		/* TODO:
-		 *   - Make the camera inversible
 		 *   - Mouse sensibility
 		 *   - Gamepad sensibility
 		 */
 		if (Input.GetMouseCameraEnabled()) {
 			Vec3 mouseDelta = Input.GetMousePosition() - this.lastMouse;
 
-			this.horAng += mouseDelta.x;
-			this.verAng += mouseDelta.y;
+			this.horAng += mouseDelta.x * Global.camX;
+			this.verAng += mouseDelta.y * Global.camY;
 		}
 		else {
 			Vec2 cam = Input.GetCamera();
 
-			this.horAng += cam.x * 5.0f;
-			this.verAng += cam.y * 5.0f;
+			this.horAng += cam.x * 5.0f * Global.camX;
+			this.verAng += cam.y * 5.0f * Global.camY;
 		}
 
 		this.horAng = Math.NormalizeAngle(this.horAng);
