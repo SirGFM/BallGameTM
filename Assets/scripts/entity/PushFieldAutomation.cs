@@ -172,8 +172,8 @@ public class PushFieldAutomation : UnityEngine.MonoBehaviour {
 
 		/* Update the arrow and the fog particle emitter. */
 		Particles[] ps = this.gameObject.GetComponentsInChildren<Particles>();
-		if (ps == null || ps.Length != 2) {
-			throw new System.Exception($"{this} requires exactly two children with a ParticleSystem component!");
+		if (ps == null || ps.Length < 2) {
+			throw new System.Exception($"{this} requires at least two children with a ParticleSystem component!");
 		}
 
 		Particles fog = null;
