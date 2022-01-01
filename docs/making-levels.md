@@ -25,6 +25,8 @@ On the image above, every static element in within the Floor game object. This i
 
 ### Triangles and Ramps
 
+**Update:** Thanks to [GabrielSilva584](https://github.com/SirGFM/BallGameTM/pull/1), these primitives now use a Mesh Collider and thus can be scaled freely.
+
 Unity does not provide any default sloped object. Ramps could be created by using rotated cubes, but that leaves some geometry dangling beneath the ramp. To solve that, and to allow the construction of more interesting geometry, three prefabs were created: Triangles, Ramps and "Inner Triangles":
 
 ![Half-sphere created from Ramps, Triangles and Cubes](/docs/imgs/half-sphere.png)
@@ -35,7 +37,6 @@ To create geometry like this half-sphere above, Ramps and Triangles are more tha
 
 Note that since these objects use rotated box colliders, they have some restrictions on how they may be scaled!
 
-**Triangles and Inner Triangles must be uniformly scaled in all axes. On the other hand, ramps may be freely scaled on its horizontal axis (i.e., alongside the slope), but the other two axis must be uniformly scaled.**
 
 ### Moving platforms
 
