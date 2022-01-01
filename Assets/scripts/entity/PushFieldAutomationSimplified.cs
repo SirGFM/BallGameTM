@@ -101,6 +101,7 @@ public class PushFieldAutomationSimplified : UnityEngine.MonoBehaviour {
 		if (p == null) {
 			throw new System.Exception($"{this} requires a child with a Push component!");
 		}
+		p.Direction = this.transform.up.normalized;
 		p.Force = this.Force;
 
 		this.setParticle(FogObject, FogEmission);
