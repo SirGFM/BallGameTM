@@ -4983,6 +4983,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8816623767487410564, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
+      propertyPath: NoiseModule.strength.minScalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816623767487410564, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
       value: 5
       objectReference: {fileID: 0}
