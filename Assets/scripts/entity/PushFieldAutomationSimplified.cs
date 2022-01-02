@@ -1,4 +1,5 @@
 using Col = UnityEngine.BoxCollider;
+using GO = UnityEngine.GameObject;
 using Particles = UnityEngine.ParticleSystem;
 using UEMath = UnityEngine.Mathf;
 using Vec3 = UnityEngine.Vector3;
@@ -8,7 +9,10 @@ using Vec3 = UnityEngine.Vector3;
  * "push field" object.
  */
 
-public class PushFieldAutomationSimplified : UnityEngine.MonoBehaviour {
+public class PushFieldAutomationSimplified : UnityEngine.MonoBehaviour, SwapEntityIface {
+
+	/** The object that pushes other objects in a given direction. */
+	private GO forceObject;
 
 	/** Default value for the Force. */
 	private static float defaultForce = 5f;
@@ -17,7 +21,7 @@ public class PushFieldAutomationSimplified : UnityEngine.MonoBehaviour {
 	private static Vec3 defaultSize = new Vec3(10f, 10f, 10f);
 
 	/** Default value for the Particle Lifetime. */
-	private static float defaultLifetime = 2f;
+	private static float defaultLifetime = 1.0f;
 
 	/** Default value for the Particle Speed. */
 	private static float defaultSpeed = 5f;
@@ -66,13 +70,33 @@ public class PushFieldAutomationSimplified : UnityEngine.MonoBehaviour {
 		float scaleFactorZ = this.Size.z/defaultSize.z;
 		float scaleFactorForce = this.Force/defaultForce;
 
-		main.startLifetime = defaultLifetime*scaleFactorY/scaleFactorForce;
+		float lifeTime = defaultLifetime;
+
+		/* Calculate the emitter offset on the Y axis, to shrink it so
+		 * particles should barely live over the end of the area. */
+		float offY = defaultSpeed * scaleFactorForce * lifeTime;
+		float height = this.Size.y;
+
+		/* Also, decrease the lifeTime if the offset were too big. */
+		if (offY >= height) {
+			lifeTime = defaultLifetime / (scaleFactorForce * 0.5f);
+			offY = defaultSpeed * scaleFactorForce * lifeTime;
+		}
+
+		main.startLifetime = lifeTime;
 		main.startSpeed = defaultSpeed*scaleFactorForce;
 		emission.rateOverTime = baseEmission*scaleFactorX*scaleFactorZ*scaleFactorForce;
 
-		shape.position = new Vec3(0.0f, -this.Size.y * 0.5f, 0.0f);
+		if (offY < height) {
+			height -= offY;
+		}
+		else {
+			height = 0.1f;
+		}
+
+		shape.position = new Vec3(0.0f, -offY * 0.5f, 0.0f);
 		shape.rotation = new Vec3(-90.0f, 0.0f, 0.0f);
-		shape.scale = new Vec3(this.Size.x, this.Size.z, 1.0f);
+		shape.scale = new Vec3(this.Size.x, this.Size.z, height);
 	}
 
 	void OnValidate() {
@@ -106,5 +130,38 @@ public class PushFieldAutomationSimplified : UnityEngine.MonoBehaviour {
 
 		this.setParticle(FogObject, FogEmission);
 		this.setParticle(WindObject, WindEmission);
+	}
+
+	/**
+	 * Retrive the push object, in case this object receives an event
+	 * before it's even initialized.
+	 */
+	private void getPushObject() {
+		if (this.forceObject != null) {
+			return;
+		}
+
+		Push p = this.gameObject.GetComponentInChildren<Push>();
+		if (p == null) {
+			throw new System.Exception($"{this} requires a child with a Push component!");
+		}
+
+		this.forceObject = p.gameObject;
+	}
+
+	public void OnSwap(out bool handled, bool enable) {
+		this.getPushObject();
+
+		if (enable) {
+			this.FogObject.Play(true);
+			this.WindObject.Play(true);
+			this.forceObject.SetActive(true);
+		}
+		else {
+			this.FogObject.Stop(true);
+			this.WindObject.Stop(true);
+			this.forceObject.SetActive(false);
+		}
+		handled = true;
 	}
 }

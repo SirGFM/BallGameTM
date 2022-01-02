@@ -113,8 +113,8 @@ MonoBehaviour:
   Collider: {fileID: 3084015076765217818}
   FogObject: {fileID: 450616957119095974}
   WindObject: {fileID: 7369394014747582060}
-  FogEmission: 60
-  WindEmission: 4
+  FogEmission: 180
+  WindEmission: 24
 --- !u!198 &3653974508747067852
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4908,11 +4908,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1900310037887765326, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: ShapeModule.m_Scale.z
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1900310037887765326, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: ShapeModule.m_Position.y
-      value: -5
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1900310037887765326, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: ShapeModule.m_Position.z
@@ -4936,11 +4936,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1900310037887765326, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 60
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 1900310037887765326, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8745330538877985718, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: m_Name
@@ -4960,11 +4960,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8816623767487410564, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: ShapeModule.m_Scale.z
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8816623767487410564, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: ShapeModule.m_Position.y
-      value: -5
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8816623767487410564, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: ShapeModule.m_Position.z
@@ -4996,11 +4996,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8816623767487410564, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 4
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 8816623767487410564, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8816623767487410564, guid: 1364fe0c8cc2e1c03888f7e388515edd, type: 3}
       propertyPath: InitialModule.startRotation.scalar
