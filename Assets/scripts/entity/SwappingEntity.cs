@@ -1,3 +1,5 @@
+using EvSys = UnityEngine.EventSystems;
+using ExecEv = UnityEngine.EventSystems.ExecuteEvents;
 using GO = UnityEngine.GameObject;
 using Time = UnityEngine.Time;
 
@@ -9,7 +11,22 @@ using Time = UnityEngine.Time;
  * the next gameObject to be delayed.
  *
  * The DefaultTime is used if a custom time isn't specified for the object.
+ *
+ * This component tries to send a OnSwap event to the entities getting
+ * enabled and disabled. If the event isn't handled, the gameObject itself
+ * gets enabled/disabled. Otherwise, it's left as is.
  */
+
+public interface SwapEntityIface : EvSys.IEventSystemHandler {
+	/**
+	 * Signal the entity that it should either get enabled or disabled.
+	 *
+	 * @param out handled: Whether the event was handled.
+	 * @param enable: Whethe the entity is being enabled or disabled.
+	 */
+	void OnSwap(out bool handled, bool enable);
+}
+
 public class SwappingEntity : UnityEngine.MonoBehaviour {
 
 	/** An entity that is enabled for some time. */
@@ -23,7 +40,17 @@ public class SwappingEntity : UnityEngine.MonoBehaviour {
 		/** Activate this object and return its active time, or 0 if not set. */
 		public float Activate() {
 			if (this.Object != null) {
-				this.Object.SetActive(true);
+				bool handled = false;
+
+				if (this.Object.activeSelf) {
+					ExecEv.ExecuteHierarchy<SwapEntityIface>(
+							this.Object, null,
+							(x,y) => x.OnSwap(out handled, true));
+				}
+
+				if (!handled || !this.Object.activeSelf) {
+					this.Object.SetActive(true);
+				}
 			}
 
 			if (this.Time > 0.0f) {
@@ -35,7 +62,14 @@ public class SwappingEntity : UnityEngine.MonoBehaviour {
 		/** Deactivate this object. */
 		public void Deactivate() {
 			if (this.Object != null) {
-				this.Object.SetActive(false);
+				bool handled = false;
+
+				ExecEv.ExecuteHierarchy<SwapEntityIface>(
+						this.Object, null,
+						(x,y) => x.OnSwap(out handled, false));
+				if (!handled) {
+					this.Object.SetActive(false);
+				}
 			}
 		}
 	};
@@ -57,10 +91,7 @@ public class SwappingEntity : UnityEngine.MonoBehaviour {
 
 		/* Disable every object but the first one. */
 		for (int i = 0; i < this.Objects.Length; i++) {
-			GO obj = this.Objects[i].Object;
-			if (obj != null) {
-				obj.SetActive(false);
-			}
+			this.Objects[i].Deactivate();
 		}
 
 		if (this.Objects.Length > 0) {
