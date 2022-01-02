@@ -177,6 +177,7 @@ static public class Input {
 		CameraRight,
 		CameraUp,
 		CameraDown,
+		ResetCamera,
 		NumActions,
 	};
 
@@ -353,6 +354,7 @@ static public class Input {
 		new axis(KeyCode.K) /* CameraRight */,
 		new axis(KeyCode.U) /* CameraUp */,
 		new axis(KeyCode.J) /* CameraDown */,
+		new axis(KeyCode.Mouse2) /* ResetCamera */,
 	};
 
 	static private axis[] axis1 = {
@@ -368,6 +370,7 @@ static public class Input {
 		new axis("joystick 0 axis 3", axisType.positiveAxis) /* CameraRight */,
 		new axis("joystick 0 axis 4", axisType.negativeAxis) /* CameraUp */,
 		new axis("joystick 0 axis 4", axisType.positiveAxis) /* CameraDown */,
+		new axis("joystick 0 button 5", axisType.none) /* ResetCamera */,
 	};
 
 	static private axis[] axis2 = {
@@ -383,6 +386,7 @@ static public class Input {
 		null /* CameraRight */,
 		null /* CameraUp */,
 		null /* CameraDown */,
+		null /* ResetCamera */,
 	};
 
 	/* =======================================================================
@@ -644,6 +648,7 @@ static public class Input {
 				new axis(KeyCode.K) /* CameraRight */,
 				new axis(KeyCode.U) /* CameraUp */,
 				new axis(KeyCode.J) /* CameraDown */,
+				new axis(KeyCode.Mouse2) /* ResetCamera */,
 			};
 			axis0 = _axis0;
 			break;
@@ -661,6 +666,7 @@ static public class Input {
 				new axis("joystick 0 axis 3", axisType.positiveAxis, Input.axisRest[3]) /* CameraRight */,
 				new axis("joystick 0 axis 4", axisType.negativeAxis, Input.axisRest[4]) /* CameraUp */,
 				new axis("joystick 0 axis 4", axisType.positiveAxis, Input.axisRest[4]) /* CameraDown */,
+				new axis("joystick 0 button 5", axisType.none) /* ResetCamera */,
 			};
 			axis1 = _axis1;
 			break;
@@ -678,6 +684,7 @@ static public class Input {
 				null /* CameraRight */,
 				null /* CameraUp */,
 				null /* CameraDown */,
+				null /* ResetCamera */,
 			};
 			axis2 = _axis2;
 			break;
@@ -809,6 +816,14 @@ static public class Input {
 
 	static public UnityEngine.Vector3 GetMousePosition() {
 		return UnityEngine.Input.mousePosition;
+	}
+
+	static public bool GetResetCameraDown() {
+		return combineButton(Actions.ResetCamera);
+	}
+
+	static public bool GetResetCameraJustPressed() {
+		return combineButtonJustPressed(Actions.ResetCamera);
 	}
 
 	/* =======================================================================

@@ -133,6 +133,25 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 		Vec3 v3 = new Vec3(x, 0.0f, y);
 		v3 *= this.speed;
 		this.rb.AddForce(v3);
+
+		if (this.cam != null) {
+			/* Only report the reset angle if any axis moved a bit (more
+			 * specifically, if both moved 0.1 units). */
+			if (x*x + y*y > 0.01) {
+				/* XXX: Rotation is just awful... because of... reasons
+				 * (most likely "something" expecting rotations to be done
+				 * clockwise and "something else" expecting rotations to be
+				 * done anti-clockwise), the vertical and the horizontal
+				 * components of the movement must be swapped....
+				 *
+				 * Note that this does send an angle behind the ball! The
+				 * alternative if everything were in the same orientation
+				 * would be to rotate this angle by 180 degrees. */
+				this.issueEvent<CameraIface>(
+						(obj,_) => obj.SetResetAngle(y, x),
+						this.cam.gameObject);
+			}
+		}
 	}
 
 	public void OnPush(Vec3 force) {

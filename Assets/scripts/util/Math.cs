@@ -193,4 +193,29 @@ public class Math {
 
 		return angle;
 	}
+
+	/**
+	 * Calculate the difference between two angles. The result is always in
+	 * the range [0, 180].
+	 *
+	 * @param a: The first angle. Must be between [0, 360]!
+	 * @param b: The second angle. Must be between [0, 360]!
+	 */
+	public static float DiffAngle(float a, float b) {
+		float ret;
+
+		/* Convert a and b to [-180, 180] */
+		if (a > 180.0f) {
+			a = -180.0f + (a - 180.0f);
+		}
+		if (b > 180.0f) {
+			b = -180.0f + (b - 180.0f);
+		}
+
+		ret = UEMath.Abs(a - b);
+		if (ret > 180.0f) {
+			return 360.0f - ret;
+		}
+		return ret;
+	}
 }

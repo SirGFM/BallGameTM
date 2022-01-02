@@ -1,3 +1,4 @@
+using Coroutine = UnityEngine.Coroutine;
 using EvSys = UnityEngine.EventSystems;
 using GO = UnityEngine.GameObject;
 using Transform = UnityEngine.Transform;
@@ -33,6 +34,15 @@ public interface CameraIface : EvSys.IEventSystemHandler {
 	 * @param perc: The percentage of the camera from the maximum distance.
 	 */
 	void SetCameraDistance(float perc);
+
+	/**
+	 * Set the horizontal angle that the camera should go back to, from a
+	 * 2D vector in the X/Z axis.
+	 *
+	 * @param x: The X axis of 2D vector defining the angle.
+	 * @param y: The Z axis of 2D vector defining the angle.
+	 */
+	void SetResetAngle(float x, float z);
 }
 
 public class CameraController : BaseRemoteAction, CameraIface {
@@ -46,12 +56,19 @@ public class CameraController : BaseRemoteAction, CameraIface {
 	/** The camera angle in the horizontal plane. */
 	private float horAng = 0.0f;
 	/** The camera angle in the vertical plane. */
-	public float verAng = 30.0f;
+	private float verAng = 30.0f;
 	/** Dynamic distance, to avoid/minimize clipping. */
 	private float curDist;
 
 	/** The position of the mouse on the last frame. */
     private Vec3 lastMouse;
+
+	/** Coroutine for resetting the camera. */
+	private Coroutine resetCor;
+	/** The X axis of 2D vector defining the resting angle. */
+	private float resetX = 0.0f;
+	/** The Z axis of 2D vector defining the resting angle. */
+	private float resetZ = 0.0f;
 
 	void Start() {
 		this.self = this.transform;
@@ -65,6 +82,7 @@ public class CameraController : BaseRemoteAction, CameraIface {
 
 		this.curDist = this.distance;
 		this.StartCoroutine(this.zoomCamera());
+		this.resetCor = null;
 	}
 
 	/**
@@ -93,6 +111,76 @@ public class CameraController : BaseRemoteAction, CameraIface {
 		return (cam != null);
 	}
 
+	/**
+	 * Return a modifier for whether a rotation from an angle to another
+	 * should be done clock or counter-clockwise.
+	 *
+	 * @param src: The source angle (in degrees).
+	 * @param dst: The destination angle (in degrees).
+	 */
+	private float getDeltaAngle(float src, float dst) {
+		if (dst > src && dst < src + 180.0f) {
+			return 1.0f;
+		}
+		return -1.0f;
+	}
+
+	/**
+	 * Rotate the camera back to a given position.
+	 *
+	 * @param hor: The horizontal angle.
+	 * @param ver: The vertical angle.
+	 */
+	private System.Collections.IEnumerator resetCamera(float hor, float ver) {
+		float dx = 0.0f;
+		float dy = 0.0f;
+
+		while (hor != Math.NormalizeAngle(hor)) {
+			hor = Math.NormalizeAngle(hor);
+		}
+		while (ver != Math.NormalizeAngle(ver)) {
+			ver = Math.NormalizeAngle(ver);
+		}
+
+		dx = 5.0f * Math.DiffAngle(this.horAng, hor);
+		dx *= this.getDeltaAngle(this.horAng, hor);
+		dy = 5.0f * Math.DiffAngle(this.verAng, ver);
+		dy *= this.getDeltaAngle(this.verAng, ver);
+
+		float maxTime = 0.0f;
+		while ((this.horAng != hor || this.verAng != ver) &&
+				maxTime < 0.75f) {
+			int count = 10;
+			float dt = Time.deltaTime / (float)count;
+
+			/* To avoid precision errors, improve the integration by using
+			 * a smaller delta time and running this a few times each
+			 * frame. Otherwise, the camera could end up skipping over the
+			 * point where it's less than 1 degree from the destination. */
+			for (; count > 0; count--) {
+				if (Math.DiffAngle(this.horAng, hor) < 1.0f) {
+					this.horAng = hor;
+					dx = 0.0f;
+				}
+				if (Math.DiffAngle(this.verAng, ver) < 1.0f) {
+					this.verAng = ver;
+					dy = 0.0f;
+				}
+
+				this.horAng += dx * dt;
+				this.verAng += dy * dt;
+			}
+
+			maxTime += Time.deltaTime;
+			yield return null;
+		}
+		/* If the loop above timed out, set the correct angle. */
+		this.horAng = hor;
+		this.verAng = ver;
+
+		this.resetCor = null;
+	}
+
 	void Update() {
 		if (this.target == null) {
 			return;
@@ -102,7 +190,23 @@ public class CameraController : BaseRemoteAction, CameraIface {
 		 *   - Mouse sensibility
 		 *   - Gamepad sensibility
 		 */
-		if (Input.GetMouseCameraEnabled()) {
+		if (this.resetCor != null) {
+			/* Don't do anything until the camera has reset. */
+		}
+		else if (Input.GetResetCameraJustPressed()) {
+			float ang;
+
+			if (this.resetZ != 0.0f || this.resetX != 0.0f) {
+				ang = UEMath.Atan2(this.resetZ, this.resetX);
+				ang = UEMath.Rad2Deg * ang;
+			}
+			else {
+				ang = 0.0f;
+			}
+
+			this.resetCor = this.StartCoroutine(this.resetCamera(ang, 30.0f));
+		}
+		else if (Input.GetMouseCameraEnabled()) {
 			Vec3 mouseDelta = Input.GetMousePosition() - this.lastMouse;
 
 			this.horAng += mouseDelta.x * Global.camX;
@@ -159,5 +263,10 @@ public class CameraController : BaseRemoteAction, CameraIface {
 		if (perc < this.lastDistPerc) {
 			this.lastDistPerc = perc;
 		}
+	}
+
+	public void SetResetAngle(float x, float z) {
+		this.resetX = x;
+		this.resetZ = z;
 	}
 }

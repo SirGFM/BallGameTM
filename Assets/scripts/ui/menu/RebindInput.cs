@@ -362,6 +362,9 @@ public class RebindInput : VerticalTextMenu {
 			new Action(this,
 					Input.Actions.CameraDown,
 					"Press input to move the camera down"),
+			new Action(this,
+					Input.Actions.ResetCamera,
+					"Press input to reset the camera behind the ball"),
 			new Header("--"),
 			new Command("Test",
 					() => {
