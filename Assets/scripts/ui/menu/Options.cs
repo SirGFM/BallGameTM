@@ -347,6 +347,46 @@ public class Options : VerticalTextMenu {
 		audioModes[0] = "Off";
 		float audioRatio = (float)audioModes.Length - 1.0f;
 
+		float[] camSpeed = new float[10];
+		string[] camSpeedStr = new string[camSpeed.Length];
+		for (int i = 0; i < camSpeed.Length; i++) {
+			float val;
+
+			if (i < 3) {
+				/* 0.25f, 0.5f, 0.75f */
+				val = (i + 1) * 0.25f;
+			}
+			else if (i < 8) {
+				/* 1.0f, 1.5f, 2.0f, 2.5f, ... */
+				val = (i - 1) * 0.5f;
+			}
+			else {
+				/* 4, 5 */
+				int ival = (i + 1) / 2;
+
+				val = ival;
+			}
+
+			camSpeed[i] = val;
+			camSpeedStr[i] = $"{val}x";
+		}
+
+		/** Lambda for searching the camSpeed array for the specified value. */
+		System.Func<float, int> getCamSpeedIdx = delegate(float speed) {
+			int idx_one = 0;
+			for (int i = 0; i < camSpeed.Length; i++) {
+				if (speed == camSpeed[i]) {
+					return i;
+				}
+				else if (camSpeed[i] == 1.0f) {
+					idx_one = i;
+				}
+			}
+
+			/* Defaults to 1.0f */
+			return idx_one;
+		};
+
 		Option[] _opts = {
 			Option.SectionHeader("-- Graphics --"),
 			new Option("Quality",
@@ -376,12 +416,20 @@ public class Options : VerticalTextMenu {
 					(new Values(idx => Config.setHorCamInverted(idx == 1),
 								"Normal",
 								"Inverted")).setAt((Config.getHorCamInverted()) ? 1 : 0)),
+			new Option("CamX Vel.",
+					"Configure camera's sensitivity on the horizontal axis. Try it out!",
+					(new Values(idx => Config.setHorCamSpeed(camSpeed[idx]),
+								camSpeedStr)).setAt(getCamSpeedIdx(Config.getHorCamSpeed()))),
 			new Option("Camera Y",
 					"Configure vertical camera movement.\n"+
 					"Try it out!",
 					(new Values(idx => Config.setVerCamInverted(idx == 1),
 								"Normal",
 								"Inverted")).setAt((Config.getVerCamInverted()) ? 1 : 0)),
+			new Option("CamY Vel.",
+					"Configure camera's sensitivity on the vertical axis. Try it out!",
+					(new Values(idx => Config.setVerCamSpeed(camSpeed[idx]),
+								camSpeedStr)).setAt(getCamSpeedIdx(Config.getVerCamSpeed()))),
 			Option.SectionHeader("-- Rebind --"),
 			new Option("Reset",
 					"Reset input bindings to their initial configurations.",

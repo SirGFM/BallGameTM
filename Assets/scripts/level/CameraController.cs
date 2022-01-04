@@ -186,10 +186,6 @@ public class CameraController : BaseRemoteAction, CameraIface {
 			return;
 		}
 
-		/* TODO:
-		 *   - Mouse sensibility
-		 *   - Gamepad sensibility
-		 */
 		if (this.resetCor != null) {
 			/* Don't do anything until the camera has reset. */
 		}
