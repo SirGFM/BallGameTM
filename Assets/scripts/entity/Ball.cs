@@ -33,6 +33,13 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 	/** How long has elapsed since the entity started to move. */
 	private float speedDT;
 
+	/** Camera target, pointing on the direction the player is moving. */
+	private Transform camTgt;
+	/** The player's own (cached) transform. */
+	private Transform self;
+	/** Offset of the camera from the player. */
+	private Vec3 camOffset;
+
 	/** Force applied when the object starts moving. */
 	public float MinSpeed = 5.0f;
 	/** How long it takes, in seconds, for the maximum force to be
@@ -51,6 +58,15 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 		}
 
 		this.drag = this.rb.drag;
+
+		/* Create a new object that shall be moved alongside the player's
+		 * target position, so the camera may show where the player is
+		 * headed to. */
+		GO go = new GO("camera-target");
+		this.self = this.transform;
+		this.camOffset = Vec3.zero;
+		this.camTgt = go.transform;
+		this.camTgt.position = this.self.position;
 
 		/* Try to retrieve and configure the main camera, and on failure
 		 * set a coroutine to try it again at a later time. */
@@ -88,7 +104,7 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 		this.cam = cam.transform;
 
 		this.issueEvent<CameraIface>(
-				(x,y) => x.SetCameraTarget(this.gameObject),
+				(x,y) => x.SetCameraTarget(this.camTgt.gameObject),
 				cam);
 		return true;
 	}
@@ -152,6 +168,15 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 						this.cam.gameObject);
 			}
 		}
+
+		/* Push the camera toward where the player is moving. This is
+		 * mostly noticeable at **really** high speeds. */
+		Vec3 offset = this.rb.velocity * 0.15f;
+		if (offset.y < 0.0f) {
+			offset.y = 0.0f;
+		}
+		this.camOffset = this.camOffset * 0.25f + offset * 0.75f;;
+		this.camTgt.position = this.self.position + this.camOffset;
 	}
 
 	public void OnPush(Vec3 force) {
