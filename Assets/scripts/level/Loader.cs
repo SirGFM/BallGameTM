@@ -166,11 +166,24 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 		op = SceneMng.LoadSceneAsync(this.uiScene, SceneMode.Additive);
 		yield return op;
 
+		string bg = LevelNameList.GetLevelBG(currentLevel);
+		op = SceneMng.LoadSceneAsync(bg, SceneMode.Additive);
+		if (op == null) {
+			string lvl = LevelNameList.GetLevel(currentLevel);
+			UnityEngine.Debug.LogWarning($"Couldn't load the background {bg} for level {lvl}!");
+		}
+		while (op != null && op.progress < 1.0f) {
+			/* Update a progress bar */
+			if (this.pb != null)
+				this.pb.progress = op.progress * 0.1f;
+			yield return new UnityEngine.WaitForFixedUpdate();
+		}
+
 		op = SceneMng.LoadSceneAsync(currentLevel, SceneMode.Additive);
 		while (op.progress < 1.0f) {
 			/* Update a progress bar */
 			if (this.pb != null)
-				this.pb.progress = op.progress * 0.95f;
+				this.pb.progress = 0.1f + op.progress * 0.85f;
 			yield return new UnityEngine.WaitForFixedUpdate();
 		}
 

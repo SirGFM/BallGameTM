@@ -28,6 +28,9 @@ static public class LevelNameList {
 	/** Cache the list of level names. */
 	static private string[] _list = null;
 
+	/** Cache the list of bg scenes per level. */
+	static private string[] _bgList = null;
+
 	/**
 	 * Convert the input name, a scene filename, into a level name.
 	 *
@@ -96,8 +99,18 @@ static public class LevelNameList {
 
 		max = i;
 		LevelNameList._list = new string[max];
-		for (i = 1; i < max; i++)
-			LevelNameList._list[i] = ProcessName(SceneUtil.GetScenePathByBuildIndex(i));
+		LevelNameList._bgList = new string[max];
+		for (i = 1; i < max; i++) {
+			string scene = SceneUtil.GetScenePathByBuildIndex(i);
+			int bgEnd = scene.LastIndexOf("/");
+			int bgStart = scene.Substring(0, bgEnd - 1).LastIndexOf("/");
+
+			LevelNameList._list[i] = ProcessName(scene);
+
+			/* The BG is simply named after the directory where the scene
+			 * is located. */
+			LevelNameList._bgList[i] = scene.Substring(bgStart + 1, bgEnd - bgStart - 1);
+		}
 	}
 
 	/**
@@ -121,6 +134,19 @@ static public class LevelNameList {
 			UpdateList();
 		if (i < LevelNameList._list.Length)
 			return LevelNameList._list[i];
+		return "Unknown";
+	}
+
+	/**
+	 * Retrieve the name of the BG scene for a given level (starting at 1).
+	 *
+	 * @return The i-th level.
+	 */
+	static public string GetLevelBG(int i) {
+		if (LevelNameList._bgList == null)
+			UpdateList();
+		if (i < LevelNameList._bgList.Length)
+			return LevelNameList._bgList[i];
 		return "Unknown";
 	}
 }

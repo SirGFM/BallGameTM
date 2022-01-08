@@ -62,4 +62,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/bg-scene/TestPerformance.unity
     guid: b7b976c64196d3e91afc6d85d86253af
+  - enabled: 1
+    path: Assets/scenes/bg-scene/00-basic.unity
+    guid: c8285e3a5329fd2db8b7858f13998e06
   m_configObjects: {}
