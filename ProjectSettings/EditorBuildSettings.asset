@@ -36,6 +36,9 @@ EditorBuildSettings:
     path: Assets/scenes/00-basic/10-ride-the-stream.unity
     guid: 3797315aa4fdfd03baf91b3eb88fafe8
   - enabled: 1
+    path: Assets/scenes/00-basic/13-follow-the-path.unity
+    guid: 62b5014c17a79a2ab98e85f9d94ddf23
+  - enabled: 1
     path: Assets/scenes/game-state/Loader.unity
     guid: 18fb5fceb35e46198a0c4511d67ea758
   - enabled: 1
