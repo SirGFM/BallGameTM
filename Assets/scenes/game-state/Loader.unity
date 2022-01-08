@@ -986,7 +986,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 10
-  verAng: 30
 --- !u!20 &2009419269
 Camera:
   m_ObjectHideFlags: 0
