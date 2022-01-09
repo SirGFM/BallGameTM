@@ -42,6 +42,9 @@ EditorBuildSettings:
     path: Assets/scenes/00-basic/13-follow-the-path.unity
     guid: 62b5014c17a79a2ab98e85f9d94ddf23
   - enabled: 1
+    path: Assets/scenes/04-ice/00-time-to-chill.unity
+    guid: 3374073b467e25fe78d4ec4bbc723897
+  - enabled: 1
     path: Assets/scenes/game-state/Loader.unity
     guid: 18fb5fceb35e46198a0c4511d67ea758
   - enabled: 1
@@ -68,4 +71,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/bg-scene/00-basic.unity
     guid: c8285e3a5329fd2db8b7858f13998e06
+  - enabled: 1
+    path: Assets/scenes/bg-scene/04-ice.unity
+    guid: c3811d5c395bb8e3ebe2b4f0f517fd45
   m_configObjects: {}
