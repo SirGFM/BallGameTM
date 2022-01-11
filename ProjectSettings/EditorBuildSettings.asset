@@ -45,6 +45,9 @@ EditorBuildSettings:
     path: Assets/scenes/04-ice/00-time-to-chill.unity
     guid: 3374073b467e25fe78d4ec4bbc723897
   - enabled: 1
+    path: Assets/scenes/04-ice/05-slippery-way.unity
+    guid: 48f5dd97122f81aebb5eab4b69341e88
+  - enabled: 1
     path: Assets/scenes/game-state/Loader.unity
     guid: 18fb5fceb35e46198a0c4511d67ea758
   - enabled: 1
