@@ -117,8 +117,27 @@ public class CameraController : BaseRemoteAction, CameraIface {
 	 *
 	 * @param src: The source angle (in degrees).
 	 * @param dst: The destination angle (in degrees).
+	 * @param diff: The absolute difference between the angles (in degrees).
 	 */
-	private float getDeltaAngle(float src, float dst) {
+	private float getDeltaAngle(float src, float dst, float diff) {
+		float posTgt = Math.NormalizeAngle(src + diff);
+		float negTgt = Math.NormalizeAngle(src - diff);
+
+		float dp = UEMath.Abs(dst - posTgt);
+		float dn = UEMath.Abs(dst - negTgt);
+
+		if (dp < 0.01 || dp >= 360.0f && dp - 360.0f < 0.01) {
+			return 1.0f;
+		}
+		else if (dn < 0.01 || dn >= 360.0f && dn - 360.0f < 0.01) {
+			return -1.0f;
+		}
+
+		/* This fails in some situations (e.g., if src == 270 && dst == 0),
+		 * so the conditional above manually checks whether the rotation
+		 * is clockwise or counter-clockwise (accounting for when the
+		 * target is past, or equal to, 360 degrees).
+		 * This was left as is as a failsafe, in case the above fails. */
 		if (dst > src && dst < src + 180.0f) {
 			return 1.0f;
 		}
@@ -142,10 +161,10 @@ public class CameraController : BaseRemoteAction, CameraIface {
 			ver = Math.NormalizeAngle(ver);
 		}
 
-		dx = 5.0f * Math.DiffAngle(this.horAng, hor);
-		dx *= this.getDeltaAngle(this.horAng, hor);
-		dy = 5.0f * Math.DiffAngle(this.verAng, ver);
-		dy *= this.getDeltaAngle(this.verAng, ver);
+		dx = Math.DiffAngle(this.horAng, hor);
+		dx *= 5.0f * this.getDeltaAngle(this.horAng, hor, dx);
+		dy = Math.DiffAngle(this.verAng, ver);
+		dy *= 5.0f * this.getDeltaAngle(this.verAng, ver, dy);
 
 		float maxTime = 0.0f;
 		while ((this.horAng != hor || this.verAng != ver) &&
