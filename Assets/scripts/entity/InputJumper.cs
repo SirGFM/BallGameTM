@@ -51,17 +51,39 @@ public class InputJumper : UnityEngine.MonoBehaviour, DetectColliderIface {
 				yield return new UnityEngine.WaitForFixedUpdate();
 			}
 
+			/* XXX: Unity's physics are WEIRD and sometimes decides to
+			 * delay issuing physics events because F*** you... Forcefully
+			 * wait 10 frames before the loop bellow to avoid issues if the
+			 * physics engine decides that none of the floor colliders are
+			 * touching anything right after jumping (even though they
+			 * visually ARE inside a geometry), but it later decides that
+			 * the colliders are still inside a geometry (at which point,
+			 * they visually aren't anymore).
+			 *
+			 * The reason to avoid this corner case is that it causes some
+			 * jumps to be way higher than the others, usually in sloped
+			 * surfaces. */
+			float t = 0.0f;
+			for (int i = 0; i < 10; i++) {
+				t += Time.fixedDeltaTime;
+				yield return new UnityEngine.WaitForFixedUpdate();
+			}
+
 			/* Wait for the component to leave the floor for at least one
 			 * frame. As a safe guard, if the component doesn't leave the
 			 * ground for 1 second, assumes something went wrong and go
 			 * back to the initial state.*/
-			for (float t = 0.0f; t < 1.0f && this.onFloor;
+			for (; t < 1.0f && this.onFloor;
 					t += Time.fixedDeltaTime) {
 				yield return new UnityEngine.WaitForFixedUpdate();
 			}
 
-			/* Avoid infinite loops (when !this.onFloor). */
-			yield return new UnityEngine.WaitForFixedUpdate();
+			/* Delay getting to the main loop until the component is back
+			 * at the floor. Otherwise, the 10 frames loop will possibly
+			 * delay some jumps. */
+			while (!this.onFloor) {
+				yield return new UnityEngine.WaitForFixedUpdate();
+			}
 		}
 	}
 
