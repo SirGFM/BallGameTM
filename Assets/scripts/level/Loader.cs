@@ -87,6 +87,8 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 		this.loadingNew = false;
 		this.blockReset = true;
 
+		Global.rtaTimer.Start();
+
 		this.loaderScene = SceneMng.GetActiveScene().buildIndex;
 
 		BaseRemoteAction.setRootTarget(this.gameObject);
@@ -98,6 +100,8 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	 * depends on Loader.currentLevel's value.
 	 */
 	private void reloadScene() {
+		Global.rtaTimer.Stop();
+		Global.igtTimer.Stop();
         SceneMng.LoadSceneAsync(this.loaderScene, SceneMode.Single);
 		this.loadingNew = true;
 	}
@@ -107,6 +111,7 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 			return;
 		}
 
+		Global.levelTimer.Stop();
 		Loader.currentLevel++;
 
 		/* Eventually, a game over scene which loops back to the main menu
@@ -186,6 +191,10 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 				this.pb.progress = 0.1f + op.progress * 0.85f;
 			yield return new UnityEngine.WaitForFixedUpdate();
 		}
+		Global.igtTimer.Start();
+
+		Global.levelTimer.Reset();
+		Global.levelTimer.Start();
 
 		SceneMng.UnloadSceneAsync(this.uiScene);
 
@@ -206,6 +215,8 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	 */
 	static public void LoadLevel(int idx) {
 		Loader.currentLevel = idx;
+		Global.rtaTimer.Reset();
+		Global.igtTimer.Reset();
 		SceneMng.LoadSceneAsync(Loader.loaderSceneName, SceneMode.Single);
 	}
 }
