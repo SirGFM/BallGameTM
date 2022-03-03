@@ -9,7 +9,7 @@ using Vec3 = UnityEngine.Vector3;
  * "push field" object.
  */
 
-public class PushFieldAutomationSimplified : UnityEngine.MonoBehaviour, SwapEntityIface {
+public class PushFieldAutomationSimplified : UnityEngine.MonoBehaviour, SetActiveIface {
 
 	/** The object that pushes other objects in a given direction. */
 	private GO forceObject;
@@ -149,7 +149,7 @@ public class PushFieldAutomationSimplified : UnityEngine.MonoBehaviour, SwapEnti
 		this.forceObject = p.gameObject;
 	}
 
-	public void OnSwap(out bool handled, bool enable) {
+	public void SetActive(out bool handled, bool enable) {
 		this.getPushObject();
 
 		if (enable) {

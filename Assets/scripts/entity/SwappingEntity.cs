@@ -1,4 +1,3 @@
-using EvSys = UnityEngine.EventSystems;
 using ExecEv = UnityEngine.EventSystems.ExecuteEvents;
 using GO = UnityEngine.GameObject;
 using Time = UnityEngine.Time;
@@ -12,20 +11,10 @@ using Time = UnityEngine.Time;
  *
  * The DefaultTime is used if a custom time isn't specified for the object.
  *
- * This component tries to send a OnSwap event to the entities getting
+ * This component tries to send a SetActive event to the entities getting
  * enabled and disabled. If the event isn't handled, the gameObject itself
  * gets enabled/disabled. Otherwise, it's left as is.
  */
-
-public interface SwapEntityIface : EvSys.IEventSystemHandler {
-	/**
-	 * Signal the entity that it should either get enabled or disabled.
-	 *
-	 * @param out handled: Whether the event was handled.
-	 * @param enable: Whethe the entity is being enabled or disabled.
-	 */
-	void OnSwap(out bool handled, bool enable);
-}
 
 public class SwappingEntity : UnityEngine.MonoBehaviour {
 
@@ -43,9 +32,9 @@ public class SwappingEntity : UnityEngine.MonoBehaviour {
 				bool handled = false;
 
 				if (this.Object.activeSelf) {
-					ExecEv.ExecuteHierarchy<SwapEntityIface>(
+					ExecEv.ExecuteHierarchy<SetActiveIface>(
 							this.Object, null,
-							(x,y) => x.OnSwap(out handled, true));
+							(x,y) => x.SetActive(out handled, true));
 				}
 
 				if (!handled || !this.Object.activeSelf) {
@@ -64,9 +53,9 @@ public class SwappingEntity : UnityEngine.MonoBehaviour {
 			if (this.Object != null) {
 				bool handled = false;
 
-				ExecEv.ExecuteHierarchy<SwapEntityIface>(
+				ExecEv.ExecuteHierarchy<SetActiveIface>(
 						this.Object, null,
-						(x,y) => x.OnSwap(out handled, false));
+						(x,y) => x.SetActive(out handled, false));
 				if (!handled) {
 					this.Object.SetActive(false);
 				}
