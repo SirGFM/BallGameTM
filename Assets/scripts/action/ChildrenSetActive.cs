@@ -26,7 +26,7 @@ public class ChildrenSetActive : BaseRemoteAction, SetActiveIface {
 		this.self = this.gameObject.transform;
 	}
 
-	public void SetActive(out bool handled, bool enable) {
+	virtual public void SetActive(out bool handled, bool enable) {
 		if (this.self.childCount == 0 || this.avoidRecusion) {
 			handled = false;
 			return;
