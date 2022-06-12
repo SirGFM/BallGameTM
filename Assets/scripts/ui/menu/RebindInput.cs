@@ -135,6 +135,12 @@ public class RebindInput : VerticalTextMenu {
 		act.setTimeoutText("");
 		this.updateSelected();
 
+		if (done) {
+			/* If rebinding the Accept button as any action, it may generate a
+			 * new button press event, which would get the RebindScene into a
+			 * loop trying to rebind the same action again and again. */
+			yield return this.WaitNoInput();
+		}
 		this._ignoreInputs--;
 	}
 
