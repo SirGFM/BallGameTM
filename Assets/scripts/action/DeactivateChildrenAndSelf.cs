@@ -22,8 +22,8 @@ public class DeactivateChildrenAndSelf : ChildrenSetActive {
 	}
 
 	override public void SetActive(out bool handled, bool enable) {
+		handled = true;
 		if (this.disabled) {
-			handled = true;
 			return;
 		}
 

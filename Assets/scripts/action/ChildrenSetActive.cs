@@ -49,8 +49,8 @@ public class ChildrenSetActive : BaseRemoteAction, SetActiveIface {
 				issueEvent<SetActiveIface>(
 						(x,y) => x.SetActive(out tmp, enable),
 						child);
-				/* Ensure that the event was handled by every child. */
-				handled = handled && tmp;
+				/* Ensure that the event was handled by at least a child. */
+				handled = handled || tmp;
 			}
 			else {
 				child.SetActive(enable);
