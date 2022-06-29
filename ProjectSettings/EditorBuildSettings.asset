@@ -51,6 +51,9 @@ EditorBuildSettings:
     path: Assets/scenes/04-ice/05-slippery-way.unity
     guid: 48f5dd97122f81aebb5eab4b69341e88
   - enabled: 1
+    path: Assets/scenes/04-ice/06.5-slippery-climb.unity
+    guid: d846961aa365c0538b0c2f550be7d77c
+  - enabled: 1
     path: Assets/scenes/04-ice/08-small-isles.unity
     guid: 63ef8a6fecd90597f9bb0ee67106cee1
   - enabled: 1
