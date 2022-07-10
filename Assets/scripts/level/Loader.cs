@@ -65,6 +65,9 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	/** The loader scene. */
 	static private string loaderSceneName = "Loader";
 
+	/** The scene shown on death. */
+	static private string loseSceneName = "OnLose";
+
 	/** Name of the sub-scene used to display the loading progress. */
 	public string uiScene = "LoadingUI";
 
@@ -218,5 +221,10 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 		Global.rtaTimer.Reset();
 		Global.igtTimer.Reset();
 		SceneMng.LoadSceneAsync(Loader.loaderSceneName, SceneMode.Single);
+	}
+
+	/** Load the scene shown on death. */
+	static public void StartLoseAnimation() {
+		SceneMng.LoadSceneAsync(Loader.loseSceneName, SceneMode.Additive);
 	}
 }

@@ -87,6 +87,9 @@ EditorBuildSettings:
     path: Assets/scenes/menu/Options.unity
     guid: afd243c77086c4c069598756d87f6253
   - enabled: 1
+    path: Assets/scenes/ingame-ui/OnLose.unity
+    guid: febb330ec8ced302d8976b0f0b56c708
+  - enabled: 1
     path: Assets/scenes/bg-scene/TestPerformance.unity
     guid: b7b976c64196d3e91afc6d85d86253af
   - enabled: 1
