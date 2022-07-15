@@ -194,8 +194,20 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 				this.pb.progress = 0.1f + op.progress * 0.85f;
 			yield return new UnityEngine.WaitForFixedUpdate();
 		}
-		Global.igtTimer.Start();
 
+		/* The active scene dictates where the lightning settings are read from.
+		 * Thus, the level scene must be set as the active one!. */
+		 while (true) {
+			Scene curScene;
+
+			curScene = SceneMng.GetSceneByBuildIndex(currentLevel);
+			if (curScene != null && SceneMng.SetActiveScene(curScene)) {
+				break;
+			}
+			yield return new UnityEngine.WaitForFixedUpdate();
+		}
+
+		Global.igtTimer.Start();
 		Global.levelTimer.Reset();
 		Global.levelTimer.Start();
 
