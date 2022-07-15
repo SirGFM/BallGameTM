@@ -64,3 +64,17 @@ For vertically moving platforms, it's useful to edit the prefab to avoid some co
 On the image above, the collider that interacts with the MovingPlatformController was grown, to ensure that the platform is able to hit the distanced colliders. Additionally to that, a small invisible border was added to make the player less likely from getting launched from the platform (in general... vertical moving platforms are finicky!)
 
 These modifications were made to two objects: the PlayerCollider, which is the object that physically interacts with the player, and the Controller, which interacts with MovingPlatformController objects. Although MovingPlatform, the parent object, is also a physics object, it's only used for the platform's movement. This had to be separated from the PlayerCollider so the player wouldn't affect the platform (making it neither fall nor rotate). The MovingPlatform is also the object that sends its own moving force to the player, hence why it's on the PlayerController layer.
+
+## Baking lightning
+
+(I always forget how to do this, so...)
+
+After finishing a stage, you must generate the stage's lighting. Otherwise, when loading the scene programmatically (either from a scene transition or from reloading) the scene will look really weird.
+
+![Left: Scene without generated light; Right: Scene with generated light](/docs/imgs/level-ilumination-comparison.png)
+
+To properly generate the light, open the desired scene, then load the Loader scene alongside it. Note that the target scene must be the active scene!
+
+![Hierarchy with both the scene without light and the Loader scene loaded](/docs/imgs/level-and-loader-loaded.png.png)
+
+Open the Lighting tab, press the `Generate Lighting` button and wait. When this finishes running, remove the Loader scene without saving, then save and commit the scene and the generated lighting data for the scene.
