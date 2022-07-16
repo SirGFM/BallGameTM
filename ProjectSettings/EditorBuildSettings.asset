@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/scenes/new-levels/00-basic/00-first-steps.unity
     guid: 6a2dd0e2f5ce966c0b8fe1bdd1790241
   - enabled: 1
-    path: Assets/scenes/00-basic/02-going-around.unity
-    guid: 7d2303ce38b8d82a99e5a6caba96f889
+    path: Assets/scenes/new-levels/00-basic/02-going-around.unity
+    guid: 78080e552f307f42a9445696d3c697aa
   - enabled: 1
     path: Assets/scenes/00-basic/02.5-dont-fall.unity
     guid: 7bd15d983b1c6d1a093847c7101b4759
