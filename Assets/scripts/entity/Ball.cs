@@ -1,5 +1,6 @@
 using GO = UnityEngine.GameObject;
 using UEMath = UnityEngine.Mathf;
+using Particles = UnityEngine.ParticleSystem;
 using RB = UnityEngine.Rigidbody;
 using Time = UnityEngine.Time;
 using Transform = UnityEngine.Transform;
@@ -20,7 +21,7 @@ using Vec3 = UnityEngine.Vector3;
  * moving, causing a nice acceleration.
  */
 
-public class Ball : BaseRemoteAction, PushIface, SetDragIface {
+public class Ball : BaseRemoteAction, PushIface, SetDragIface, KillIface {
 	/** The main camera, retrieved from a GetMainCamera event. */
 	private Transform cam;
 	/** This object's rigidbody. */
@@ -164,5 +165,22 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface {
 
 	public void OnResetDrag() {
 		this.rb.drag = this.drag;
+	}
+
+	public void OnKill() {
+		Transform self = this.transform;
+		Transform parent = self.parent;
+
+		/* Try to send a KillAt to the ball's parent,
+		 * so it may explode while this object is destroyed. */
+		if (parent != null) {
+			Vec3 pos = self.localPosition;
+			GO target = parent.gameObject;
+
+			this.issueEvent<KillAtIface>( (x,y) => x.KillAt(pos), target);
+		}
+
+		Loader.StartLoseAnimation();
+		GO.Destroy(this.gameObject);
 	}
 }
