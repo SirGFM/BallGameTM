@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/scenes/new-levels/00-basic/12-keep-your-balance.unity
     guid: 76b04c5a93796aba5904cc59f36f7fa6
   - enabled: 1
+    path: Assets/scenes/new-levels/00-basic/14-up-and-steady.unity
+    guid: 85962feb8bf90416ab1383b9655eb696
+  - enabled: 1
     path: Assets/scenes/00-basic/02.5-dont-fall.unity
     guid: 7bd15d983b1c6d1a093847c7101b4759
   - enabled: 1
