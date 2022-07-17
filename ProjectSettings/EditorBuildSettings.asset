@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/scenes/new-levels/00-basic/06-danger-ahead.unity
     guid: 677380e29456a4545981f4ae540cfd98
   - enabled: 1
+    path: Assets/scenes/new-levels/00-basic/08-danger-everywhere.unity
+    guid: 18f101a99ba650a60bdfd12ad167afc5
+  - enabled: 1
     path: Assets/scenes/00-basic/02.5-dont-fall.unity
     guid: 7bd15d983b1c6d1a093847c7101b4759
   - enabled: 1
