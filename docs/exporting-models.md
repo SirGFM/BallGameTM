@@ -8,6 +8,15 @@ it seems like Unity ends up batching each object individually.
 
 **Thus, these prototypes must eventually be modelled in an external tool!**
 
+## Shading mode in Blender
+
+To make Blender models more smooth in Unity,
+be sure to select every face of the model in `Edit Mode` and hit `Ctrl+f`.
+
+![Toolbar showing the 'Shade Smooth' setting](/docs/imgs/blender-shading.png)
+
+This information is carried over when exporting the model!
+
 ## Exporting Blender models
 
 To standardize everything, assume that 10cm (the default size of a cube) is 1 unit in Unity.
