@@ -36,6 +36,9 @@ EditorBuildSettings:
     path: Assets/scenes/new-levels/00-basic/16-mind-your-step.unity
     guid: 626f3e44af0c759959980755e17b30fb
   - enabled: 1
+    path: Assets/scenes/new-levels/00-basic/18-threading-the-needle.unity
+    guid: 4e8da317f4685ea3ca84e21bed5644ad
+  - enabled: 1
     path: Assets/scenes/00-basic/02.5-dont-fall.unity
     guid: 7bd15d983b1c6d1a093847c7101b4759
   - enabled: 1
