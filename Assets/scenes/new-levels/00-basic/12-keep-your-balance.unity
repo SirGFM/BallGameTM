@@ -998,6 +998,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6698912143688851997, guid: 71a74e1230161791baae8db027af2cbe, type: 3}
+      propertyPath: Force
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 7250324999961104041, guid: 71a74e1230161791baae8db027af2cbe, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1708,6 +1712,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6698912143688851997, guid: 71a74e1230161791baae8db027af2cbe, type: 3}
+      propertyPath: Force
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 7250324999961104041, guid: 71a74e1230161791baae8db027af2cbe, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -3421,32 +3429,32 @@ Transform:
   - {fileID: 1626484035}
   - {fileID: 619325111}
   - {fileID: 808045560}
+  - {fileID: 718353507}
   - {fileID: 1968195626}
   - {fileID: 1214285976}
+  - {fileID: 1457941831}
   - {fileID: 210090881}
   - {fileID: 932314099}
   - {fileID: 1392119675}
   - {fileID: 1210272382}
+  - {fileID: 1971837807}
+  - {fileID: 504021412}
   - {fileID: 1367051589}
   - {fileID: 1590076146}
+  - {fileID: 1369571328}
   - {fileID: 360148888}
-  - {fileID: 1457941831}
   - {fileID: 451197960}
-  - {fileID: 1971837807}
-  - {fileID: 718353507}
   - {fileID: 1739402036}
   - {fileID: 499883743}
   - {fileID: 1203060981}
   - {fileID: 1516520180}
   - {fileID: 555032332}
-  - {fileID: 1369571328}
   - {fileID: 90257643}
   - {fileID: 858277928}
   - {fileID: 2089828489}
-  - {fileID: 717677207}
-  - {fileID: 504021412}
-  - {fileID: 883219382}
   - {fileID: 2017721845}
+  - {fileID: 717677207}
+  - {fileID: 883219382}
   - {fileID: 1753765101}
   - {fileID: 1637916370}
   - {fileID: 1244761316}
