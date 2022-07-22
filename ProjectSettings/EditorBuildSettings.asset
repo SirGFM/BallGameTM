@@ -42,6 +42,9 @@ EditorBuildSettings:
     path: Assets/scenes/new-levels/04-ice/00-time-to-chill.unity
     guid: 7c666390120d349d5991befb9e467281
   - enabled: 1
+    path: Assets/scenes/new-levels/04-ice/02-slippery-way.unity
+    guid: e3fc4d71fd30f49d386b5a29afc17fdb
+  - enabled: 1
     path: Assets/scenes/00-basic/02.5-dont-fall.unity
     guid: 7bd15d983b1c6d1a093847c7101b4759
   - enabled: 1
@@ -68,9 +71,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/04-ice/03-timed-avalanche.unity
     guid: 2ae5bd376379423c48d8a28d9d5bd351
-  - enabled: 1
-    path: Assets/scenes/04-ice/05-slippery-way.unity
-    guid: 48f5dd97122f81aebb5eab4b69341e88
   - enabled: 1
     path: Assets/scenes/04-ice/06.5-slippery-climb.unity
     guid: d846961aa365c0538b0c2f550be7d77c
