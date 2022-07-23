@@ -54,6 +54,9 @@ EditorBuildSettings:
     path: Assets/scenes/new-levels/04-ice/06-ride-the-stream.unity
     guid: 21cda13fcfb2c45d78d77b8ab0f5177e
   - enabled: 1
+    path: Assets/scenes/new-levels/04-ice/08-slippery-climb.unity
+    guid: 084de85adc924ab61ba89ff63faf6e82
+  - enabled: 1
     path: Assets/scenes/00-basic/02.5-dont-fall.unity
     guid: 7bd15d983b1c6d1a093847c7101b4759
   - enabled: 1
@@ -74,9 +77,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/04-ice/03-timed-avalanche.unity
     guid: 2ae5bd376379423c48d8a28d9d5bd351
-  - enabled: 1
-    path: Assets/scenes/04-ice/06.5-slippery-climb.unity
-    guid: d846961aa365c0538b0c2f550be7d77c
   - enabled: 1
     path: Assets/scenes/04-ice/08-small-isles.unity
     guid: 63ef8a6fecd90597f9bb0ee67106cee1
