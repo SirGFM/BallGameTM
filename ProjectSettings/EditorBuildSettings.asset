@@ -60,6 +60,9 @@ EditorBuildSettings:
     path: Assets/scenes/new-levels/04-ice/10-around-the-stage.unity
     guid: 4f6d419c864600b9ca70d8d05dd0cb43
   - enabled: 1
+    path: Assets/scenes/new-levels/04-ice/20-floating-islands.unity
+    guid: 5b76ec6a144e18ad19125c8ffeb59e32
+  - enabled: 1
     path: Assets/scenes/00-basic/02.5-dont-fall.unity
     guid: 7bd15d983b1c6d1a093847c7101b4759
   - enabled: 1
@@ -83,9 +86,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/04-ice/08-small-isles.unity
     guid: 63ef8a6fecd90597f9bb0ee67106cee1
-  - enabled: 1
-    path: Assets/scenes/04-ice/14-floating-islands.unity
-    guid: 47cc706a9a7ea17c4af2ff49ffa89cc7
   - enabled: 1
     path: Assets/scenes/new-levels/Loader.unity
     guid: eb922485ff6d198349c6e1d2bc7f9e9f
