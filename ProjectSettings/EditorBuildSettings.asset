@@ -48,6 +48,9 @@ EditorBuildSettings:
     path: Assets/scenes/new-levels/04-ice/04-blown-away.unity
     guid: 0ad41d26b9759b4e0bdf08c2871b8c5f
   - enabled: 1
+    path: Assets/scenes/new-levels/04-ice/06-ride-the-stream.unity
+    guid: 21cda13fcfb2c45d78d77b8ab0f5177e
+  - enabled: 1
     path: Assets/scenes/00-basic/02.5-dont-fall.unity
     guid: 7bd15d983b1c6d1a093847c7101b4759
   - enabled: 1
@@ -59,9 +62,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/00-basic/08-going-with-the-flow.unity
     guid: a7ab38f087effacd9883cc2416a3645f
-  - enabled: 1
-    path: Assets/scenes/00-basic/10-ride-the-stream.unity
-    guid: 3797315aa4fdfd03baf91b3eb88fafe8
   - enabled: 1
     path: Assets/scenes/00-basic/11-dont-stop.unity
     guid: e4c9acd8ad5ab87c78b134e4532fc33d
