@@ -213,11 +213,9 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 
 		SceneMng.UnloadSceneAsync(this.uiScene);
 
-		/* TODO: Load the game UI */
-#if false
+		/* Load the game UI */
 		op = SceneMng.LoadSceneAsync(this.gameUiScene, SceneMode.Additive);
 		yield return op;
-#endif
 
 		this.blockReset = false;
 	}
