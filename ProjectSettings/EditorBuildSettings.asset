@@ -54,6 +54,9 @@ EditorBuildSettings:
     path: Assets/scenes/new-levels/04-ice/06-ride-the-stream.unity
     guid: 21cda13fcfb2c45d78d77b8ab0f5177e
   - enabled: 1
+    path: Assets/scenes/new-levels/04-ice/07-spiky-attraction.unity
+    guid: db7c56afc09dd94cbb54eb80366892e2
+  - enabled: 1
     path: Assets/scenes/new-levels/04-ice/08-slippery-climb.unity
     guid: 084de85adc924ab61ba89ff63faf6e82
   - enabled: 1
