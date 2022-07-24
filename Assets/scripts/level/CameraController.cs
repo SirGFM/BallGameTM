@@ -70,6 +70,11 @@ public class CameraController : BaseRemoteAction, CameraIface {
 	/** The Z axis of 2D vector defining the resting angle. */
 	private float resetZ = 0.0f;
 
+	/** Maximum angle when rotating the camera upward. */
+	private const float maxTopAngle = 88.0f;
+	/** Maximum angle when rotating the camera downward. */
+	private const float maxBottomAngle = 272.0f;
+
 	void Start() {
 		this.self = this.transform;
 		this.lastMouse = Input.GetMousePosition();
@@ -201,6 +206,8 @@ public class CameraController : BaseRemoteAction, CameraIface {
 	}
 
 	void Update() {
+		float dVerAng = 0.0f;
+
 		if (this.target == null) {
 			return;
 		}
@@ -225,13 +232,25 @@ public class CameraController : BaseRemoteAction, CameraIface {
 			Vec3 mouseDelta = Input.GetMousePosition() - this.lastMouse;
 
 			this.horAng += mouseDelta.x * Global.camX;
-			this.verAng += mouseDelta.y * Global.camY;
+			dVerAng = mouseDelta.y * Global.camY;
 		}
 		else {
 			Vec2 cam = Input.GetCamera();
 
 			this.horAng += cam.x * 5.0f * Global.camX;
-			this.verAng += cam.y * 5.0f * Global.camY;
+			dVerAng = cam.y * 5.0f * Global.camY;
+		}
+
+		/* Limit the camera from going both over and under the player, as those
+		 * situations cause the rotation axis to invert. */
+		if (this.verAng <= maxTopAngle && this.verAng + dVerAng >= maxTopAngle) {
+			this.verAng = maxTopAngle;
+		}
+		else if (this.verAng >= maxBottomAngle && this.verAng + dVerAng <= maxBottomAngle) {
+			this.verAng = maxBottomAngle;
+		}
+		else if (dVerAng != 0.0f) {
+			this.verAng += dVerAng;
 		}
 
 		this.horAng = Math.NormalizeAngle(this.horAng);
