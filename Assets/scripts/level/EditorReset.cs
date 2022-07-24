@@ -21,4 +21,7 @@ public class EditorReset : UnityEngine.MonoBehaviour, LoaderIface {
 	public void SetSceneTitle(out bool done, UiText txt, UiScene ui) {
 		done = false;
 	}
+
+	public void SetTimer(UiText txt, UiTimer timer) {
+	}
 }

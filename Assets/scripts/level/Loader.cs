@@ -14,7 +14,8 @@ using UiText = UnityEngine.UI.Text;
  * SetProgressBar event to signal which object has the UI, so the loader
  * may update it as the level is loaded. Similarly, the UI must send a
  * SetSceneTitle to set the name on the loading screen and within the
- * in-game UI.
+ * in-game UI. While in game, the UI may send SetTime events to update the
+ * desired timer in the UI.
  *
  * This component also implementns OnReset, to reload the current stage
  * and OnGoal to load the next stage. The stage that will be loaded by
@@ -27,6 +28,13 @@ using UiText = UnityEngine.UI.Text;
 public enum UiScene {
 	LoadingScene,
 	GameScene
+}
+
+/** Identify the timers tracked by the loader. */
+public enum UiTimer {
+	IgtTimer,
+	LevelTimer,
+	None, /* Used exclusively to hide the timer's descriptor. */
 }
 
 public interface LoaderIface : EvSys.IEventSystemHandler {
@@ -48,6 +56,14 @@ public interface LoaderIface : EvSys.IEventSystemHandler {
 	 *            customized accordingly.
 	 */
 	void SetSceneTitle(out bool done, UiText txt, UiScene ui);
+
+	/**
+	 * SetTimer configures the element that shows the requested timer.
+	 *
+	 * @param txt: The text element to be updated with the timer's value.
+	 * @param timer: Which timer should be used.
+	 */
+	void SetTimer(UiText txt, UiTimer timer);
 
 	/**
 	 * Resets the current stage.
@@ -103,7 +119,7 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	 * depends on Loader.currentLevel's value.
 	 */
 	private void reloadScene() {
-		Global.rtaTimer.Stop();
+		Global.levelTimer.Stop();
 		Global.igtTimer.Stop();
         SceneMng.LoadSceneAsync(this.loaderScene, SceneMode.Single);
 		this.loadingNew = true;
@@ -114,6 +130,7 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 			return;
 		}
 
+		Global.igtTimer.Stop();
 		Global.levelTimer.Stop();
 		Loader.currentLevel++;
 
@@ -161,6 +178,19 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 
 		txt.text = $"Level {Loader.currentLevel}{separator}{levelName}";
 		done = true;
+	}
+
+	public void SetTimer(UiText txt, UiTimer timer) {
+		switch (timer) {
+		case UiTimer.IgtTimer:
+			txt.text = Global.igtTimer.ToString();
+			break;
+		case UiTimer.LevelTimer:
+			txt.text = Global.levelTimer.ToString();
+			break;
+		default:
+			throw new System.Exception($"Invalid UiTimer ({timer})");
+		}
 	}
 
 	/**

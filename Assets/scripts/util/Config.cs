@@ -8,6 +8,8 @@ static public class Config {
 	static private float camDirY = 1.0f;
 	/** Multiplier for the camera speed in the vertical axis. */
 	static private float camSpeedY = 1.0f;
+	/** Whether the in-game timer is visible or not. */
+	static private bool timer = true;
 
 	/**
 	 * Configure (and save) whether the camera should be inverted on the
@@ -87,5 +89,22 @@ static public class Config {
 	/* Retrieve the camera's speed on the horizontal axis. */
 	static public float getVerCamSpeed() {
 		return Config.camSpeedY;
+	}
+
+	/**
+	 * Configure (and save) the in-game timer visibility.
+	 *
+	 * @param v: Whether the in-game timer is visible.
+	 */
+	static public void setInGameTimer(bool v) {
+		Config.timer = v;
+
+		Global.showTimer = v;
+		/* TODO: Save */
+	}
+
+	/** Retrieve whether the in-game timer is visible. */
+	static public bool getInGameTimer() {
+		return Config.timer;
 	}
 }

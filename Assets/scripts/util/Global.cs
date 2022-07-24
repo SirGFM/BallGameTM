@@ -96,6 +96,9 @@ static public class Global {
 		}
 	}
 
+	/** Whether the in-game time should be visibile. */
+	static public bool showTimer = true;
+
 	/**
 	 * RTA ("real time attack") timer. Starts counting from new-game/level
 	 * select, and continues until the game is over.
