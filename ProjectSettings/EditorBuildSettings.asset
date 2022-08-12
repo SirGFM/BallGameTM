@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/scenes/game-state/RecalibrateGamepad.unity
-    guid: 7b3e8bd85c5e9d6f9aff8be285379296
+    path: Assets/scenes/game-state/Main.unity
+    guid: 5e6cdc348890c05e5a490a83d50d0737
   - enabled: 1
     path: Assets/scenes/new-levels/00-basic/00-first-steps.unity
     guid: 6a2dd0e2f5ce966c0b8fe1bdd1790241
@@ -74,6 +74,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/game-state/LoadingUI.unity
     guid: ef8b8731a055ce8128a85eee1441f719
+  - enabled: 1
+    path: Assets/scenes/game-state/RecalibrateGamepad.unity
+    guid: 7b3e8bd85c5e9d6f9aff8be285379296
   - enabled: 1
     path: Assets/scenes/menu/MainMenu.unity
     guid: 1ac741ed4a0a58352aca915c34441108

@@ -905,7 +905,6 @@ GameObject:
   - component: {fileID: 394038287}
   - component: {fileID: 394038286}
   - component: {fileID: 394038285}
-  - component: {fileID: 394038284}
   - component: {fileID: 394038283}
   - component: {fileID: 394038282}
   m_Layer: 11
@@ -992,14 +991,6 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
---- !u!81 &394038284
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 394038281}
-  m_Enabled: 1
 --- !u!114 &394038285
 MonoBehaviour:
   m_ObjectHideFlags: 0
