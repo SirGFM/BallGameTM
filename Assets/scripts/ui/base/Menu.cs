@@ -78,13 +78,15 @@ public class Menu : BaseRemoteAction {
 			}
 
 			if (Input.MenuSelect()) {
-				/* TODO SFX */
+				Global.Sfx.playEnterMenu();
+
 				this.onSelect();
 				while (Input.MenuSelect())
 					yield return null;
 			}
 			else if (Input.MenuCancel()) {
-				/* TODO SFX */
+				Global.Sfx.playCancelMenu();
+
 				this.onCancel();
 				while (Input.MenuCancel())
 					yield return null;
@@ -103,7 +105,9 @@ public class Menu : BaseRemoteAction {
 				else
 					playSound = false;
 
-				/* TODO SFX */
+				if (playSound) {
+					Global.Sfx.playMoveMenu();
+				}
 
 				for (float t = 0; t < delay && this.anyDirDown();
 						t += Time.deltaTime) {

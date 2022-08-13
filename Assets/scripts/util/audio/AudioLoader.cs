@@ -59,6 +59,7 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 	public AudioClip sfxFall;
 	public AudioClip sfxExplode;
 	public AudioClip sfxVictory;
+	public AudioClip sfxDefeatOpening;
 	public AudioClip sfxDefeat;
 
 	/** The main menu scene, loaded if there are no connected gamepad. */
@@ -76,6 +77,8 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 	private AudioSource musicPlayer;
 
 	void Start() {
+		Global.Sfx.setAudioLoader(this);
+
 		this.musicPlayer = this.gameObject.AddComponent<AudioSource>();
 		/* Makes this a "2D sound" (i.e., its position is ignored). */
 		this.musicPlayer.spatialBlend = 0.0f;
@@ -92,6 +95,15 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 		this.StartCoroutine(this.run());
 		this.StartCoroutine(this.startSong());
 		GO.DontDestroyOnLoad(this.gameObject);
+	}
+
+	/**
+	 * Update the volume of the currently playing music.
+	 *
+	 * @param val: The new volume.
+	 */
+	public void setMusicVolume(float val) {
+		this.musicPlayer.volume = val;
 	}
 
 	/**

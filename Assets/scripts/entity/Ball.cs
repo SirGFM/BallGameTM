@@ -180,6 +180,7 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface, KillIface {
 			this.issueEvent<KillAtIface>( (x,y) => x.KillAt(pos), target);
 		}
 
+		Global.Sfx.playExplode();
 		Loader.StartLoseAnimation();
 		GO.Destroy(this.gameObject);
 	}

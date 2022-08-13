@@ -5,10 +5,10 @@ public class LoseScene : WinLoseScene {
 	}
 
 	protected override void playOpeningSfx() {
-		// TODO
+		Global.Sfx.playDefeatOpening();
 	}
 
 	protected override void playSfx() {
-		// TODO
+		Global.Sfx.playDefeat();
 	}
 }

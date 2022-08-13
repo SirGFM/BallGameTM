@@ -158,14 +158,15 @@ MonoBehaviour:
   songChillBeginnings: {fileID: 8300000, guid: 5086da09f5a58939fb618be37be8817c, type: 3}
   songGrassyFields: {fileID: 8300000, guid: 7eb35781f465e4b1bb227d23ac4b0dcf, type: 3}
   grassyFieldsSelector: levels/00-basic
-  sfxMoveMenu: {fileID: 0}
-  sfxEnterMenu: {fileID: 0}
-  sfxCancelMenu: {fileID: 0}
-  sfxJump: {fileID: 0}
-  sfxFall: {fileID: 0}
-  sfxExplode: {fileID: 0}
+  sfxMoveMenu: {fileID: 8300000, guid: 3c720c0e3b860db51a54bfd30b59f7f5, type: 3}
+  sfxEnterMenu: {fileID: 8300000, guid: f3e8be8a0987f60c38371ddef19cea41, type: 3}
+  sfxCancelMenu: {fileID: 8300000, guid: 31a94558db7e1d7ee90771697091e498, type: 3}
+  sfxJump: {fileID: 8300000, guid: e3394c6a27f37b84d82f494af4378f63, type: 3}
+  sfxFall: {fileID: 8300000, guid: 68f906d31bda0fb62ab161c5bf3b16f9, type: 3}
+  sfxExplode: {fileID: 8300000, guid: 6ddad80e863bd5bb782554d1c477e00b, type: 3}
   sfxVictory: {fileID: 0}
-  sfxDefeat: {fileID: 0}
+  sfxDefeatOpening: {fileID: 8300000, guid: 96a1de21cebe02aef82fab088d6173eb, type: 3}
+  sfxDefeat: {fileID: 8300000, guid: 62ba0a3812e15a048bec9e519c20e113, type: 3}
   mainMenuScene: MainMenu
   calibrationScene: RecalibrateGamepad
   muteMusic: 1

@@ -1,3 +1,6 @@
+using AudioClip = UnityEngine.AudioClip;
+using AudioSource = UnityEngine.AudioSource;
+using GO = UnityEngine.GameObject;
 
 static public class Global {
 	/**
@@ -113,4 +116,109 @@ static public class Global {
 
 	/** Track the duration of a single run in a single level. */
 	static public Timer levelTimer = new Timer();
+
+	/** Sfx holds every method used to play sound effects. */
+	static public class Sfx {
+		/** The global object playing the music and storing all the loaded
+		 * audio clips. */
+		static private AudioLoader audioLoader;
+
+		/**
+		 * Configure the Sfx's audio loader.
+		 *
+		 * @param audioLoader: The audio loader.
+		 */
+		static public void setAudioLoader(AudioLoader audioLoader) {
+			Global.Sfx.audioLoader = audioLoader;
+		}
+
+		/** The music's volume. This shouldn't be set directly, as the music
+		 * source must be updated as well. */
+		static private float musicVolume = 0.6f;
+
+		/**
+		 * Update the volume of the currently playing music.
+		 *
+		 * @param val: The new volume.
+		 */
+		static public void setMusicVolume(float val) {
+			Global.Sfx.musicVolume = val;
+
+			if (Global.Sfx.audioLoader != null) {
+				Global.Sfx.audioLoader.setMusicVolume(val);
+			}
+		}
+
+		/** Retrieve the volume of the currently playing music. */
+		static public float getMusicVolume() {
+			return Global.Sfx.musicVolume;
+		}
+
+		/** The volume for newly played sound effects. */
+		static public float sfxVolume = 0.4f;
+
+		/**
+		 * Play a sound effect.
+		 *
+		 * @param clip: The audio clip to be played.
+		 * @param throughTransition: Make the audio persist through scene transition.
+		 */
+		static private void playAudio(AudioClip clip, bool throughTransition=false) {
+			if (clip == null || Global.Sfx.sfxVolume <= 0.0f) {
+				return;
+			}
+
+			/* Create a new object, since every sound effect needs its own
+			 * audio source. */
+			GO obj = new GO();
+
+			if (throughTransition) {
+				GO.DontDestroyOnLoad(obj);
+			}
+
+			AudioSource player = obj.AddComponent<AudioSource>();
+			player.clip = clip;
+			/* Makes this a "2D sound" (i.e., its position is ignored). */
+			player.spatialBlend = 0.0f;
+			player.volume = Global.Sfx.sfxVolume;
+			player.Play();
+			obj.AddComponent<DestroyOnAudioDone>();
+		}
+
+		static public void playMoveMenu() {
+			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxMoveMenu);
+		}
+
+		static public void playEnterMenu() {
+			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxEnterMenu, true);
+		}
+
+		static public void playCancelMenu() {
+			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxCancelMenu, true);
+		}
+
+		static public void playJump() {
+			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxJump);
+		}
+
+		static public void playFall() {
+			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxFall);
+		}
+
+		static public void playExplode() {
+			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxExplode);
+		}
+
+		static public void playVictory() {
+			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxVictory);
+		}
+
+		static public void playDefeatOpening() {
+			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxDefeatOpening);
+		}
+
+		static public void playDefeat() {
+			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxDefeat);
+		}
+	}
 }

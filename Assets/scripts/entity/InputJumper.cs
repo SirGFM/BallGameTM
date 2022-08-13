@@ -42,6 +42,8 @@ public class InputJumper : UnityEngine.MonoBehaviour, DetectColliderIface {
 		while (true) {
 			while (this.onFloor) {
 				if (this.tryJump > 0.0f) {
+					Global.Sfx.playJump();
+
 					Vec3 v3 = new Vec3(0.0f, this.Jump, 0.0f);
 					this.rb.AddForce(v3);
 					this.tryJump = 0.0f;
@@ -97,6 +99,9 @@ public class InputJumper : UnityEngine.MonoBehaviour, DetectColliderIface {
     }
 
 	public void OnTouchingAny() {
+		if (!this.onFloor) {
+			Global.Sfx.playFall();
+		}
 		this.onFloor = true;
 	}
 
