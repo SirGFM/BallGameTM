@@ -87,6 +87,9 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	/** The scene shown on death. */
 	private string loseSceneName = "OnLose";
 
+	/** The scene shown when the player reaches a goal. */
+	private string winSceneName = "OnWin";
+
 	/** Name of the sub-scene used to display the loading progress. */
 	public string uiScene = "LoadingUI";
 
@@ -123,6 +126,10 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	 * depends on Loader.currentLevel's value.
 	 */
 	private void reloadScene() {
+		if (this.loadingNew) {
+			return;
+		}
+
 		Global.levelTimer.Stop();
 		Global.igtTimer.Stop();
         SceneMng.LoadSceneAsync(this.loaderScene, SceneMode.Single);
@@ -130,13 +137,9 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	}
 
 	public void OnGoal() {
-		if (this.loadingNew) {
+		if (this.blockReset || this.loadingNew) {
 			return;
 		}
-
-		Global.igtTimer.Stop();
-		Global.levelTimer.Stop();
-		Loader.currentLevel++;
 
 		/* Eventually, a game over scene which loops back to the main menu
 		 * should be loaded. Therefore, currentLevel shouldn't ever
@@ -149,6 +152,16 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 		}
 #endif
 
+		this.blockReset = true;
+		this.startEndCard(this.winSceneName);
+	}
+
+	public void OnAdvanceLevel() {
+		if (this.loadingNew) {
+			return;
+		}
+
+		Loader.currentLevel++;
 		this.reloadScene();
 	}
 

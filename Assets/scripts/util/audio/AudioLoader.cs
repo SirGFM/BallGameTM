@@ -58,6 +58,7 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 	public AudioClip sfxJump;
 	public AudioClip sfxFall;
 	public AudioClip sfxExplode;
+	public AudioClip sfxVictoryOpening;
 	public AudioClip sfxVictory;
 	public AudioClip sfxDefeatOpening;
 	public AudioClip sfxDefeat;

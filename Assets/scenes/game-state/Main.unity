@@ -164,7 +164,8 @@ MonoBehaviour:
   sfxJump: {fileID: 8300000, guid: e3394c6a27f37b84d82f494af4378f63, type: 3}
   sfxFall: {fileID: 8300000, guid: 68f906d31bda0fb62ab161c5bf3b16f9, type: 3}
   sfxExplode: {fileID: 8300000, guid: 6ddad80e863bd5bb782554d1c477e00b, type: 3}
-  sfxVictory: {fileID: 0}
+  sfxVictoryOpening: {fileID: 8300000, guid: abc40502f205ec94e9045d3217b6a096, type: 3}
+  sfxVictory: {fileID: 8300000, guid: 1f55afd4b2627cc15baaae03249c1803, type: 3}
   sfxDefeatOpening: {fileID: 8300000, guid: 96a1de21cebe02aef82fab088d6173eb, type: 3}
   sfxDefeat: {fileID: 8300000, guid: 62ba0a3812e15a048bec9e519c20e113, type: 3}
   mainMenuScene: MainMenu

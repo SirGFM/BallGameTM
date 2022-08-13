@@ -209,6 +209,10 @@ static public class Global {
 			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxExplode);
 		}
 
+		static public void playVictoryOpening() {
+			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxVictoryOpening);
+		}
+
 		static public void playVictory() {
 			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxVictory);
 		}

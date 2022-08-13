@@ -13,6 +13,11 @@ public interface GoalIface : EvSys.IEventSystemHandler {
 	void OnGoal();
 
 	/**
+	 * Signals an entity that the game should go to the next level.
+	 */
+	void OnAdvanceLevel();
+
+	/**
 	 * Signals an entity that the game must restart the current level.
 	 */
 	void OnRetryLevel();
