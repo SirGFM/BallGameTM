@@ -78,11 +78,14 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	 * set back to 1. */
 	static public int currentLevel = 1;
 
+	/** Whether an end card is already playing, and thus other ones should be played. */
+	private bool blockEndCard;
+
 	/** The loader scene. */
 	static private string loaderSceneName = "Loader";
 
 	/** The scene shown on death. */
-	static private string loseSceneName = "OnLose";
+	private string loseSceneName = "OnLose";
 
 	/** Name of the sub-scene used to display the loading progress. */
 	public string uiScene = "LoadingUI";
@@ -103,6 +106,7 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	private bool blockReset;
 
 	void Start() {
+		this.blockEndCard = false;
 		this.loadingNew = false;
 		this.blockReset = true;
 
@@ -263,8 +267,23 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 		SceneMng.LoadSceneAsync(Loader.loaderSceneName, SceneMode.Single);
 	}
 
+	/**
+	 * Load an end card scene.
+	 *
+	 * @param scene: The end card overlay scene.
+	 */
+	private void startEndCard(string scene) {
+		if (!this.blockEndCard) {
+			Global.igtTimer.Stop();
+			Global.levelTimer.Stop();
+
+			SceneMng.LoadSceneAsync(scene, SceneMode.Additive);
+			this.blockEndCard = true;
+		}
+	}
+
 	/** Load the scene shown on death. */
-	static public void StartLoseAnimation() {
-		SceneMng.LoadSceneAsync(Loader.loseSceneName, SceneMode.Additive);
+	public void OnRetryLevel() {
+		this.startEndCard(this.loseSceneName);
 	}
 }

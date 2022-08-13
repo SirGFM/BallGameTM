@@ -181,7 +181,7 @@ public class Ball : BaseRemoteAction, PushIface, SetDragIface, KillIface {
 		}
 
 		Global.Sfx.playExplode();
-		Loader.StartLoseAnimation();
+		this.rootEvent<GoalIface>( (x,y) => x.OnRetryLevel() );
 		GO.Destroy(this.gameObject);
 	}
 }

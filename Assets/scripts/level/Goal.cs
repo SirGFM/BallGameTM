@@ -11,6 +11,11 @@ public interface GoalIface : EvSys.IEventSystemHandler {
 	 * Signals an entity has reached the goal.
 	 */
 	void OnGoal();
+
+	/**
+	 * Signals an entity that the game must restart the current level.
+	 */
+	void OnRetryLevel();
 }
 
 public class Goal : BaseRemoteAction {

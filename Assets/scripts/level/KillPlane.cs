@@ -1,16 +1,9 @@
 using Col = UnityEngine.Collider;
 
-public class KillPlane : UnityEngine.MonoBehaviour {
-	private bool done = false;
+public class KillPlane : BaseRemoteAction {
 
 	void OnTriggerEnter(Col other) {
-		if (this.done) {
-			return;
-		}
-
-		Loader.StartLoseAnimation();
+		rootEvent<GoalIface>( (x,y) => x.OnRetryLevel() );
 		this.gameObject.SetActive(false);
-
-		this.done = true;
 	}
 }

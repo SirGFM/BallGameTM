@@ -19,4 +19,8 @@ public class AdvanceLevel : UnityEngine.MonoBehaviour, GoalIface {
 
         SceneMng.LoadSceneAsync(next, SceneMode.Single);
 	}
+
+	public void OnRetryLevel() {
+		/* Stub. Do nothing. */
+	}
 }
