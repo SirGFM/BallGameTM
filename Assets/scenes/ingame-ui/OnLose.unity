@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Rise again and keep on climbing!
+  m_Text: Keep. On. Rolling!
 --- !u!222 &545567794
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -315,7 +315,7 @@ MonoBehaviour:
   bgColor: {fileID: 1767354424}
   title: {fileID: 1456556343}
   titleFx: {fileID: 1316269183}
-  flavor: {fileID: 0}
+  flavor: {fileID: 545567792}
   pressToPlay: {fileID: 785239124}
   scaleDelay: 1.75
   initialPos: 96
