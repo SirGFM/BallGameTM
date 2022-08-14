@@ -69,6 +69,16 @@ public interface LoaderIface : EvSys.IEventSystemHandler {
 	 * Resets the current stage.
 	 */
 	void OnReset();
+
+	/**
+	 * Show the pause menu.
+	 */
+	void ShowPause();
+
+	/**
+	 * Hide the pause menu.
+	 */
+	void HidePause();
 }
 
 public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
@@ -90,6 +100,9 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	/** The scene shown when the player reaches a goal. */
 	private string winSceneName = "OnWin";
 
+	/** The scene shown when the pause is pressed. */
+	private string pauseSceneName = "Pause";
+
 	/** Name of the sub-scene used to display the loading progress. */
 	public string uiScene = "LoadingUI";
 
@@ -108,10 +121,14 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	/** Wehther resetting is blocked, as while the stage is being loaded. */
 	private bool blockReset;
 
+	/** Whether the pause scene has been loaded. */
+	private bool isPauseLoaded;
+
 	void Start() {
 		this.blockEndCard = false;
 		this.loadingNew = false;
 		this.blockReset = true;
+		this.isPauseLoaded = false;
 
 		Global.rtaTimer.Start();
 
@@ -207,6 +224,20 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 			break;
 		default:
 			throw new System.Exception($"Invalid UiTimer ({timer})");
+		}
+	}
+
+	public void ShowPause() {
+		if (!this.isPauseLoaded) {
+			SceneMng.LoadSceneAsync(this.pauseSceneName, SceneMode.Additive);
+			this.isPauseLoaded = true;
+		}
+	}
+
+	public void HidePause() {
+		if (this.isPauseLoaded) {
+			SceneMng.UnloadSceneAsync(this.pauseSceneName);
+			this.isPauseLoaded = false;
 		}
 	}
 

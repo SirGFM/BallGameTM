@@ -24,4 +24,10 @@ public class EditorReset : UnityEngine.MonoBehaviour, LoaderIface {
 
 	public void SetTimer(UiText txt, UiTimer timer) {
 	}
+
+	public void ShowPause() {
+	}
+
+	public void HidePause() {
+	}
 }
