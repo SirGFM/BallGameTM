@@ -69,6 +69,9 @@ EditorBuildSettings:
     path: Assets/scenes/new-levels/04-ice/20-floating-islands.unity
     guid: 5b76ec6a144e18ad19125c8ffeb59e32
   - enabled: 1
+    path: Assets/scenes/game-state/GameOver.unity
+    guid: 7ca126e404f60ab709467cc76fbc178c
+  - enabled: 1
     path: Assets/scenes/new-levels/Loader.unity
     guid: eb922485ff6d198349c6e1d2bc7f9e9f
   - enabled: 1

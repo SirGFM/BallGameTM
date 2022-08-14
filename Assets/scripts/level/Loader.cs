@@ -35,6 +35,7 @@ public enum UiTimer {
 	IgtTimer,
 	LevelTimer,
 	None, /* Used exclusively to hide the timer's descriptor. */
+	RtaTimer,
 }
 
 public interface LoaderIface : EvSys.IEventSystemHandler {
@@ -109,6 +110,9 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	/** Name of the sub-scene used to display the game UI. */
 	public string gameUiScene = "GameUI";
 
+	/** Name of the scene loaded after the last stage. */
+	public string lastScene = "GameOver";
+
 	/** UI progress bar. */
 	private ProgressBar pb;
 
@@ -149,7 +153,12 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 
 		Global.levelTimer.Stop();
 		Global.igtTimer.Stop();
-        SceneMng.LoadSceneAsync(this.loaderScene, SceneMode.Single);
+		if (LevelNameList.GetLevel(currentLevel).ToLower() == this.lastScene.ToLower()) {
+			SceneMng.LoadSceneAsync(this.lastScene, SceneMode.Single);
+		}
+		else {
+			SceneMng.LoadSceneAsync(this.loaderScene, SceneMode.Single);
+		}
 		this.loadingNew = true;
 	}
 
@@ -221,6 +230,9 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 			break;
 		case UiTimer.LevelTimer:
 			txt.text = Global.levelTimer.ToString();
+			break;
+		case UiTimer.RtaTimer:
+			txt.text = Global.rtaTimer.ToString();
 			break;
 		default:
 			throw new System.Exception($"Invalid UiTimer ({timer})");
