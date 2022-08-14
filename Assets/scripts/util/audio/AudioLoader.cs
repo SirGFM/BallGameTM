@@ -1,4 +1,5 @@
 using AudioClip = UnityEngine.AudioClip;
+using AudioListener = UnityEngine.AudioListener;
 using AudioSource = UnityEngine.AudioSource;
 using CoroutineRet = System.Collections.IEnumerator;
 using GO = UnityEngine.GameObject;
@@ -96,6 +97,15 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 		this.StartCoroutine(this.run());
 		this.StartCoroutine(this.startSong());
 		GO.DontDestroyOnLoad(this.gameObject);
+	}
+
+	/**
+	 * Update the game's overall volume.
+	 *
+	 * @param val: The new volume.
+	 */
+	public void setGlobalVolume(float v) {
+		AudioListener.volume = v;
 	}
 
 	/**

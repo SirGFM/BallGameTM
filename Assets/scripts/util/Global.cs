@@ -132,6 +132,28 @@ static public class Global {
 			Global.Sfx.audioLoader = audioLoader;
 		}
 
+		/** The game's overall volume. This shouldn't be set directly, as the audio
+		 * listener must be updated as well. */
+		static private float globalVolume = 1.0f;
+
+		/**
+		 * Update the game's overall volume.
+		 *
+		 * @param val: The new volume.
+		 */
+		static public void setGlobalVolume(float val) {
+			Global.Sfx.globalVolume = val;
+
+			if (Global.Sfx.audioLoader != null) {
+				Global.Sfx.audioLoader.setGlobalVolume(val);
+			}
+		}
+
+		/** Retrieve the game's overall volume. */
+		static public float getGlobalVolume() {
+			return Global.Sfx.globalVolume;
+		}
+
 		/** The music's volume. This shouldn't be set directly, as the music
 		 * source must be updated as well. */
 		static private float musicVolume = 0.6f;

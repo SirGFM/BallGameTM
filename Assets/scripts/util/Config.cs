@@ -107,4 +107,48 @@ static public class Config {
 	static public bool getInGameTimer() {
 		return Config.timer;
 	}
+
+	/**
+	 * Configure (and save) how loud the game as a whole is.
+	 *
+	 * @param v: The game's new volume.
+	 */
+	static public void setGlobalVolume(float v) {
+		Global.Sfx.setGlobalVolume(v);
+		/* TODO: Save */
+	}
+
+	static public float getGlobalVolume() {
+		return Global.Sfx.getGlobalVolume();
+	}
+
+	/**
+	 * Configure (and save) the volume for the game's music.
+	 *
+	 * @param v: The volume of the music.
+	 */
+	static public void setMusicVolume(float v) {
+		Global.Sfx.setMusicVolume(v);
+		/* TODO: Save */
+	}
+
+	/** Retrieve the current music volume. */
+	static public float getMusicVolume() {
+		return Global.Sfx.getMusicVolume();
+	}
+
+	/**
+	 * Configure (and save) the volume for new sound effects.
+	 *
+	 * @param v: The volume for new sound effects.
+	 */
+	static public void setSfxVolume(float v) {
+		Global.Sfx.sfxVolume = v;
+		/* TODO: Save */
+	}
+
+	/** Retrieve the current sound effects volume. */
+	static public float getSfxVolume() {
+		return Global.Sfx.sfxVolume;
+	}
 }

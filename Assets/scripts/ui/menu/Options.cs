@@ -388,6 +388,19 @@ public class Options : VerticalTextMenu {
 		};
 
 		Option[] _opts = {
+			Option.SectionHeader("-- Audio --"),
+			new Option("Global",
+					"Adjusted game-audio globally (both music and sound effects).",
+					(new Values(idx => Config.setGlobalVolume(idx / audioRatio),
+								audioModes).setAt((int)(Config.getGlobalVolume() * audioRatio)))),
+			new Option("Music",
+					"Music volume.",
+					(new Values(idx => Config.setMusicVolume(idx / audioRatio),
+								audioModes).setAt((int)(Config.getMusicVolume() * audioRatio)))),
+			new Option("Sounds",
+					"Sound effects volume.",
+					(new Values(idx => Config.setSfxVolume(idx / audioRatio),
+								audioModes).setAt((int)(Config.getSfxVolume() * audioRatio)))),
 			Option.SectionHeader("-- Graphics --"),
 			new Option("Quality",
 					"Set the game's overall graphical quality.\n"+
