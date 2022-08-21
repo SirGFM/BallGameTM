@@ -246,5 +246,13 @@ static public class Global {
 		static public void playDefeat() {
 			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxDefeat);
 		}
+
+		static public void playCollectible() {
+			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxCollectible);
+		}
+
+		static public void playOpenDoor() {
+			Global.Sfx.playAudio(Global.Sfx.audioLoader?.sfxOpenDoor);
+		}
 	}
 }

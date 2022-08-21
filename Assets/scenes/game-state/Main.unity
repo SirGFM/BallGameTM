@@ -168,6 +168,8 @@ MonoBehaviour:
   sfxVictory: {fileID: 8300000, guid: 1f55afd4b2627cc15baaae03249c1803, type: 3}
   sfxDefeatOpening: {fileID: 8300000, guid: 96a1de21cebe02aef82fab088d6173eb, type: 3}
   sfxDefeat: {fileID: 8300000, guid: 62ba0a3812e15a048bec9e519c20e113, type: 3}
+  sfxCollectible: {fileID: 8300000, guid: 98b17d5553b35fc0fb389d15e63d1eec, type: 3}
+  sfxOpenDoor: {fileID: 8300000, guid: 86297032ea92e868bb687db1c0c5d6bd, type: 3}
   mainMenuScene: MainMenu
   calibrationScene: RecalibrateGamepad
   muteMusic: 1

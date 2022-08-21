@@ -40,6 +40,7 @@ public class MoveOnDeactivate : UnityEngine.MonoBehaviour, SetActiveIface {
 	 */
 	private void startMoving() {
 		this.isMoving = true;
+		Global.Sfx.playOpenDoor();
 
 		Rigidbody rb = this.GetComponent<Rigidbody>();
 

@@ -57,5 +57,6 @@ public class CollectOnTouch : BaseRemoteAction {
 
 		this.disableSelf();
 		this.collected = true;
+		Global.Sfx.playCollectible();
 	}
 }

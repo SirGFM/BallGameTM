@@ -63,6 +63,8 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 	public AudioClip sfxVictory;
 	public AudioClip sfxDefeatOpening;
 	public AudioClip sfxDefeat;
+	public AudioClip sfxCollectible;
+	public AudioClip sfxOpenDoor;
 
 	/** The main menu scene, loaded if there are no connected gamepad. */
 	public string mainMenuScene = "MainMenu";
