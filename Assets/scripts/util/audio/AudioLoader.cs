@@ -53,6 +53,11 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 	/* Path of levels that use the grassy fields song. */
 	public string grassyFieldsSelector = "levels/00-basic";
 
+	public AudioClip songCalmLands;
+
+	/* Path of levels that use the calm lands song. */
+	public string calmLandsSelector = "levels/04-ice";
+
 	public AudioClip sfxMoveMenu;
 	public AudioClip sfxEnterMenu;
 	public AudioClip sfxCancelMenu;
@@ -147,6 +152,9 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 
 		if (next.path.Contains(this.grassyFieldsSelector)) {
 			this.playSong(this.songGrassyFields);
+		}
+		else if (next.path.Contains(this.calmLandsSelector)) {
+			this.playSong(this.songCalmLands);
 		}
 		else {
 			this.playSong(this.songChillBeginnings);
