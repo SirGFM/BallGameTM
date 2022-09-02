@@ -1,3 +1,4 @@
+using PlayerPrefs = UnityEngine.PlayerPrefs;
 
 static public class Config {
 	/** Multiplier for flipping the camera in the horizontal axis. */
@@ -10,6 +11,53 @@ static public class Config {
 	static private float camSpeedY = 1.0f;
 	/** Whether the in-game timer is visible or not. */
 	static private bool timer = true;
+
+	private const bool defaultInvertCamX = false;
+	private const bool defaultInvertCamY = false;
+	private const bool defaultShowTimer = true;
+	private const float defaultCamXSpeed = 1.0f;
+	private const float defaultCamYSpeed = 1.0f;
+	private const float defaultGlobalVolume = 1.0f;
+	private const float defaultMusicVolume = 0.6f;
+	private const float defaultSfxVolume = 0.4f;
+
+	/** Reset the configurations back to the default values. */
+	static public void reset() {
+		Config.saveBool("InvertCamX", defaultInvertCamX);
+		PlayerPrefs.SetFloat("CamXSpeed", defaultCamXSpeed);
+		Config.saveBool("InvertCamY", defaultInvertCamY);
+		PlayerPrefs.SetFloat("CamYSpeed", defaultCamYSpeed);
+		Config.saveBool("ShowTimer", defaultShowTimer);
+		PlayerPrefs.SetFloat("GlobalVolume", defaultGlobalVolume);
+		PlayerPrefs.SetFloat("MusicVolume", defaultMusicVolume);
+		PlayerPrefs.SetFloat("SfxVolume", defaultSfxVolume);
+
+		for (int set = 0; set < 3; set++) {
+			Input.RevertMap(set);
+			Config.saveInput(set);
+		}
+
+		/* Ensure the audio is properly set. */
+		setGlobalVolume(PlayerPrefs.GetFloat("GlobalVolume", defaultGlobalVolume));
+		setMusicVolume(PlayerPrefs.GetFloat("MusicVolume", defaultMusicVolume));
+		setSfxVolume(PlayerPrefs.GetFloat("SfxVolume", defaultSfxVolume));
+	}
+
+	/** Load the player configuration. */
+	static public void load() {
+		setHorCamInverted(Config.loadBool("InvertCamX", defaultInvertCamX));
+		setHorCamSpeed(PlayerPrefs.GetFloat("CamXSpeed", defaultCamXSpeed));
+		setVerCamInverted(Config.loadBool("InvertCamY", defaultInvertCamY));
+		setVerCamSpeed(PlayerPrefs.GetFloat("CamYSpeed", defaultCamYSpeed));
+		setInGameTimer(Config.loadBool("ShowTimer", defaultShowTimer));
+		setGlobalVolume(PlayerPrefs.GetFloat("GlobalVolume", defaultGlobalVolume));
+		setMusicVolume(PlayerPrefs.GetFloat("MusicVolume", defaultMusicVolume));
+		setSfxVolume(PlayerPrefs.GetFloat("SfxVolume", defaultSfxVolume));
+
+		for (int set = 0; set < 3; set++) {
+			Config.loadInput(set);
+		}
+	}
 
 	/**
 	 * Configure (and save) whether the camera should be inverted on the
@@ -26,7 +74,7 @@ static public class Config {
 		}
 
 		Global.camX = Config.camDirX * Config.camSpeedX;
-		/* TODO: Save */
+		Config.saveBool("InvertCamX", v);
 	}
 
 	/** Retrieve whether the camera is inverted on the horizontal axis. */
@@ -43,7 +91,7 @@ static public class Config {
 		Config.camSpeedX = v;
 
 		Global.camX = Config.camDirX * Config.camSpeedX;
-		/* TODO: Save */
+		PlayerPrefs.SetFloat("CamXSpeed", v);
 	}
 
 	/* Retrieve the camera's speed on the horizontal axis. */
@@ -66,7 +114,7 @@ static public class Config {
 		}
 
 		Global.camY = Config.camDirY * Config.camSpeedY;
-		/* TODO: Save */
+		Config.saveBool("InvertCamY", v);
 	}
 
 	/** Retrieve whether the camera is inverted on the vertical axis. */
@@ -83,7 +131,7 @@ static public class Config {
 		Config.camSpeedY = v;
 
 		Global.camY = Config.camDirY * Config.camSpeedY;
-		/* TODO: Save */
+		PlayerPrefs.SetFloat("CamYSpeed", v);
 	}
 
 	/* Retrieve the camera's speed on the horizontal axis. */
@@ -100,7 +148,7 @@ static public class Config {
 		Config.timer = v;
 
 		Global.showTimer = v;
-		/* TODO: Save */
+		Config.saveBool("ShowTimer", v);
 	}
 
 	/** Retrieve whether the in-game timer is visible. */
@@ -115,7 +163,7 @@ static public class Config {
 	 */
 	static public void setGlobalVolume(float v) {
 		Global.Sfx.setGlobalVolume(v);
-		/* TODO: Save */
+		PlayerPrefs.SetFloat("GlobalVolume", v);
 	}
 
 	static public float getGlobalVolume() {
@@ -129,7 +177,7 @@ static public class Config {
 	 */
 	static public void setMusicVolume(float v) {
 		Global.Sfx.setMusicVolume(v);
-		/* TODO: Save */
+		PlayerPrefs.SetFloat("MusicVolume", v);
 	}
 
 	/** Retrieve the current music volume. */
@@ -144,11 +192,70 @@ static public class Config {
 	 */
 	static public void setSfxVolume(float v) {
 		Global.Sfx.sfxVolume = v;
-		/* TODO: Save */
+		PlayerPrefs.SetFloat("SfxVolume", v);
 	}
 
 	/** Retrieve the current sound effects volume. */
 	static public float getSfxVolume() {
 		return Global.Sfx.sfxVolume;
+	}
+
+	/**
+	 * Save the requested input set.
+	 *
+	 * @param set: The input set being saved.
+	 */
+	static public void saveInput(int set) {
+		string key = $"Input-{set}";
+
+		try {
+			string data = Input.axisToJson(set);
+			PlayerPrefs.SetString(key, data);
+		} catch (System.Exception) {
+		}
+	}
+
+	/**
+	 * Load the requested input set.
+	 *
+	 * @param set: The input set being loaded.
+	 */
+	static private void loadInput(int set) {
+		string key = $"Input-{set}";
+
+		if (!PlayerPrefs.HasKey(key)) {
+			return;
+		}
+		string data = PlayerPrefs.GetString(key, "");
+
+		try {
+			Input.axisFromJson(set, data);
+		} catch (System.Exception) {
+			Input.RevertMap(set);
+		}
+	}
+
+	/**
+	 * Load a boolean value from the configuration file.
+	 *
+	 * @param key: The name of the value.
+	 * @param def: The default value, if it doesn't exist in the file.
+	 */
+	static private bool loadBool(string key, bool def) {
+		if (!PlayerPrefs.HasKey(key)) {
+			return def;
+		}
+
+		return PlayerPrefs.GetInt(key) == 1;
+	}
+
+	/**
+	 * Save a boolean value to the configuration file.
+	 *
+	 * @param key: The name of the value.
+	 * @param v: The value.
+	 */
+	static private void saveBool(string key, bool v) {
+		PlayerPrefs.SetInt(key, (v ? 1 : 0));
 	}
 }

@@ -130,6 +130,11 @@ static public class Global {
 		 */
 		static public void setAudioLoader(AudioLoader audioLoader) {
 			Global.Sfx.audioLoader = audioLoader;
+
+			/* In case the configuration was loaded before the audio was set,
+			 * initialize the volume. */
+			Global.Sfx.setGlobalVolume(Global.Sfx.globalVolume);
+			Global.Sfx.setMusicVolume(Global.Sfx.musicVolume);
 		}
 
 		/** The game's overall volume. This shouldn't be set directly, as the audio

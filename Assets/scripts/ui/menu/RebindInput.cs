@@ -288,7 +288,7 @@ public class RebindInput : VerticalTextMenu {
 	}
 
 	private void saveInputs() {
-		// TODO save the inputs
+		Config.saveInput(RebindInput.inputMap);
 	}
 
 	private void back() {

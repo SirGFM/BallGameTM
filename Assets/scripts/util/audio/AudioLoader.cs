@@ -86,14 +86,14 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 	private AudioSource musicPlayer;
 
 	void Start() {
-		Global.Sfx.setAudioLoader(this);
-
 		this.musicPlayer = this.gameObject.AddComponent<AudioSource>();
 		/* Makes this a "2D sound" (i.e., its position is ignored). */
 		this.musicPlayer.spatialBlend = 0.0f;
 		/* Initialize the volume to a safe default,
 		 * later overriden by the configuration. */
 		this.musicPlayer.volume = 0.25f;
+
+		Global.Sfx.setAudioLoader(this);
 
 #if UNITY_EDITOR
 		this.musicPlayer.mute = this.muteMusic;
