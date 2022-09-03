@@ -51,12 +51,12 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 	public AudioClip songGrassyFields;
 
 	/* Path of levels that use the grassy fields song. */
-	public string grassyFieldsSelector = "levels/00-basic";
+	public string grassyFieldsSelector = "levels/00-grassy-fields";
 
 	public AudioClip songCalmLands;
 
 	/* Path of levels that use the calm lands song. */
-	public string calmLandsSelector = "levels/04-ice";
+	public string calmLandsSelector = "levels/04-calm-lands";
 
 	public AudioClip sfxMoveMenu;
 	public AudioClip sfxEnterMenu;
