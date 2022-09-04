@@ -1,0 +1,1 @@
+BallGameTM.exe --reset-config

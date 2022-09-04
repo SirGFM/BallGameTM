@@ -1,0 +1,10 @@
+
+[[actions]]
+name = "play"
+path = "BallGameTM.exe"
+platform = "windows"
+
+[[actions]]
+name = "Reset Config and Play"
+path = "reset-config.bat"
+platform = "windows"

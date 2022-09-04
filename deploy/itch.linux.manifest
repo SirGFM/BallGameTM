@@ -1,0 +1,11 @@
+
+[[actions]]
+name = "play"
+path = "BallGameTM"
+platform = "linux"
+
+[[actions]]
+name = "Reset Config and Play"
+path = "BallGameTM"
+args = ["--reset-config"]
+platform = "linux"
