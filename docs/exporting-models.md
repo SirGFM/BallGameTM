@@ -47,3 +47,41 @@ Finally, after importing the model in Unity (which is done automatically),
 be sure to select the imported object and set the `Scale Factor` to 50.
 
 ![Setting the Scale Factor in Unity](/docs/imgs/unity-model-importing.png)
+
+### Materials
+
+To allow customizing the models color palette,
+we must first understand
+how materials are exported from Blender and imported into Unity.
+
+The material must have been sorted in the Blender model, but I couldn't find any way to check its order...
+So better to always follow the steps bellow.
+
+The only way that I could find to sort materials is to separate each material into its own model and then rejoin these object.
+When joining two object, **the material of object selected last will come before the materials of the other object**.
+So, for models with multiple materials, say mat1, mat2, mat3, and mat4, we must join them in sorta the reverse order:
+
+1. First, join mat4 to mat3 (i.e., first select mat3 then mat4) as joined1
+2. Then, join joined1 to mat2 as joined2
+3. Finally, join joined2 to mat1
+
+The final object will be guaranteed to have its materials sorted in the order mat1, mat2, mat3, mat4.
+
+To separate each material into its own object, go into Edit mode, select every vertex (press `a`), press `p` and select `By Material`.
+
+![Separate objects by material](/docs/imgs/separate-objects-by-material.png)
+
+Then, exit Edit mode and join the objects as described above, pressing `Ctrl+j` to join two objects.
+It may be easier to select the objects from the Outliner tab, since that list that materials in the object.
+
+![Separated objects in the Outliner tab](/docs/imgs/separate-objects-in-outliner.png)
+
+Then, after exporting the object, be sure to adjust the materials in Unity's inspector.
+Don't mind the order of the materials in this view, as its not representative of the material order in the Mesh Renderer.
+
+![Materials on Unity's inspector](/docs/imgs/materials-on-unitys-inspector.png)
+
+Doing all that, the material order should be correct when the object is imported into a scene,
+allowing for changing models while keeping the colors consistently configurable.
+
+![Materials in object imported into an Unity scene](/docs/imgs/material-order-in-unity.png)
