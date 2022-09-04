@@ -169,4 +169,19 @@ static public class LevelNameList {
 			return LevelNameList._worldList[i];
 		return "Unknown";
 	}
+
+	/**
+	 * Retrieve the number of levels in the game.
+	 *
+	 * Note that levels (as retrieved by GetLevel and GetLevelBG) are 1-indexed.
+	 * Thus, when iterating over every level name, the iteration must be from 1
+	 * to this value, including it!
+	 *
+	 * @return the number of levels in the game.
+	 */
+	static public int GetLevelCount() {
+		if (LevelNameList._list == null)
+			UpdateList();
+		return LevelNameList._list.Length - 1;
+	}
 }
