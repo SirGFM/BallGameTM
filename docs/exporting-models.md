@@ -85,3 +85,8 @@ Doing all that, the material order should be correct when the object is imported
 allowing for changing models while keeping the colors consistently configurable.
 
 ![Materials in object imported into an Unity scene](/docs/imgs/material-order-in-unity.png)
+
+Lastly, to simplify finding the model in Unity, be sure to name the model something meaningful.
+In the Outliner tab, this is how a renamed object that would appear as `basic-ball` on Unity looks like:
+
+![Naming the model in Blender](/docs/imgs/blender-model-name.png)
