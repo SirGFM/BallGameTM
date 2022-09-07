@@ -105,6 +105,9 @@ EditorBuildSettings:
     path: Assets/scenes/bg-scene/LevelSelectBg.unity
     guid: 2ae1b04d42edc0a55b97c09eb49e901b
   - enabled: 1
+    path: Assets/scenes/menu/CustomizePlayer.unity
+    guid: 589fbf2a2771141b3aeeb3ff6b8b8e31
+  - enabled: 1
     path: Assets/scenes/ingame-ui/OnLose.unity
     guid: febb330ec8ced302d8976b0f0b56c708
   - enabled: 1

@@ -6,6 +6,7 @@ public class MainMenu : VerticalTextMenu {
 	private string[] _opts = {
 		"New game",
 		"Level Select",
+		"Customize PLayer",
 		"Options",
 		"Quit"
 	};
@@ -19,9 +20,12 @@ public class MainMenu : VerticalTextMenu {
 			this.LoadScene("scenes/menu/LevelSelect");
 			break;
 		case 2:
-			this.LoadScene("scenes/menu/Options");
+			this.LoadScene("scenes/menu/CustomizePlayer");
 			break;
 		case 3:
+			this.LoadScene("scenes/menu/Options");
+			break;
+		case 4:
 			App.Quit();
 			break;
 		}

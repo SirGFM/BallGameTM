@@ -32,6 +32,8 @@ static public class Config {
 		PlayerPrefs.SetFloat("MusicVolume", defaultMusicVolume);
 		PlayerPrefs.SetFloat("SfxVolume", defaultSfxVolume);
 
+		Config.savePlayerModel();
+
 		for (int set = 0; set < 3; set++) {
 			Input.RevertMap(set);
 			Config.saveInput(set);
@@ -53,6 +55,11 @@ static public class Config {
 		setGlobalVolume(PlayerPrefs.GetFloat("GlobalVolume", defaultGlobalVolume));
 		setMusicVolume(PlayerPrefs.GetFloat("MusicVolume", defaultMusicVolume));
 		setSfxVolume(PlayerPrefs.GetFloat("SfxVolume", defaultSfxVolume));
+
+		PlayerModel.Model = PlayerPrefs.GetInt("Model", PlayerModel.Model);
+		PlayerModel.BaseColor = PlayerPrefs.GetInt("BaseColor", PlayerModel.BaseColor);
+		PlayerModel.MainDetailColor = PlayerPrefs.GetInt("MainDetailColor", PlayerModel.MainDetailColor);
+		PlayerModel.SubDetailColor = PlayerPrefs.GetInt("SubDetailColor", PlayerModel.SubDetailColor);
 
 		for (int set = 0; set < 3; set++) {
 			Config.loadInput(set);
@@ -257,5 +264,13 @@ static public class Config {
 	 */
 	static private void saveBool(string key, bool v) {
 		PlayerPrefs.SetInt(key, (v ? 1 : 0));
+	}
+
+	/** Save the current player model/palette to the configuration file. */
+	static public void savePlayerModel() {
+		PlayerPrefs.SetInt("Model", PlayerModel.Model);
+		PlayerPrefs.SetInt("BaseColor", PlayerModel.BaseColor);
+		PlayerPrefs.SetInt("MainDetailColor", PlayerModel.MainDetailColor);
+		PlayerPrefs.SetInt("SubDetailColor", PlayerModel.SubDetailColor);
 	}
 }
