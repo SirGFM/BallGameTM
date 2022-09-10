@@ -767,7 +767,7 @@ static public class Input {
 	 *   Controller getters
 	 * =======================================================================*/
 
-	static private Vec2 _getNormalizedMovement(Actions left, Actions right,
+	static private Vec2 _getMovement(Actions left, Actions right,
 			Actions up, Actions down) {
 		float x, y;
 
@@ -775,11 +775,14 @@ static public class Input {
 		y = combineAxis(up, down);
 
 		Vec2 v = new Vec2(x, y);
-		return v.normalized;
+		if (v.sqrMagnitude > 1.0f) {
+			v.Normalize();
+		}
+		return v;
 	}
 
 	static public Vec2 GetMovement() {
-		return Input._getNormalizedMovement(Actions.Left, Actions.Right,
+		return Input._getMovement(Actions.Left, Actions.Right,
 				Actions.Up, Actions.Down);
 	}
 
@@ -812,7 +815,7 @@ static public class Input {
 	}
 
 	static public Vec2 GetCamera() {
-		return Input._getNormalizedMovement(Actions.CameraLeft,
+		return Input._getMovement(Actions.CameraLeft,
 				Actions.CameraRight, Actions.CameraUp, Actions.CameraDown);
 	}
 
