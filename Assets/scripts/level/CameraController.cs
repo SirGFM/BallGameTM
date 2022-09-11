@@ -237,8 +237,8 @@ public class CameraController : BaseRemoteAction, CameraIface {
 		else {
 			Vec2 cam = Input.GetCamera();
 
-			this.horAng += cam.x * 5.0f * Global.camX;
-			dVerAng = cam.y * 5.0f * Global.camY;
+			this.horAng += cam.x * 2.5f * Global.camX;
+			dVerAng = cam.y * 2.5f * Global.camY;
 		}
 
 		/* Limit the camera from going both over and under the player, as those
