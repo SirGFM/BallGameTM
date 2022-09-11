@@ -489,9 +489,7 @@ public class Options : VerticalTextMenu {
 		this.updateValues();
 	}
 
-	void Update() {
-		if (Input.MenuCancel()) {
-			this.back();
-		}
+	override protected void onCancel() {
+		this.back();
 	}
 }
