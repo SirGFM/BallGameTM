@@ -7753,7 +7753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2478149889750529282, guid: 631a17ec87e53a245a5460b980517622, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2478149889750529285, guid: 631a17ec87e53a245a5460b980517622, type: 3}
       propertyPath: m_Enabled
@@ -8354,6 +8354,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3778196780219060971, guid: 3001ce433cda99b8685e595cf72dc4d6, type: 3}
   m_PrefabInstance: {fileID: 1183394997}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1189098392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2478149889750529280, guid: 631a17ec87e53a245a5460b980517622, type: 3}
+  m_PrefabInstance: {fileID: 990089927}
+  m_PrefabAsset: {fileID: 0}
+--- !u!75 &1189098398
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189098392}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0.25, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!114 &1189098400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189098392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2af802d2071a639c8b97812bfbbd6cfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAngularSpeed: 0.5
+  axis: 1
 --- !u!1001 &1218266769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8623,6 +8654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minRotation: -30
   maxRotation: 5
+  axis: 1
 --- !u!1001 &1268884436
 PrefabInstance:
   m_ObjectHideFlags: 0

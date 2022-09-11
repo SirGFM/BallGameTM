@@ -5,12 +5,20 @@ using Vec3 = UnityEngine.Vector3;
 
 public class SillyRotation : UnityEngine.MonoBehaviour {
 
+	public enum RotationAxis {
+		X = 0,
+		Y,
+		Z
+	}
+
 	private Transform self;
 
 	private ConstantForce cf;
 
 	public float minRotation = -112.5f;
 	public float maxRotation = 22.5f;
+
+	public RotationAxis axis = RotationAxis.Y;
 
 	void Start() {
 		this.cf = this.GetComponent<ConstantForce>();
@@ -28,12 +36,12 @@ public class SillyRotation : UnityEngine.MonoBehaviour {
 	 */
 	private void updateTorque(float signal) {
 		Vec3 newTorque = this.cf.torque;
-		newTorque.y = signal * UEMath.Abs(this.cf.torque.y);
+		newTorque[(int)axis] = signal * UEMath.Abs(this.cf.torque[(int)axis]);
 		this.cf.torque = newTorque;
 	}
 
 	void Update() {
-		float angle = this.self.eulerAngles.y;
+		float angle = this.self.eulerAngles[(int)axis];
 
 		if (angle > 180.0f) {
 			angle -= 360.0f;
