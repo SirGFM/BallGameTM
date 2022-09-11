@@ -160,6 +160,12 @@ public static class ActionsMethods {
 }
 
 static public class Input {
+	/** Minimum value for an individual axis before clamping it back to 0. */
+	public static float minAxis = 0.5f;
+
+	/** Maximum value for an individual axis when it's rounded to 1. */
+	public static float maxAxis = 0.95f;
+
 	private const int gamepadNum = 9;
 	private const int gamepadAxisNum = 10;
 	private const int gamepadButtonNum = 20;
@@ -310,8 +316,12 @@ static public class Input {
 
 			if ((val < this.rest && this.type != axisType.negativeAxis) ||
 					(val > this.rest && this.type == axisType.negativeAxis) ||
-					perc < 0.5f)
+					perc < Input.minAxis) {
 				return 0.0f;
+			}
+			else if (perc >= Input.maxAxis) {
+				return 1.0f;
+			}
 			return perc;
 		}
 

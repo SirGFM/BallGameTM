@@ -1,3 +1,4 @@
+using CoroutineRet = System.Collections.IEnumerator;
 using QualitySettings = UnityEngine.QualitySettings;
 using ResMode = UnityEngine.Resolution;
 using Screen = UnityEngine.Screen;
@@ -269,8 +270,50 @@ public class Options : VerticalTextMenu {
 		QualitySettings.SetQualityLevel(this.qualityMode, true);
 	}
 
+	/** Block inputs, for testing the axis deadzone. */
+	private bool blockInputs = false;
+
+	/** Watch the controller's axis and show it in the description. */
+	private CoroutineRet watchAxis() {
+		while (this.blockInputs) {
+			Vec2 movement = Input.GetMovement();
+			Vec2 camera = Input.GetCamera();
+
+			this.help.text = $"Movement: ({movement.x:F2}, {movement.y:F2})\n"+
+				$"Camera: ({camera.x:F2}, {camera.y:F2})";
+
+			yield return null;
+		}
+	}
+
+	private void swapBlockInputs() {
+		this.blockInputs = !this.blockInputs;
+
+		if (this.blockInputs) {
+			this.StartCoroutine(this.watchAxis());
+		}
+		else {
+			Option cur = this.opts[this.getCurrentOpt()];
+			this.help.text = cur.getDescription();
+		}
+	}
+
+	override protected bool ignoreInputs() {
+		/* Always accept cancel and select, so the input may be re-enabled. */
+		if (Input.MenuCancel() || Input.MenuSelect()) {
+			return false;
+		}
+
+		return this.blockInputs;
+	}
+
 	private void back() {
-		this.LoadScene("scenes/menu/MainMenu");
+		if (!this.blockInputs) {
+			this.LoadScene("scenes/menu/MainMenu");
+		}
+		else {
+			this.swapBlockInputs();
+		}
 	}
 
 	/** Called whenever an option is selected */
@@ -285,6 +328,9 @@ public class Options : VerticalTextMenu {
 			Input.RevertMap(0);
 			Input.RevertMap(1);
 			Input.RevertMap(2);
+		}
+		else if (cur.EndsWith(" Axis")) {
+			this.swapBlockInputs();
 		}
 		else if (cur.StartsWith("Input")) {
 			switch (cur[cur.Length - 1]) {
@@ -387,6 +433,12 @@ public class Options : VerticalTextMenu {
 			return idx_one;
 		};
 
+		float deadzoneRatio = 0.05f;
+		string[] deadzones = new string[2 + (int)(1.0 / deadzoneRatio)];
+		for (int i = 0; i < deadzones.Length; i++) {
+			deadzones[i] = $"{i*deadzoneRatio:F2}";
+		}
+
 		Option[] _opts = {
 			Option.SectionHeader("-- Audio --"),
 			new Option("Global",
@@ -423,6 +475,16 @@ public class Options : VerticalTextMenu {
 					"windowed mode.",
 					null),
 			Option.SectionHeader("-- General --"),
+			new Option("Min Axis",
+					"Ignore any axis input bellow this.\n"+
+					"Press OK to monitor the axis live.",
+					(new Values(idx => Config.setMinDeadzone(idx * deadzoneRatio),
+								deadzones).setAt((int)(Config.getMinDeadzone() / deadzoneRatio)))),
+			new Option("Max Axis",
+					"Max out any axis input above this.\n"+
+					"Press OK to monitor the axis live.",
+					(new Values(idx => Config.setMaxDeadzone(idx * deadzoneRatio),
+								deadzones).setAt((int)(Config.getMaxDeadzone() / deadzoneRatio)))),
 			new Option("Camera X",
 					"Configure horizontal camera movement.\n"+
 					"Try it out!",

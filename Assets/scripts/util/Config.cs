@@ -31,6 +31,8 @@ static public class Config {
 		PlayerPrefs.SetFloat("GlobalVolume", defaultGlobalVolume);
 		PlayerPrefs.SetFloat("MusicVolume", defaultMusicVolume);
 		PlayerPrefs.SetFloat("SfxVolume", defaultSfxVolume);
+		PlayerPrefs.SetFloat("MinDeadzone", Input.minAxis);
+		PlayerPrefs.SetFloat("MaxDeadzone", Input.maxAxis);
 
 		Config.savePlayerModel();
 
@@ -55,6 +57,8 @@ static public class Config {
 		setGlobalVolume(PlayerPrefs.GetFloat("GlobalVolume", defaultGlobalVolume));
 		setMusicVolume(PlayerPrefs.GetFloat("MusicVolume", defaultMusicVolume));
 		setSfxVolume(PlayerPrefs.GetFloat("SfxVolume", defaultSfxVolume));
+		setMinDeadzone(PlayerPrefs.GetFloat("MinDeadzone", Input.minAxis));
+		setMaxDeadzone(PlayerPrefs.GetFloat("MaxDeadzone", Input.maxAxis));
 
 		PlayerModel.Model = PlayerPrefs.GetInt("Model", PlayerModel.Model);
 		PlayerModel.BaseColor = PlayerPrefs.GetInt("BaseColor", PlayerModel.BaseColor);
@@ -272,5 +276,35 @@ static public class Config {
 		PlayerPrefs.SetInt("BaseColor", PlayerModel.BaseColor);
 		PlayerPrefs.SetInt("MainDetailColor", PlayerModel.MainDetailColor);
 		PlayerPrefs.SetInt("SubDetailColor", PlayerModel.SubDetailColor);
+	}
+
+	/* Retrieve the axis minimum deadzone. */
+	static public float getMinDeadzone() {
+		return Input.minAxis;
+	}
+
+	/**
+	 * Configure (and save) the axis minimum deadzone.
+	 *
+	 * @param v: The deadzone
+	 */
+	static public void setMinDeadzone(float v) {
+		Input.minAxis = v;
+		PlayerPrefs.SetFloat("MinDeadzone", v);
+	}
+
+	/* Retrieve the axis maximum deadzone. */
+	static public float getMaxDeadzone() {
+		return Input.maxAxis;
+	}
+
+	/**
+	 * Configure (and save) the axis maximum deadzone.
+	 *
+	 * @param v: The deadzone
+	 */
+	static public void setMaxDeadzone(float v) {
+		Input.maxAxis = v;
+		PlayerPrefs.SetFloat("MaxDeadzone", v);
 	}
 }
