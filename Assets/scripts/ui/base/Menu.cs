@@ -184,4 +184,29 @@ public class Menu : BaseRemoteAction {
 		this.isLoading = true;
 		SceneMng.LoadSceneAsync(scene, SceneMode.Single);
 	}
+
+	/**
+	 * Unload and reload a scene alongside the current scene, clearing the
+	 * loading flags as soon as everything is finished.
+	 *
+	 * @param scene: The scene to be reloaded.
+	 */
+	private System.Collections.IEnumerator reloadCombined(string scene) {
+		yield return SceneMng.UnloadSceneAsync(scene);
+		yield return SceneMng.LoadSceneAsync(scene, SceneMode.Additive);
+		this.isLoading = false;
+	}
+
+	/**
+	 * Reload a scene on top/alongside the current scene.
+	 *
+	 * @param scene: The scene to be reloaded.
+	 */
+	protected void CombinedReloadScene(string scene) {
+		if (this.isLoading)
+			return;
+
+		this.isLoading = true;
+		this.StartCoroutine(this.reloadCombined(scene));
+	}
 }

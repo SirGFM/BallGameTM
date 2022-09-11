@@ -164,4 +164,22 @@ public class PushFieldAutomationSimplified : UnityEngine.MonoBehaviour, SetActiv
 		}
 		handled = true;
 	}
+
+	void Start() {
+		float perc = Config.getParticleQuantity();
+		float fogPerc = perc;
+
+		if (fogPerc < 0.25f) {
+			fogPerc *= 0.1f;
+		}
+		else if (fogPerc < 0.5f) {
+			fogPerc *= 0.25f;
+		}
+		else if (fogPerc < 1.0f) {
+			fogPerc *= 0.5f;
+		}
+
+		this.setParticle(FogObject, FogEmission * fogPerc);
+		this.setParticle(WindObject, WindEmission * perc);
+	}
 }

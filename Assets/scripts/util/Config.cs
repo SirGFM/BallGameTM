@@ -11,6 +11,8 @@ static public class Config {
 	static private float camSpeedY = 1.0f;
 	/** Whether the in-game timer is visible or not. */
 	static private bool timer = true;
+	/** How many particles are emitted per second. */
+	static private float particleQuantity = 1.0f;
 
 	private const bool defaultInvertCamX = false;
 	private const bool defaultInvertCamY = false;
@@ -20,6 +22,7 @@ static public class Config {
 	private const float defaultGlobalVolume = 1.0f;
 	private const float defaultMusicVolume = 0.6f;
 	private const float defaultSfxVolume = 0.4f;
+	private const float defaultParticleQuantity = 1.0f;
 
 	/** Reset the configurations back to the default values. */
 	static public void reset() {
@@ -33,6 +36,7 @@ static public class Config {
 		PlayerPrefs.SetFloat("SfxVolume", defaultSfxVolume);
 		PlayerPrefs.SetFloat("MinDeadzone", Input.minAxis);
 		PlayerPrefs.SetFloat("MaxDeadzone", Input.maxAxis);
+		PlayerPrefs.SetFloat("ParticleQuantity", defaultParticleQuantity);
 
 		Config.savePlayerModel();
 
@@ -59,6 +63,7 @@ static public class Config {
 		setSfxVolume(PlayerPrefs.GetFloat("SfxVolume", defaultSfxVolume));
 		setMinDeadzone(PlayerPrefs.GetFloat("MinDeadzone", Input.minAxis));
 		setMaxDeadzone(PlayerPrefs.GetFloat("MaxDeadzone", Input.maxAxis));
+		setParticleQuantity(PlayerPrefs.GetFloat("ParticleQuantity", defaultParticleQuantity));
 
 		PlayerModel.Model = PlayerPrefs.GetInt("Model", PlayerModel.Model);
 		PlayerModel.BaseColor = PlayerPrefs.GetInt("BaseColor", PlayerModel.BaseColor);
@@ -306,5 +311,20 @@ static public class Config {
 	static public void setMaxDeadzone(float v) {
 		Input.maxAxis = v;
 		PlayerPrefs.SetFloat("MaxDeadzone", v);
+	}
+
+	/* Retrieve the particle emission rate. */
+	static public float getParticleQuantity() {
+		return Config.particleQuantity;
+	}
+
+	/**
+	 * Configure (and save) the particle emission rate.
+	 *
+	 * @param v: The emission rate
+	 */
+	static public void setParticleQuantity(float v) {
+		Config.particleQuantity = v;
+		PlayerPrefs.SetFloat("ParticleQuantity", v);
 	}
 }

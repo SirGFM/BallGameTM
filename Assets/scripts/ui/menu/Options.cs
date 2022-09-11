@@ -263,11 +263,19 @@ public class Options : VerticalTextMenu {
 		this.updateValues();
 	}
 
+	/** Request the performance scene to be reloaded. */
+	private bool reloadPerformance = false;
+
 	/** Update the game's graphical mode */
 	private void updateGraphics() {
 		ResMode res = this.resolutions[this.resMode];
 		Screen.SetResolution(res.width, res.height, this.isFull, res.refreshRate);
 		QualitySettings.SetQualityLevel(this.qualityMode, true);
+
+		if (this.reloadPerformance) {
+			this.CombinedReloadScene("scenes/bg-scene/TestPerformance");
+			this.reloadPerformance = false;
+		}
 	}
 
 	/** Block inputs, for testing the axis deadzone. */
@@ -439,6 +447,11 @@ public class Options : VerticalTextMenu {
 			deadzones[i] = $"{i*deadzoneRatio:F2}";
 		}
 
+		string[] particles = new string[10];
+		for (int i = 0; i < particles.Length; i++) {
+			particles[i] = $"{(i+1)*10} %";
+		}
+
 		Option[] _opts = {
 			Option.SectionHeader("-- Audio --"),
 			new Option("Global",
@@ -454,9 +467,17 @@ public class Options : VerticalTextMenu {
 					(new Values(idx => Config.setSfxVolume(idx / audioRatio),
 								audioModes).setAt((int)(Config.getSfxVolume() * audioRatio)))),
 			Option.SectionHeader("-- Graphics --"),
+			new Option("Particles",
+					"Limit the number of particles.\n"+
+					"Only takes effect on \"Apply\"!",
+					(new Values(idx => {
+									Config.setParticleQuantity((idx+1) * 0.1f);
+									this.reloadPerformance = true;
+								},
+								particles).setAt((int)(Config.getParticleQuantity() * 10 - 1)))),
 			new Option("Quality",
 					"Set the game's overall graphical quality.\n"+
-					"Only takes effect on \"Apply\"!",
+					"\"Apply\" to see the effects!",
 					(new Values(idx => this.qualityMode = idx,
 								QualitySettings.names)).setAt(this.qualityMode)),
 			new Option("Resolution",
