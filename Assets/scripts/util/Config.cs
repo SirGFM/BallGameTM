@@ -13,6 +13,8 @@ static public class Config {
 	static private bool timer = true;
 	/** How many particles are emitted per second. */
 	static private float particleQuantity = 1.0f;
+	/** Whether the low res models should be used. */
+	static private bool lowResModels = false;
 
 	private const bool defaultInvertCamX = false;
 	private const bool defaultInvertCamY = false;
@@ -23,6 +25,7 @@ static public class Config {
 	private const float defaultMusicVolume = 0.6f;
 	private const float defaultSfxVolume = 0.4f;
 	private const float defaultParticleQuantity = 1.0f;
+	private const bool defaultLowResModels = false;
 
 	/** Reset the configurations back to the default values. */
 	static public void reset() {
@@ -37,6 +40,7 @@ static public class Config {
 		PlayerPrefs.SetFloat("MinDeadzone", Input.minAxis);
 		PlayerPrefs.SetFloat("MaxDeadzone", Input.maxAxis);
 		PlayerPrefs.SetFloat("ParticleQuantity", defaultParticleQuantity);
+		Config.saveBool("LowResModels", defaultLowResModels);
 
 		Config.savePlayerModel();
 
@@ -64,6 +68,7 @@ static public class Config {
 		setMinDeadzone(PlayerPrefs.GetFloat("MinDeadzone", Input.minAxis));
 		setMaxDeadzone(PlayerPrefs.GetFloat("MaxDeadzone", Input.maxAxis));
 		setParticleQuantity(PlayerPrefs.GetFloat("ParticleQuantity", defaultParticleQuantity));
+		setLowResModels(Config.loadBool("LowResModels", defaultLowResModels));
 
 		PlayerModel.Model = PlayerPrefs.GetInt("Model", PlayerModel.Model);
 		PlayerModel.BaseColor = PlayerPrefs.GetInt("BaseColor", PlayerModel.BaseColor);
@@ -326,5 +331,20 @@ static public class Config {
 	static public void setParticleQuantity(float v) {
 		Config.particleQuantity = v;
 		PlayerPrefs.SetFloat("ParticleQuantity", v);
+	}
+
+	/** Retrieve whether the low res models should be used. */
+	static public bool getLowResModels() {
+		return Config.lowResModels;
+	}
+
+	/**
+	 * Configure (and save) whether the low res models should be used.
+	 *
+	 * @param v: The the value
+	 */
+	static public void setLowResModels(bool v) {
+		Config.lowResModels = v;
+		Config.saveBool("LowResModels", v);
 	}
 }

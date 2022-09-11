@@ -475,6 +475,15 @@ public class Options : VerticalTextMenu {
 									this.reloadPerformance = true;
 								},
 								particles).setAt((int)(Config.getParticleQuantity() * 10 - 1)))),
+			new Option("Low Res",
+					"Use less intensive models.\n"+
+					"\"Apply\" to see the effects!",
+					(new Values(idx => {
+									Config.setLowResModels(idx == 1);
+									this.reloadPerformance = true;
+								},
+								"No",
+								"Yes")).setAt(Config.getLowResModels() ? 1 : 0)),
 			new Option("Quality",
 					"Set the game's overall graphical quality.\n"+
 					"\"Apply\" to see the effects!",
