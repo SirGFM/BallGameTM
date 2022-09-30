@@ -37,14 +37,20 @@ echo "Updating the game's version..." &&
     ${UNITY} -quit -batchmode -buildWindows64Player ${WS}/win64/${APP}.exe &&
     echo 'Deploying Linux 64 version...' &&
     echo ${VERSION} > VERSION.new &&
+    cp deploy/open-manual.sh ${WS}/linux64 &&
+    cp deploy/BallGameTM.pdf ${WS}/linux64 &&
     cp deploy/itch.linux.manifest ${WS}/linux64/.itch.toml &&
     butler push --userversion-file=VERSION.new ${WS}/linux64 "GFM/ballgametm:linux64" &&
     echo 'Deploying Windows 32 version...' &&
+    cp deploy/open-manual.bat ${WS}/win32 &&
     cp deploy/reset-config.bat ${WS}/win32 &&
+    cp deploy/BallGameTM.pdf ${WS}/win32 &&
     cp deploy/itch.win.manifest ${WS}/win32/.itch.toml &&
     butler push --userversion-file=VERSION.new ${WS}/win32 "GFM/ballgametm:win32" &&
     echo 'Deploying Windows 64 version...' &&
+    cp deploy/open-manual.bat ${WS}/win64 &&
     cp deploy/reset-config.bat ${WS}/win64 &&
+    cp deploy/BallGameTM.pdf ${WS}/win64 &&
     cp deploy/itch.win.manifest ${WS}/win64/.itch.toml &&
     butler push --userversion-file=VERSION.new ${WS}/win64 "GFM/ballgametm:win64" &&
     rm -f VERSION.new &&

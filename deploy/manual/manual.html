@@ -1,0 +1,495 @@
+<html>
+	<head>
+		<style>
+			@page {
+				margin: 0;
+				size: 10.5cm 10.5cm;
+			}
+
+			body {
+				margin: 0;
+
+				color: #ffffff;
+				text-shadow: -1px 0 3px #000000,
+							 0 1px 3px #000000,
+							 1px 0 3px #000000,
+							 0 -1px 3px #000000;
+			}
+
+			div.page {
+				display: flex;
+				flex-direction: column;
+
+				break-after: page;
+				size: 10.5cm 10.5cm;
+				width: 10.5cm;
+				height: 10.5cm;
+				overflow: hidden;
+
+				background:
+					linear-gradient(
+						rgba(0, 0, 0, 0.4),
+						rgba(0, 0, 0, 0.4)
+					),
+					url('/imgs/background.png');
+				background-size: contain;
+			}
+
+			div#first {
+				background-image: url('/imgs/front-cover.png');
+				background-size: contain;
+			}
+
+			div#last {
+				background-image: url('/imgs/back-cover.png');
+				background-size: contain;
+			}
+
+			div#blank {
+				background: rgba(256, 256, 256, 1);
+			}
+
+			div#level {
+				background-image: url('/imgs/level-example-bg.png');
+				background-size: contain;
+			}
+
+			div.vcenter {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			div.row {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: flex-start;
+			}
+
+			div.hright {
+				flex-direction: row-reverse;
+				text-align: end;
+			}
+
+			img {
+				object-fit: scale-down;
+			}
+
+			img#title {
+				max-width: 90%;
+			}
+
+			h1 {
+				padding-left: 2.5%;
+			}
+
+			h2 {
+				padding-left: 3%;
+			}
+
+			.border {
+				padding-left: 5%;
+				padding-right: 5%;
+			}
+
+			p {
+				padding-left: 5%;
+				padding-right: 5%;
+				font-size: 0.95em;
+			}
+
+			p.floating {
+				position: relative;
+			}
+
+			table {
+				border-collapse: collapse;
+				text-align: center;
+				font-size: 0.9em;
+			}
+			th, td {
+				border: 1px solid;
+				max-width: 2.5cm;
+			}
+
+			p.player {
+				margin-top: 0.3em;
+				margin-bottom: 0.3em;
+			}
+
+			img.player {
+				max-height: 1cm;
+				border-style: outset;
+				border-color: #3f3f74;
+			}
+
+			a {
+				color: #d77bba;
+			}
+
+			p.thanks {
+				margin-top: 0.75em;
+				margin-bottom: 0.75em;
+			}
+		</style>
+	</head>
+	<body>
+		<div id=first class='page vcenter'>
+			<img id=title src='/imgs/banner.png' />
+		</div>
+
+
+		<div id=blank class=page> </div>
+
+
+		<div class=page>
+			<h2> Important notice about controllers! </h2>
+
+			<p>
+				Do you remember the good old days of
+				having to keep the analog stick perfectly still when booting a console,
+				otherwise that controller would keep drifting until it was replugged?
+			</p>
+
+			<p>
+				Then this game is for you!
+			</p>
+
+			<p>
+				Be sure to start the game with the gamepad connected,
+				and calibrate it as requested,
+				otherwise the game may read inputs incorrectly.
+			</p>
+
+			<p>
+				<small> (someday I'll figure out why this happens...) </small>
+			</p>
+		</div>
+
+
+		<div class=page>
+			<h1> About this <s>game</s> ball </h1>
+
+			<div class=vcenter>
+				<p> <s>Run</s> Roll to the goal </p>
+				<p> Jump over spikes </p>
+				<p> Avoid obstacles </p>
+				</br>
+				<p> But above all... </p>
+				</br>
+				<p> Have a Fun! </p>
+			</div>
+		</div>
+
+
+		<div id=level class=page>
+			<h1> How to play </h1>
+
+			<p
+				class=floating
+				style='top: 3.05cm; left: 3.6cm;'
+			>
+				You, the ball
+			</p>
+			<p
+				class=floating
+				style='top: 2.25cm; left: 6.25cm; max-width: 3cm;'
+			>
+				Reach this goal to beat the stage
+			</p>
+			<p
+				class=floating
+				style='top: -3.1cm; left: 4.6cm;'
+			>
+				The current level
+			</p>
+			<p
+				class=floating
+				style='top: 1.35cm; left: 0.1cm; max-width: 4cm;'
+			>
+				For how long you've been playing from new game/level select
+			</p>
+			<p
+				class=floating
+				style='top: -5.5cm; left: 1cm; max-width: 4cm;'
+			>
+				For how long you've been playing this level
+			</p>
+			<p
+				class=floating
+				style='top: -4.6cm; left: 1.5cm; max-width: 3.5cm;'
+			>
+				Beware: spiky things will kill you!
+			</p>
+
+			<div>
+				<svg
+					width="8cm"
+					height="8cm"
+					viewBox='0 0 100 100'
+					style='position: relative; top: -10.15cm; left: -0.25cm;'
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M 8 12 Q 0 45, 8 87"
+						stroke="black"
+						stroke-width="1.1"
+						fill="transparent"
+					/>
+					<path
+						d="M 8 12 Q 0 45, 8 87"
+						stroke="white"
+						stroke-width="0.5"
+						fill="transparent"
+					/>
+				</svg>
+			</div>
+		</div>
+
+
+		<div class=page>
+			<h1> Controls </h1>
+
+			<p>
+				This game can be played both on the gamepad
+				and on keyboard (optionally with mouse-controlled camera).
+			</p>
+
+			<p>
+				All in-game actions are 100% rebindable from the options menu.
+				Just note that all 3 input sets are active at once!
+			</p>
+
+			<p>
+				To reset the configurations (and, most importantly, the controls):
+			</p>
+
+			<ul>
+				<li> <b>Windows</b>: Launch the game by double-clicking <code>reset-config.bat</code>;</li>
+				<li> <b>Linux</b>: Pass <code>--reset-config</code> when launching the game.</li>
+			</ul>
+		</div>
+
+
+		<div
+			class=page
+			style='justify-content: center;'
+		>
+			<div class=vcenter>
+				<table>
+					<thead>
+						<tr>
+							<th>Input</th>
+							<th>Keyboard / Mouse</th>
+							<th>XBox</th>
+							<th>DualShock / DualSense</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><strong>Movement</strong><br></td>
+							<td>WASD</td>
+							<td>D-pad /<br>Left analog stick</td>
+							<td>D-pad /<br>Left analog stick</td></tr>
+						<tr>
+							<td><strong>Jump</strong></td>
+							<td>Spacebar</td>
+							<td>A</td>
+							<td>Cross</td>
+						</tr>
+						<tr>
+							<td><strong>Camera</strong></td>
+							<td>UHJK /<br>Hold right mouse button + movement</td>
+							<td>Right analog stick</td>
+							<td>Right analog stick</td>
+						</tr>
+						<tr>
+							<td><strong>Reset Camera</strong></td>
+							<td>Middle mouse click</td>
+							<td>Rb</td>
+							<td>R1</td>
+						</tr>
+						<tr>
+							<td><strong>Restart Level</strong></td>
+							<td>R</td>
+							<td>Y</td>
+							<td>Triangle</td>
+						</tr>
+						<tr>
+							<td><strong>Pause</strong></td>
+							<td>Esc</td>
+							<td>Pause</td>
+							<td>Pause</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class=page>
+			<h1> Characters <s>?</s> </h1>
+
+			<p>
+				Here's a brief explanation about the models.
+				<s>I'm totally not doing this only to fill up pages, OK?</s>
+			</p>
+
+			<div class='row border'>
+				<img class='player' src='/imgs/player-default.png' />
+				<p class=player>
+					<b>The basic ball</b>:
+					It's way easier to notice that a sphere is rolling if you add stripes to it!
+				</p>
+			</div>
+			<div class='row hright border'>
+				<img class='player' src='/imgs/player-star.png' />
+				<p class=player>
+					<b>The star</b>:
+					There's something about a ball with a star on it that just feels right.
+				</p>
+			</div>
+			<div class='row border'>
+				<img class='player' src='/imgs/player-anti.png' />
+				<p class=player>
+					<b>The anti-ball</b>:
+					Give someone too much power and they will start to flip every normal outward... C'mon, it looks cool!
+				</p>
+			</div>
+			<div class='row hright border'>
+				<img class='player' src='/imgs/player-monkey.png' />
+				<p class=player>
+					<b>The monkey</b>:
+					Monkeys and balls are an integral part of the mystery community...
+				</p>
+			</div>
+			<div class='row border'>
+				<img class='player' src='/imgs/player-ghost.png' />
+				<p class=player>
+					<b>The ghost</b>:
+					It's a mystery!
+				</p>
+			</div>
+		</div>
+
+
+		<div class=page>
+			<h1> Credits, Acknowledgments and stuff </h1>
+
+			<p>
+				Made with Unity, Blender, LMMS, BFXR, ChipTone, VIM, Python and Audacity.
+			</p>
+
+			<p>
+				32 color palette by DawnBringer
+				(<a href='https://pixeljoint.com/forum/forum\_posts.asp?TID=16247'>
+					<small>https://pixeljoint.com/forum/forum\_posts.asp?TID=16247</small>
+				</a>).
+			</p>
+
+			<p>
+				Fog/wind particles by Frono!!
+			</p>
+
+			<p>
+				Everything else (code, graphics, models, song) by GFM.
+			</p>
+		</div>
+
+		<div class=page>
+			<h2> (more stuff) </h2>
+
+			<p>
+				The songs were live recorded (with a Dual Sense as the microphone),
+				except for the drums (which were sequenced).
+			</p>
+
+			<p>
+				Project hosted on Github. It's Open Source, so feel free to check it out at:
+				<a href='https://github.com/SirGFM/BallGameTM'>
+					<small>https://github.com/SirGFM/BallGameTM</small>
+				</a>
+			</p>
+
+			<p>
+				Game freely available on itch.io, at:
+				<a href='https://gfm.itch.io/ballgametm'>
+					<small>https://gfm.itch.io/ballgametm</small>
+				</a>
+			</p>
+		</div>
+
+
+		<div class=page>
+			<h1>Special Thanks</h1>
+
+			<p class=thanks>
+				This was a fun project.
+				It feels like I started this forever ago, but it hasn't even been 1 year.
+			</p>
+
+			<p class=thanks>
+				However, I wouldn't have even started it if not for some people,
+				and it wouldn't be anywhere as good(?) as it ended up being:
+			</p>
+
+			<p class=thanks>
+				<b>BlasphemousRoar</b>
+				(<small><a href='https://www.twitch.tv/blasphemousroar'>https://www.twitch.tv/blasphemousroar</a></small>)
+				- Gave me the initial idea to do this.
+				I still need to get back to Roar and see about the initial plan for this game...
+				It was going to be fun!
+			</p>
+
+			<p class=thanks>
+				<b>Hopscotch007</b>
+				(<small><a href='https://www.twitch.tv/hopscotch007'>https://www.twitch.tv/hopscotch007</a></small>)
+				- Did a lot of the initial testing,
+				helping me get the game to (hopefully) feel good to play.
+			</p>
+		</div>
+
+
+		<div class=page>
+			<p class=thanks>
+				<b>The Mystery Community</b>
+				(<small><a href='https://mysteryfun.house/'>https://mysteryfun.house/</a></small>)
+				- It's always fun making something considering that they may race it.
+				Although blind racing may be niche,
+				it became an integral part of how I think about making games.
+				I also wouldn't have learned about ball games if not for them!
+			</p>
+
+			<p class=thanks>
+				<b>Frono</b>
+				(<small><a href='https://frono.itch.io/'>https://frono.itch.io/</a></small>)
+				- It's thanks to him that the wind is pretty and nice,
+				and not some weird floating arrows.
+			</p>
+
+			<p class=thanks>
+				<b>Alexandre Esquitini</b>
+				(<small><a href='https://www.esquitini.com.br/'>https://www.esquitini.com.br/</a></small>)
+				- Listening about your projects (and listening <b>to</b> them)
+				motivated me to go back and continue this game.
+				Also, watching you play an earlier build of the game
+				made me realize that I had to improve the level design quite a bit.
+			</p>
+
+			<p class=thanks>
+				<b>PlayFriends</b>
+				- The PlayFrame (<small><a href='https://www.youtube.com/c/PlayFramePlus'>https://www.youtube.com/c/PlayFramePlus</a></small>)
+				fan community is great!
+				The game has ambient occlusion thanks to them,
+				and it's fun talking with them about game dev (and otherwise)!
+			</p>
+		</div>
+
+
+		<div id=blank class=page> </div>
+
+
+		<div id=last class=page>
+		</div>
+	</body>
+</html>

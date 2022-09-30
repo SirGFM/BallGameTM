@@ -5,6 +5,12 @@ path = "BallGameTM"
 platform = "linux"
 
 [[actions]]
+name = "manual"
+path = "open-manual.sh"
+args = ["BallGameTM.pdf"]
+platform = "linux"
+
+[[actions]]
 name = "Reset Config and Play"
 path = "BallGameTM"
 args = ["--reset-config"]
