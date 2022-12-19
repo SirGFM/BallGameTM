@@ -22,6 +22,9 @@ using UiText = UnityEngine.UI.Text;
  * this component is stored in the global variable currentLevel, which
  * must be manually set to start a game from the first level, or to start
  * from the selected level.
+ *
+ * Lastly, this component also manages hiding/showing the mouse cursor
+ * to improve the experience when controlling the camera with the mouse.
  */
 
 /** Identify UI scenes that may try to ask for the scene's name. */
@@ -239,10 +242,18 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 		}
 	}
 
+	void Update() {
+		if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Mouse0)) {
+			UnityEngine.Cursor.lockState = UnityEngine.CursorLockMode.Locked;
+		}
+	}
+
 	public void ShowPause() {
 		if (!this.isPauseLoaded) {
 			SceneMng.LoadSceneAsync(this.pauseSceneName, SceneMode.Additive);
 			this.isPauseLoaded = true;
+
+			UnityEngine.Cursor.lockState = UnityEngine.CursorLockMode.None;
 		}
 	}
 

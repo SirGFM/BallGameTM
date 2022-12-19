@@ -1,5 +1,6 @@
 using App = UnityEngine.Application;
 using Color = UnityEngine.Color;
+using CoroutineRet = System.Collections.IEnumerator;
 using Image = UnityEngine.UI.Image;
 
 public class MainMenu : VerticalTextMenu {
@@ -35,5 +36,22 @@ public class MainMenu : VerticalTextMenu {
 		this.options = this._opts;
 		this.CombinedLoadScene("scenes/bg-scene/MainMenuBg");
 		base.start();
+
+		this.StartCoroutine(this.hideMouse());
+	}
+
+	override protected void onCancel() {
+		UnityEngine.Cursor.lockState = UnityEngine.CursorLockMode.None;
+		base.onCancel();
+	}
+
+	/** Hide the mouse cursor on press. */
+	private CoroutineRet hideMouse() {
+		while (true) {
+			if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Mouse0)) {
+				UnityEngine.Cursor.lockState = UnityEngine.CursorLockMode.Locked;
+			}
+			yield return null;
+		}
 	}
 }
