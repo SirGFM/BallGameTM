@@ -16,6 +16,12 @@ static public class Global {
     static public float camY = 1.0f;
 
 	/**
+	 * Whether the camera should actively track the mouse,
+	 * instead of only on press.
+	 */
+	static public bool continuousMouseCamera = false;
+
+	/**
 	 * Implement a timer to track durations that may be temporarily paused.
 	 *
 	 * To start tracking time, call 'Start()'. The timer will start running

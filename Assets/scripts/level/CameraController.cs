@@ -201,6 +201,31 @@ public class CameraController : BaseRemoteAction, CameraIface {
 		this.resetCor = null;
 	}
 
+	/**
+	 * Move the camera base on inputs (either mouse movement or buttons).
+	 *
+	 * @return By how much the vertical axis is expected to change.
+	 */
+	private float inputCameraMovement() {
+		float dVerAng = 0.0f;
+
+		if (Input.GetMouseCameraEnabled() || Global.continuousMouseCamera) {
+			Vec3 mouseDelta = Input.GetMouseDelta();
+
+			this.horAng += mouseDelta.x * Global.camX;
+			dVerAng += mouseDelta.y * Global.camY;
+		}
+
+		if (!Input.GetMouseCameraEnabled()) {
+			Vec2 cam = Input.GetCamera();
+
+			this.horAng += cam.x * 2.5f * Global.camX;
+			dVerAng += cam.y * 2.5f * Global.camY;
+		}
+
+		return dVerAng;
+	}
+
 	void Update() {
 		float dVerAng = 0.0f;
 
@@ -224,17 +249,8 @@ public class CameraController : BaseRemoteAction, CameraIface {
 
 			this.resetCor = this.StartCoroutine(this.resetCamera(ang, 30.0f));
 		}
-		else if (Input.GetMouseCameraEnabled()) {
-			Vec3 mouseDelta = Input.GetMouseDelta();
-
-			this.horAng += mouseDelta.x * Global.camX;
-			dVerAng = mouseDelta.y * Global.camY;
-		}
 		else {
-			Vec2 cam = Input.GetCamera();
-
-			this.horAng += cam.x * 2.5f * Global.camX;
-			dVerAng = cam.y * 2.5f * Global.camY;
+			dVerAng = inputCameraMovement();
 		}
 
 		/* Limit the camera from going both over and under the player, as those

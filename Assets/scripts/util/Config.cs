@@ -15,6 +15,9 @@ static public class Config {
 	static private float particleQuantity = 1.0f;
 	/** Whether the low res models should be used. */
 	static private bool lowResModels = false;
+	/** Whether the camera should actively track the mouse,
+	 * instead of only on press. */
+	static private bool continuousMouseCamera = false;
 
 	private const bool defaultInvertCamX = false;
 	private const bool defaultInvertCamY = false;
@@ -26,6 +29,7 @@ static public class Config {
 	private const float defaultSfxVolume = 0.4f;
 	private const float defaultParticleQuantity = 1.0f;
 	private const bool defaultLowResModels = false;
+	private const bool defaultContinuousMouseCamera = false;
 
 	/** Reset the configurations back to the default values. */
 	static public void reset() {
@@ -41,6 +45,7 @@ static public class Config {
 		PlayerPrefs.SetFloat("MaxDeadzone", Input.maxAxis);
 		PlayerPrefs.SetFloat("ParticleQuantity", defaultParticleQuantity);
 		Config.saveBool("LowResModels", defaultLowResModels);
+		Config.saveBool("ContinuousMouseCamera", defaultContinuousMouseCamera);
 
 		Config.savePlayerModel();
 
@@ -69,6 +74,7 @@ static public class Config {
 		setMaxDeadzone(PlayerPrefs.GetFloat("MaxDeadzone", Input.maxAxis));
 		setParticleQuantity(PlayerPrefs.GetFloat("ParticleQuantity", defaultParticleQuantity));
 		setLowResModels(Config.loadBool("LowResModels", defaultLowResModels));
+		setContinuousMouseCamera(Config.loadBool("ContinuousMouseCamera", defaultContinuousMouseCamera));
 
 		PlayerModel.Model = PlayerPrefs.GetInt("Model", PlayerModel.Model);
 		PlayerModel.BaseColor = PlayerPrefs.GetInt("BaseColor", PlayerModel.BaseColor);
@@ -346,5 +352,22 @@ static public class Config {
 	static public void setLowResModels(bool v) {
 		Config.lowResModels = v;
 		Config.saveBool("LowResModels", v);
+	}
+
+	/** Retrieve whether the camera should actively track the mouse. */
+	static public bool getContinuousMouseCamera() {
+		return Config.continuousMouseCamera;
+	}
+
+	/**
+	 * Configure (and save) whether the camera should actively track the mouse,
+	 *
+	 * @param v: The the value
+	 */
+	static public void setContinuousMouseCamera(bool v) {
+		Config.continuousMouseCamera = v;
+		Config.saveBool("ContinuousMouseCamera", v);
+
+		Global.continuousMouseCamera = v;
 	}
 }
