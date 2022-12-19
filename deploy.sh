@@ -4,6 +4,9 @@ if [ $# -ne 2 ]; then
     echo "Usage: ${1} version message"
     echo "  version -- The new version (e.g., 1.0);"
     echo "  message -- The tag label (e.g., first version)"
+    echo ""
+    echo "NOTE: This script automatically adds the version prefix 'v'!"
+    echo "      Thus, the version should be something like 1.0.0."
     exit 0
 fi
 
