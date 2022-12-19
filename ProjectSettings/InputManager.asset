@@ -4421,3 +4421,35 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 8
+  - serializedVersion: 3
+    m_Name: Mouse X
+    descriptiveName: Horizontal mouse movement
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1
+    dead: 0
+    sensitivity: 1
+    snap: 1
+    invert: 0
+    type: 1
+    axis: 0
+    joyNum: 8
+  - serializedVersion: 3
+    m_Name: Mouse Y
+    descriptiveName: Vertical mouse movement
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 19
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1
+    dead: 0
+    sensitivity: 1
+    snap: 1
+    invert: 0
+    type: 1
+    axis: 1
+    joyNum: 8

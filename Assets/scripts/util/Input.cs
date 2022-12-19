@@ -827,8 +827,10 @@ static public class Input {
 		return combineAxis(Actions.CameraUp, Actions.CameraDown);
 	}
 
-	static public UnityEngine.Vector3 GetMousePosition() {
-		return UnityEngine.Input.mousePosition;
+	static public UnityEngine.Vector3 GetMouseDelta() {
+		float x = UnityEngine.Input.GetAxis("Mouse X");
+		float y = UnityEngine.Input.GetAxis("Mouse Y");
+		return new UnityEngine.Vector3(x, y, 0.0f);
 	}
 
 	static public bool GetResetCameraDown() {

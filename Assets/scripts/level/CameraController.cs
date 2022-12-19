@@ -60,9 +60,6 @@ public class CameraController : BaseRemoteAction, CameraIface {
 	/** Dynamic distance, to avoid/minimize clipping. */
 	private float curDist;
 
-	/** The position of the mouse on the last frame. */
-    private Vec3 lastMouse;
-
 	/** Coroutine for resetting the camera. */
 	private Coroutine resetCor;
 	/** The X axis of 2D vector defining the resting angle. */
@@ -77,7 +74,6 @@ public class CameraController : BaseRemoteAction, CameraIface {
 
 	void Start() {
 		this.self = this.transform;
-		this.lastMouse = Input.GetMousePosition();
 
 		/* Try to configure this as the main camera, and on failure
 		 * set a coroutine to try it again at a later time. */
@@ -229,7 +225,7 @@ public class CameraController : BaseRemoteAction, CameraIface {
 			this.resetCor = this.StartCoroutine(this.resetCamera(ang, 30.0f));
 		}
 		else if (Input.GetMouseCameraEnabled()) {
-			Vec3 mouseDelta = Input.GetMousePosition() - this.lastMouse;
+			Vec3 mouseDelta = Input.GetMouseDelta();
 
 			this.horAng += mouseDelta.x * Global.camX;
 			dVerAng = mouseDelta.y * Global.camY;
@@ -264,10 +260,6 @@ public class CameraController : BaseRemoteAction, CameraIface {
 
 		this.self.position = new Vec3(rx, ry, rz) + this.target.position;
 		this.self.LookAt(this.target);
-
-		/* Update the mouse's origin to calculate the movement on a later
-		 * frame. */
-		this.lastMouse = Input.GetMousePosition();
 	}
 
 	public void SetCameraTarget(GO target) {
