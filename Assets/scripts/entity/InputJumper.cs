@@ -16,6 +16,10 @@ public class InputJumper : UnityEngine.MonoBehaviour, DetectColliderIface {
 	 * jump input. */
     public float JumpBuffer = 0.3f;
 
+	/** How long until the game assumes that something went wrong
+	 * and the object didn't jump as it was supposed to. */
+	public float LeaveFloorTimeout = 0.6f;
+
     void Start() {
         this.rb = this.GetComponent<RB>();
         if (this.rb == null) {
@@ -73,9 +77,9 @@ public class InputJumper : UnityEngine.MonoBehaviour, DetectColliderIface {
 
 			/* Wait for the component to leave the floor for at least one
 			 * frame. As a safe guard, if the component doesn't leave the
-			 * ground for 1 second, assumes something went wrong and go
-			 * back to the initial state.*/
-			for (; t < 1.0f && this.onFloor;
+			 * ground in the configured time, assumes something went wrong
+			 * and go back to the initial state.*/
+			for (; t < this.LeaveFloorTimeout && this.onFloor;
 					t += Time.fixedDeltaTime) {
 				yield return new UnityEngine.WaitForFixedUpdate();
 			}
