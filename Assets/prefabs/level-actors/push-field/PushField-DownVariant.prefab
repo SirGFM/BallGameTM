@@ -67,6 +67,22 @@ PrefabInstance:
       propertyPath: Direction.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3630639723555481838, guid: 131fcf61fa1fd8cee8de99efcbe3f8d3, type: 3}
+      propertyPath: color.a
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630639723555481838, guid: 131fcf61fa1fd8cee8de99efcbe3f8d3, type: 3}
+      propertyPath: color.b
+      value: 0.19607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630639723555481838, guid: 131fcf61fa1fd8cee8de99efcbe3f8d3, type: 3}
+      propertyPath: color.g
+      value: 0.19607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630639723555481838, guid: 131fcf61fa1fd8cee8de99efcbe3f8d3, type: 3}
+      propertyPath: color.r
+      value: 0.6745098
+      objectReference: {fileID: 0}
     - target: {fileID: 4015975148434318062, guid: 131fcf61fa1fd8cee8de99efcbe3f8d3, type: 3}
       propertyPath: m_Name
       value: PushField-DownVariant
