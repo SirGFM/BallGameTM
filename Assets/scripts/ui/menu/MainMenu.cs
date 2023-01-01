@@ -4,6 +4,9 @@ using CoroutineRet = System.Collections.IEnumerator;
 using Image = UnityEngine.UI.Image;
 
 public class MainMenu : VerticalTextMenu {
+	/** The error text container, to be enabled if loading failed. */
+	public UnityEngine.GameObject ErrorText;
+
 	private string[] _opts = {
 		"New game",
 		"Level Select",
@@ -36,6 +39,10 @@ public class MainMenu : VerticalTextMenu {
 		this.options = this._opts;
 		this.CombinedLoadScene("scenes/bg-scene/MainMenuBg");
 		base.start();
+
+		if (Loader.FailedToLoad() && this.ErrorText != null) {
+			this.ErrorText.SetActive(true);
+		}
 
 		this.StartCoroutine(this.hideMouse());
 	}

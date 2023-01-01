@@ -92,6 +92,14 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	 * set back to 1. */
 	static public int currentLevel = 1;
 
+	/** XXX: How many times loading has failed in sequence.
+	 * This should be reset when loading stages from the main menu,
+	 * as well as when a stage is properly loaded. */
+	static public int loadErrorCount = 0;
+
+	/** How many subsequent load failures causes the game to give up loading the current stage. */
+	private const int maxLoadErrorCount = 5;
+
 	/** Whether an end card is already playing, and thus other ones should be played. */
 	private bool blockEndCard;
 
@@ -106,6 +114,9 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 
 	/** The scene shown when the pause is pressed. */
 	private string pauseSceneName = "Pause";
+
+	/** The main menu scene, used for forcefully going back to the menu. */
+	private string mainMenuSceneName = "MainMenu";
 
 	/** Name of the sub-scene used to display the loading progress. */
 	public string uiScene = "LoadingUI";
@@ -268,7 +279,7 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	 * Loads the current stage in background, updating the progress bar
 	 * (if it was configured) as the stage is loaded.
 	 */
-	private System.Collections.IEnumerator load() {
+	private System.Collections.IEnumerator loadUnsafe() {
 		AsyncOp op;
 
 		this.pb = null;
@@ -322,16 +333,70 @@ public class Loader : BaseRemoteAction, LoaderIface, GoalIface {
 	}
 
 	/**
+	 * Try loading a level, but force a restart on failure.
+	 */
+	private System.Collections.IEnumerator load() {
+		bool failed = true;
+
+		/* XXX: As stupid and annoying as this may be,
+		 * using 'yield return <func>' causes the finally to be ignored.
+		 * Manually iterating and calling each coroutine section (or whathever they are called)
+		 * causes any exception thrown to be correctly thrown and caught here.
+		 *
+		 * This is most likely caused by the coroutine being handled by Unity
+		 * when the entire function is yield (as in, Unity does the iteration),
+		 * thus causing the exception to be thrown from a different function.
+		 *
+		 * Additionally, this can't have a 'catch' statement because of CS1626...
+		 */
+		try {
+			var cor = this.loadUnsafe();
+			while (true) {
+				if (!cor.MoveNext()) {
+					break;
+				}
+				yield return cor.Current;
+			}
+
+			/* If the loop above throws any exception,
+			 * this statement won't be reached
+			 * and thus we can use 'failed' to detect whether an exception was raised.
+			 */
+			failed = false;
+			Loader.loadErrorCount = 0;
+		}
+		finally {
+			if (failed) {
+				Loader.loadErrorCount++;
+				if (Loader.loadErrorCount < Loader.maxLoadErrorCount) {
+					this.reloadScene();
+				}
+				else {
+					/* If the maximum number of retries were made,
+					 * simply go back to the main menu. */
+					SceneMng.LoadSceneAsync(this.mainMenuSceneName, SceneMode.Single);
+				}
+			}
+		}
+	}
+
+	/**
 	 * Load a given level, configuring everything so level progression may
 	 * work properly.
 	 *
 	 * @param idx: The index of the level to be loaded (should start at 1).
 	 */
 	static public void LoadLevel(int idx) {
+		Loader.loadErrorCount = 0;
 		Loader.currentLevel = idx;
 		Global.rtaTimer.Reset();
 		Global.igtTimer.Reset();
 		SceneMng.LoadSceneAsync(Loader.loaderSceneName, SceneMode.Single);
+	}
+
+	/** Returns whether the game failed to load a level. */
+	static public bool FailedToLoad() {
+		return Loader.loadErrorCount == Loader.maxLoadErrorCount;
 	}
 
 	/**
