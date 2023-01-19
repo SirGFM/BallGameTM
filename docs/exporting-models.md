@@ -61,8 +61,8 @@ The only way that I could find to sort materials is to separate each material in
 When joining two object, **the material of object selected last will come before the materials of the other object**.
 So, for models with multiple materials, say mat1, mat2, mat3, and mat4, we must join them in sorta the reverse order:
 
-1. First, join mat4 to mat3 (i.e., first select mat3 then mat4) as joined1
-2. Then, join joined1 to mat2 as joined2
+1. First, join mat4 to mat3 (i.e., first select mat4 then mat3) as joined1
+2. Then, join joined1 to mat2 as joined2 (again, first select joined1 then mat2)
 3. Finally, join joined2 to mat1
 
 The final object will be guaranteed to have its materials sorted in the order mat1, mat2, mat3, mat4.
