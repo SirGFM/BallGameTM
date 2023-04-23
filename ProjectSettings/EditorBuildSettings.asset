@@ -128,4 +128,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/bg-scene/04-calm-lands.unity
     guid: c3811d5c395bb8e3ebe2b4f0f517fd45
+  - enabled: 1
+    path: Assets/scenes/bg-scene/08-scorching-depths.unity
+    guid: 4f0f18368b848ee4ba341a23c12ab6e9
   m_configObjects: {}

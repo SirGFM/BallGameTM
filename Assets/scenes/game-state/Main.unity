@@ -203,6 +203,8 @@ MonoBehaviour:
     selector: levels/00-grassy-fields
   - song: {fileID: 8300000, guid: 5086da09f5a58939fb618be37be8817c, type: 3}
     selector: levels/04-calm-lands
+  - song: {fileID: 8300000, guid: 73de4dfb2537d3d6ea502706a7a1f505, type: 3}
+    selector: levels/08-scorching-depths
   songDefault: {fileID: 8300000, guid: b838e20f3d7877346911120db9471ed7, type: 3}
   sfxMoveMenu: {fileID: 8300000, guid: 3c720c0e3b860db51a54bfd30b59f7f5, type: 3}
   sfxEnterMenu: {fileID: 8300000, guid: f3e8be8a0987f60c38371ddef19cea41, type: 3}
