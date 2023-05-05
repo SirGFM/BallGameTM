@@ -39,6 +39,17 @@ using SceneMode = UnityEngine.SceneManagement.LoadSceneMode;
  *   * That's literally a directory named 'Resources' under 'Assets/'.
  */
 
+/**
+ * A given song that plays whenever the loaded stage has the selector on its name.
+ */
+[System.Serializable]
+public struct BGM {
+	/** The song to be played. */
+	public AudioClip song;
+	/** The selector/section of the stage name. */
+	public string selector;
+};
+
 public class AudioLoader : UnityEngine.MonoBehaviour {
 
 	/* Path of levels shouldn't update the song in any way. */
@@ -46,17 +57,11 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 		"levels/Loader",
 	};
 
-	public AudioClip songChillBeginnings;
+	/** List of songs played through the game. */
+	public BGM[] bgms;
 
-	public AudioClip songGrassyFields;
-
-	/* Path of levels that use the grassy fields song. */
-	public string grassyFieldsSelector = "levels/00-grassy-fields";
-
-	public AudioClip songCalmLands;
-
-	/* Path of levels that use the calm lands song. */
-	public string calmLandsSelector = "levels/04-calm-lands";
+	/** The default song, if no song was selected. */
+	public AudioClip songDefault;
 
 	public AudioClip sfxMoveMenu;
 	public AudioClip sfxEnterMenu;
@@ -150,15 +155,13 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 			}
 		}
 
-		if (next.path.Contains(this.grassyFieldsSelector)) {
-			this.playSong(this.songGrassyFields);
+		foreach (var bgm in this.bgms) {
+			if (next.path.Contains(bgm.selector)) {
+				this.playSong(bgm.song);
+				return;
+			}
 		}
-		else if (next.path.Contains(this.calmLandsSelector)) {
-			this.playSong(this.songCalmLands);
-		}
-		else {
-			this.playSong(this.songChillBeginnings);
-		}
+		this.playSong(this.songDefault);
 	}
 
 	/** Check that every audio was loaded and then change to the next scene. */
@@ -205,10 +208,10 @@ public class AudioLoader : UnityEngine.MonoBehaviour {
 	/** Start playing the menu song as soon as it's loaded. */
 	private CoroutineRet startSong() {
 		/* Wait until the main menu song is loaded. */
-		while (this.songChillBeginnings.loadState != UnityEngine.AudioDataLoadState.Loaded) {
+		while (this.songDefault.loadState != UnityEngine.AudioDataLoadState.Loaded) {
 			yield return null;
 		}
 
-		this.playSong(this.songChillBeginnings);
+		this.playSong(this.songDefault);
 	}
 }
