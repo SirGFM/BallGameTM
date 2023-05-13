@@ -18,6 +18,9 @@ public class MoveOnDeactivate : UnityEngine.MonoBehaviour, SetActiveIface {
 	/** The movement made by the object. */
 	public Vec3 Movement;
 
+	/** Keep the object around even after it moved. */
+	public bool KeepOnDeactivate = false;
+
 	/** Whether the object has already started moving. */
 	private bool isMoving = false;
 
@@ -77,6 +80,8 @@ public class MoveOnDeactivate : UnityEngine.MonoBehaviour, SetActiveIface {
 			yield return new UnityEngine.WaitForFixedUpdate();
 		}
 
-		this.gameObject.SetActive(false);
+		if (!this.KeepOnDeactivate) {
+			this.gameObject.SetActive(false);
+		}
 	}
 }
