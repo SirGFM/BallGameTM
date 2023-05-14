@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 8927934627780718607}
   - component: {fileID: 1947610838180754231}
   - component: {fileID: 3669224989541157094}
+  - component: {fileID: 8608221752716696538}
   m_Layer: 9
   m_Name: MovingFloatingSpikeBall
   m_TagString: Untagged
@@ -228,3 +229,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Model: {fileID: -2302868040756616058, guid: b245f626dd175583c95f326808412ac4, type: 3}
+--- !u!114 &8608221752716696538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6150660930648556029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f220f4406db66f90a37f3eee663c078, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Max: 0
