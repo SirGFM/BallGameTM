@@ -78,6 +78,9 @@ EditorBuildSettings:
     path: Assets/scenes/new-levels/08-scorching-depths/02-lapping-up.unity
     guid: 43cea0617d39edd27b55a6d9ac5cacfa
   - enabled: 1
+    path: Assets/scenes/new-levels/08-scorching-depths/04-pogo-around.unity
+    guid: 7b0b57af2f5702cf09dc7149dc8b564b
+  - enabled: 1
     path: Assets/scenes/new-levels/08-scorching-depths/10-back-and-forth.unity
     guid: ee6d093ddb2093cd58f460dddb46af7e
   - enabled: 1
