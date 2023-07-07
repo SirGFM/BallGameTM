@@ -81,6 +81,9 @@ EditorBuildSettings:
     path: Assets/scenes/new-levels/08-scorching-depths/04-pogo-around.unity
     guid: 7b0b57af2f5702cf09dc7149dc8b564b
   - enabled: 1
+    path: Assets/scenes/new-levels/08-scorching-depths/05-up-and-across.unity
+    guid: 17f5e225923e25d00b058b85e2453822
+  - enabled: 1
     path: Assets/scenes/new-levels/08-scorching-depths/07-conveyor-belt.unity
     guid: 4dda63503e983316481f19dc902f88ae
   - enabled: 1
