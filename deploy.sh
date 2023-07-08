@@ -21,6 +21,18 @@ if [ $? -ne 1 ]; then
     exit 1
 fi
 
+# XXX: In Debian 12 (and possibly in other systems as well),
+# Unity fails to build with:
+#
+#    > Couldn't find a valid ICU package installed on the system. [...]
+#
+# This can be checked in ~/.config/unity3d/Editor.log, on failure!
+#
+# To fix it, simply specify which libicu your system is using.
+#
+# Additionally, Unity will also fail to build if libssl1.1 isn't installed!
+export CLR_ICU_VERSION_OVERRIDE=`dpkg -l | grep libicu | awk '{ print $3 }' | cut -d '-' -f 1`
+
 WS=deploy/${VERSION}
 UNITY=/home/gfm/Unity/Hub/Editor/2020.3.22f1/Editor/Unity
 APP=BallGameTM
