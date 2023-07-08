@@ -22,7 +22,7 @@ if [ $? -ne 1 ]; then
 fi
 
 WS=deploy/${VERSION}
-UNITY=/opt/gamedev/unity3d-editors/2020.3.22f1/Editor/Unity
+UNITY=/home/gfm/Unity/Hub/Editor/2020.3.22f1/Editor/Unity
 APP=BallGameTM
 
 echo "Updating the game's version..." &&
