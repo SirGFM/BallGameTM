@@ -44,7 +44,11 @@ public class MainMenu : VerticalTextMenu {
 			this.ErrorText.SetActive(true);
 		}
 
+		/* Do not hide the mouse in the WebGL build
+		 * so the player may press the 'reset config' button. */
+#if !UNITY_WEBGL
 		this.StartCoroutine(this.hideMouse());
+#endif
 	}
 
 	override protected void onCancel() {

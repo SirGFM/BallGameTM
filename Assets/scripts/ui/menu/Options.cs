@@ -268,8 +268,10 @@ public class Options : VerticalTextMenu {
 
 	/** Update the game's graphical mode */
 	private void updateGraphics() {
+#if !UNITY_WEBGL
 		ResMode res = this.resolutions[this.resMode];
 		Screen.SetResolution(res.width, res.height, this.isFull, res.refreshRate);
+#endif
 		QualitySettings.SetQualityLevel(this.qualityMode, true);
 
 		if (this.reloadPerformance) {
@@ -489,6 +491,7 @@ public class Options : VerticalTextMenu {
 					"\"Apply\" to see the effects!",
 					(new Values(idx => this.qualityMode = idx,
 								QualitySettings.names)).setAt(this.qualityMode)),
+#if !UNITY_WEBGL
 			new Option("Resolution",
 					"Set the game's resolution.\n"+
 					"Only takes effect on \"Apply\"!",
@@ -500,6 +503,7 @@ public class Options : VerticalTextMenu {
 					(new Values(idx => this.isFull = (idx == 1),
 								"Windowed",
 								"Fullscreen")).setAt(this.isFull ? 1 : 0)),
+#endif
 			new Option("Apply",
 					"Apply the selected resolution and\n"+
 					"windowed mode.",
