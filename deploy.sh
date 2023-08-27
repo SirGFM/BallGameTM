@@ -15,7 +15,7 @@ rm -f VERSION.new VERSION.latest
 VERSION=v${1}
 MESSAGE="${2}"
 echo 'Checking the current version...'
-git tag -l | grep -qo ${VERSION}
+git tag -l | grep -qo "^${VERSION}$"
 if [ $? -ne 1 ]; then
     echo "Failed to deploy: version/tag has already been deployed"
     exit 1
