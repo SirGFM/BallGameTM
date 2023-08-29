@@ -6,12 +6,14 @@ using EvSys = UnityEngine.EventSystems;
  * sending a OnGoal event.
  */
 
-public interface GoalIface : EvSys.IEventSystemHandler {
+public interface BasicGoalIface : EvSys.IEventSystemHandler {
 	/**
 	 * Signals an entity has reached the goal.
 	 */
 	void OnGoal();
+}
 
+public interface GoalIface : BasicGoalIface {
 	/**
 	 * Signals an entity that the game should go to the next level.
 	 */
@@ -26,6 +28,10 @@ public interface GoalIface : EvSys.IEventSystemHandler {
 public class Goal : BaseRemoteAction {
 
 	void OnTriggerEnter(Col other) {
+		/** Trigger the goal on the game, advancing to the next stage. */
 		rootEvent<GoalIface>( (x,y) => x.OnGoal() );
+
+		/** Trigger any effect on the object itself. */
+		issueEvent<BasicGoalIface>( (x,y) => x.OnGoal() );
 	}
 }
