@@ -48,6 +48,15 @@ public class InputJumper : UnityEngine.MonoBehaviour, DetectColliderIface {
 				if (this.tryJump > 0.0f) {
 					Global.Sfx.playJump();
 
+					/* If the player is falling,
+					 * the fall speed would get subtracted from the jump speed.
+					 * Reset the speed to ensure that max jump height is achieved. */
+					Vec3 velocity = this.rb.velocity;
+					if (velocity.y < 0.0f) {
+						velocity.y = 0.0f;
+						this.rb.velocity = velocity;
+					}
+
 					Vec3 v3 = new Vec3(0.0f, this.Jump, 0.0f);
 					this.rb.AddForce(v3);
 					this.tryJump = 0.0f;
